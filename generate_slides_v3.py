@@ -12,7 +12,7 @@ def create_slide(text, filename, bg_color, text_color):
     draw = ImageDraw.Draw(img)
 
     try:
-        font = ImageFont.truetype("arial.ttf", 60)
+        font = ImageFont.truetype("arial.ttf", 110)
     except:
         font = ImageFont.load_default()
 
@@ -21,19 +21,21 @@ def create_slide(text, filename, bg_color, text_color):
     line = ""
 
     for word in words:
-        if len(line + word) < 25:
+        if len(line + word) < 40:
             line += word + " "
         else:
             lines.append(line)
             line = word + " "
     lines.append(line)
 
-    y_text = 200
+    y_text = 150
+
     for line in lines:
-        draw.text((100, y_text), line.strip(), font=font, fill=text_color)
-        y_text += 80
+        draw.text((100, y_text), line.strip(), fill=text_color, font=font)
+        y_text += 120
 
     img.save(filename)
+
 
 def generate_post(row, index):
     folder = f"exports/post_{index}"
@@ -57,7 +59,8 @@ def generate_post(row, index):
             text_color=(255, 255, 255),
         )
 
-with open("content/workflow_content.csv", newline='', encoding="utf-8") as csvfile:
+
+with open("content/workflow_content.csv", newline="", encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile)
     for i, row in enumerate(reader, start=1):
         generate_post(row, i)
