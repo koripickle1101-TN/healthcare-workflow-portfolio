@@ -23,14 +23,26 @@ This tool follows this specific technical logic flow:
 ```mermaid
 graph TD
     %% Tool Data Stream
-    A[Denied Claims Data] -->|Injects| B[Python Script: Denial Detective Tool]
+    A[Denied Claims Data] -->|Injects| B[Python Script Denial Detective Tool]
     B -->|Rules Engine| C{Informatics Logic Check}
 
     %% RCM Informatics Decisions
-    C -->|CARC 16: CDI Query Triggered| D(Immediate CDI Review & Root Cause Analysis)
-    C -->|CARC 18: RPM Data Capture Query Triggered| E(Immediate RPM Data Loop Check)
-    D & E -->|wait loop: 24h| C
-    C -->|Trigger: Incomplete CDI/RPM Pass| F(Actionable & Documented for Resubmission)
+    C -->|CARC 16 CDI Query Triggered| D(Immediate CDI Review & Root Cause Analysis)
+    C -->|CARC 18 RPM Data Capture Query Triggered| E(Immediate RPM Data Loop Check)
+    D & E -->|Wait loop 24h| C
+    C -->|Trigger Incomplete CDI/RPM Pass| F(Actionable & Documented for Resubmission)
 
-    %% Styles
-    style C fill:#f9f,stroke:#333,stroke-width:2px;
+    %% Styles: Orange, Black, Gray, and White
+    %% Gray Background for main nodes
+    style A fill:#D6D6D6,stroke:#333,stroke-width:2px;
+    style B fill:#D6D6D6,stroke:#333,stroke-width:2px;
+    style C fill:#D6D6D6,stroke:#333,stroke-width:2px;
+    style F fill:#D6D6D6,stroke:#333,stroke-width:2px;
+
+    %% White Background for outcomes
+    style D fill:#FFFFFF,stroke:#333,stroke-width:2px;
+    style E fill:#FFFFFF,stroke:#333,stroke-width:2px;
+
+    %% Orange Background for final success
+    style F fill:#F97316,stroke:#333,stroke-width:2px;
+
