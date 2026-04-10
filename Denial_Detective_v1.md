@@ -34,3 +34,17 @@ graph TD
 
     %% Styles
     style C fill:#f9f,stroke:#333,stroke-width:2px;
+---
+
+## 📊 The "Fixing the Lag" Matrix: Traditional vs. Automated RCM
+
+This tool success is measured by two specific Informatics metrics:
+
+### 1. **Denial Response Lag Reduction**
+| Workflow Type | Denial Analysis Lag | Denial Response Cycle | RCM Impact |
+| :--- | :--- | :--- | :--- |
+| **Traditional (Manual Review)** | 7-14 Days | 30+ Days | High Denial Risk/Delayed Revenue |
+| **Optimized (Automated Denial Detective)** | **< 2 Days** | **7-10 Days** | Maximized Denial Prevention/Cash Flow |
+
+```markdown
+*This optimized tool defines the Informatics pipeline, bridging technical Clinical Documentation (CDI) integrity with sustainable financial workflow.*
