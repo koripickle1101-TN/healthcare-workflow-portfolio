@@ -23,7 +23,7 @@ This tool follows this specific technical logic flow:
 ```mermaid
 graph TD
     %% Tool Data Stream
-    A[Denied Claims Data] -->|Injects| B[Python Script (Denial Detective)]
+    A[Denied Claims Data] -->|Injects| B[Python Script: Denial Detective Tool]
     B -->|Rules Engine| C{Informatics Logic Check}
 
     %% RCM Informatics Decisions
@@ -34,4 +34,3 @@ graph TD
 
     %% Styles
     style C fill:#f9f,stroke:#333,stroke-width:2px;
-*This optimized tool defines the Informatics pipeline, bridging technical Clinical Documentation (CDI) integrity with sustainable financial workflow.*
