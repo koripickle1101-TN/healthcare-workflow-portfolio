@@ -1,4 +1,5 @@
-# 🏥 Healthcare Workflow & Informatics Portfolio
+# 🟠 Healthcare Workflow & Informatics Portfolio
+### **Brand Theme: Tennessee Volunteers Orange**
 
 This repository contains evidence-based informatics solutions focused on clinical documentation integrity (CDI) and revenue cycle optimization.
 
