@@ -1,9 +1,21 @@
-# <img src="https://capsule-render.vercel.app/render?type=flat&color=F97316&height=120&section=header&text=Healthcare%20Informatics%20Portfolio&fontSize=40" width="100%">
-
-### 🟠 **Brand Identity: Tennessee Volunteers Orange**
-### 🎓 **Kori Pickle | Healthcare Administration (GPA: 3.7)**
+> [!TIP]
+> # 🟠 Healthcare Informatics & Workflow Portfolio
+> **Brand Identity: Tennessee Volunteers Orange** > **Developed by: Kori Pickle | GPA: 3.7**
 
 ---
-[Project Links Here]
+
+## 🏛️ Executive Overview
+This repository serves as a professional portfolio for high-impact healthcare informatics solutions, bridging the gap between clinical documentation integrity (CDI) and revenue cycle optimization.
+
+### 📁 Featured Projects & Case Studies
+* **[🍊 Public Health PERIE Analysis](./PERIE_ANALYSIS.md)**: Integrating Mascot, TN diabetes prevalence data with clinical workflows.
+* **[🍊 Denial Detective Tool](./Denial_Detective_v1.md)**: Python-based logic for automating CARC 16 and CARC 18 denial resolutions.
+* **[🍊 Revenue & Billing Logic](./BILLING_LOGIC.md)**: Optimized billing triggers for CPT 99457 to maximize reimbursement.
+
 ---
-<img src="https://capsule-render.vercel.app/render?type=soft&color=F97316&height=30&section=footer" width="100%">
+
+## 🛠️ Technical Core
+The workflows within this portfolio utilize **Vols Orange** as the primary indicator for **Success Nodes**—representing cleared claims, validated data, and optimized revenue streams.
+
+---
+*© 2026 Kori Pickle | Mascot, TN | University of Phoenix*
