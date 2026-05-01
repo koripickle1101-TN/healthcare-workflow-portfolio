@@ -1,3 +1,4 @@
+![Portfolio Banner](https://via.placeholder.com/1200x300/FF8200/FFFFFF?text=Healthcare+Workflow+Portfolio)
 <div align="center">
 
 <h1 style="color:#FF8200;">Healthcare Revenue Cycle Workflow Portfolio</h1>
