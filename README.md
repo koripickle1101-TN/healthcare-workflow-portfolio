@@ -1,3 +1,5 @@
+![Healthcare Workflow Portfolio](https://dummyimage.com/1200x300/ff8200/ffffff&text=Healthcare+Workflow+Portfolio)
+
 <div align="center">
 
 # Healthcare Revenue Cycle Workflow Portfolio
