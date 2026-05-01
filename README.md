@@ -1,44 +1,72 @@
-# healthcare-workflow-portfolio
-Healthcare workflow analysis portfolio focused on intake, documentation, and revenue cycle breakdowns.
-Healthcare Workflow Portfolio
+<div align="center">
 
-This portfolio supports my entry-level career path in Revenue Cycle Management, with a focus on eligibility, claims accuracy, denial prevention, and healthcare workflow improvement.
+<h1 style="color:#FF8200;">Healthcare Revenue Cycle Workflow Portfolio</h1>
 
-Purpose
+<p>
+Focused on building practical knowledge in revenue cycle management, with an emphasis on claims accuracy, eligibility, denial prevention, and workflow efficiency.
+</p>
 
-The goal of this portfolio is to show my understanding of how front-end accuracy, documentation, and workflow consistency affect the full revenue cycle.
+</div>
 
-Focus Areas
+<hr>
 
-- Revenue Cycle Management
-- Eligibility Verification
-- Prior Authorizations
-- Claims Workflow
-- Denial Prevention
-- Healthcare Operations
+<h2 style="color:#FF8200;">Overview</h2>
 
-Projects
+<p>
+This portfolio highlights my understanding of how front-end processes impact the full revenue cycle. It reflects my approach to identifying breakdowns, reducing rework, and improving workflow performance.
+</p>
 
-Eligibility Workflow Analysis
-Explains how insurance verification and front-end accuracy affect claim outcomes.
+<h2 style="color:#FF8200;">Focus Areas</h2>
 
-Claims Process Breakdown
-Outlines how claims move through the revenue cycle and where delays or errors can occur.
+<ul>
+  <li>Revenue Cycle Management</li>
+  <li>Eligibility Verification</li>
+  <li>Prior Authorizations</li>
+  <li>Claims Workflow</li>
+  <li>Denial Prevention</li>
+  <li>Healthcare Operations</li>
+</ul>
 
-Denial Prevention Notes
-Highlights common denial causes and basic prevention opportunities.
+<h2 style="color:#FF8200;">Project Highlights</h2>
 
-Workflow Improvement Concepts
-Shows how small process changes can reduce rework, delays, and preventable errors.
+<h3>Eligibility Workflow Analysis</h3>
+<p>
+Examines how insurance verification and front-end accuracy influence claim outcomes and reimbursement timelines.
+</p>
 
-Live Project Deployments
+<h3>Claims Process Breakdown</h3>
+<p>
+Outlines the end-to-end claims workflow and identifies where delays, errors, and inefficiencies commonly occur.
+</p>
 
-https://vercel.com/koripickle1101-3286s-projects
+<h3>Denial Prevention Insights</h3>
+<p>
+Focuses on common denial causes and how workflow improvements can reduce avoidable rejections.
+</p>
 
-About Me
+<h3>Workflow Improvement Concepts</h3>
+<p>
+Explores simple process changes that support cleaner claims, faster turnaround, and reduced rework.
+</p>
 
-I am building my career in Revenue Cycle Management and healthcare operations. I am focused on learning how workflows connect across eligibility, claims, authorizations, and denial prevention.
+<h2 style="color:#FF8200;">Live Project Deployments</h2>
 
-LinkedIn
+<p>
+<a href="https://vercel.com/koripickle1101-3286s-projects">View project deployments</a>
+</p>
 
-https://www.linkedin.com/in/kori-p-865jct
+<h2 style="color:#FF8200;">Professional Focus</h2>
+
+<p>
+I am building my career in revenue cycle management with a focus on understanding how workflows connect across eligibility, authorizations, claims, and denial prevention.
+</p>
+
+<p>
+My goal is to continue developing practical, real-world knowledge that supports more efficient and accurate healthcare operations.
+</p>
+
+<h2 style="color:#FF8200;">LinkedIn</h2>
+
+<p>
+<a href="https://www.linkedin.com/in/kori-p-865jct">Connect with me on LinkedIn</a>
+</p>
