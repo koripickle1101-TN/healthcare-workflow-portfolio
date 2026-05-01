@@ -14,6 +14,6 @@ export const metadata = {
   openGraph: {
     title: 'Healthcare Revenue Cycle Workflow Portfolio',
     description: 'RCM Case Studies | Denial Prevention | Claims Analysis | Health Informatics',
-    images: ['/og-image.png'],
+    images: ['/api/og'],
   },
 };
