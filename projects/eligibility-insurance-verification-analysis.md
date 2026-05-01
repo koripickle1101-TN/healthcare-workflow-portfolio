@@ -1,16 +1,29 @@
-# Eligibility & Insurance Verification Analysis
+# Case Study: Eligibility & Insurance Verification Analysis
 
-**Project Type:** Self-directed learning project  
-**Focus Area:** Insurance verification, eligibility checks, patient access, revenue cycle risk prevention  
+**Project Type:** Self-directed portfolio case study  
+**Role Simulated:** RCM / Patient Access Workflow Analyst  
+**Focus Area:** Insurance verification, eligibility checks, patient access, denial prevention  
 **Brand System:** White background, black text, Vols Orange `#FF8200` accents
 
 ---
 
-## Project Summary
+## Executive Summary
 
-This self-directed project examines how insurance verification and eligibility accuracy affect the healthcare revenue cycle. The goal is to show practical understanding of how front-end verification gaps can create downstream claim denials, patient confusion, rework, and reimbursement delays.
+This case study analyzes how eligibility and insurance verification gaps can create downstream revenue cycle problems. The purpose is to demonstrate practical workflow analysis, patient access thinking, and denial prevention logic without claiming employer or client experience.
 
-This project does not use patient data, employer data, payer data, or protected health information. It is a simulated workflow analysis built for portfolio demonstration and learning.
+The central question:
+
+**How can the front-end workflow prevent eligibility-related claim failures before billing begins?**
+
+This case study maps the verification process, identifies risk points, and proposes validation controls that could improve claim readiness and reduce avoidable rework.
+
+---
+
+## Scenario
+
+A healthcare organization is experiencing recurring eligibility-related claim issues. Patient coverage is sometimes inactive, payer details may be outdated, and authorization or referral requirements are not always identified before service.
+
+Instead of treating these as isolated claim problems, this case study evaluates the patient access workflow as a revenue cycle control point.
 
 ---
 
@@ -50,9 +63,9 @@ Claim Prepared with Verified Coverage
 
 ---
 
-## Risk Table
+## Risk Analysis
 
-| Workflow Point | Risk | Possible Revenue Cycle Impact | Prevention Step |
+| Workflow Point | Risk | Revenue Cycle Impact | Prevention Step |
 |---|---|---|---|
 | Registration | Incorrect payer entered | Claim rejection or denial | Confirm payer name and plan type |
 | Insurance Capture | Missing subscriber details | Rework and claim delay | Require complete policy fields |
@@ -75,7 +88,7 @@ Claim Prepared with Verified Coverage
 
 ---
 
-## Sample Eligibility Status Categories
+## Eligibility Status Logic
 
 | Status | Meaning | Recommended Action |
 |---|---|---|
@@ -86,9 +99,22 @@ Claim Prepared with Verified Coverage
 
 ---
 
-## RCM Insight
+## Simulated Improvement Targets
 
-Eligibility verification is not just an administrative task. It is a front-end revenue cycle control point.
+These targets are for educational demonstration only and are not based on employer or client data.
+
+| Metric | Current Risk Signal | Target Direction |
+|---|---|---|
+| Eligibility denial risk | Elevated when coverage is not verified | Reduce with pre-service verification |
+| Rework volume | Higher when payer data is incomplete | Reduce with required field controls |
+| Claim readiness | Inconsistent without standardized notes | Improve with clear eligibility documentation |
+| Patient billing confusion | Possible when coverage issues are found late | Reduce through earlier coverage validation |
+
+---
+
+## Analyst Takeaway
+
+Eligibility verification is not only an administrative step. It is a front-end revenue cycle control point.
 
 A strong verification process helps prevent:
 
@@ -116,4 +142,4 @@ The goal is not only to collect insurance information. The goal is to validate w
 
 ## Ethical Note
 
-This is a self-directed educational portfolio project. It uses simulated workflow logic and general healthcare operations concepts. It does not represent client work, employer work, patient data, payer data, or protected health information.
+This is a self-directed educational portfolio case study. It uses simulated workflow logic and general healthcare operations concepts. It does not represent client work, employer work, patient data, payer data, or protected health information.
