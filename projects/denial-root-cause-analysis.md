@@ -1,22 +1,35 @@
-# Denial Root Cause Analysis Framework
+# Case Study: Denial Root Cause Analysis Framework
 
-**Project Type:** Self-directed learning project  
-**Focus Area:** Denial prevention, revenue cycle analysis, workflow improvement  
+**Project Type:** Self-directed portfolio case study  
+**Role Simulated:** RCM Analyst (Denial Prevention Focus)  
+**Focus Area:** Denial categorization, root cause analysis, workflow improvement  
 **Brand System:** White background, black text, Vols Orange `#FF8200` accents
 
 ---
 
-## Project Summary
+## Executive Summary
 
-This project focuses on analyzing healthcare claim denials as system signals rather than isolated billing issues. The goal is to demonstrate how denial patterns can be categorized, traced back to upstream workflow breakdowns, and addressed through prevention-focused improvements.
+This case study analyzes healthcare claim denials as system signals rather than isolated billing issues. The purpose is to demonstrate structured RCM analysis, pattern recognition, and prevention-focused workflow thinking.
 
-This is a simulated analytical framework created for portfolio development. It does not use real payer data, employer data, or protected health information.
+The central question:
+
+**What patterns exist in denial activity, and what upstream workflow failures are causing them?**
+
+The case study categorizes denial types, maps them to workflow stages, and proposes a feedback loop that supports denial prevention.
+
+---
+
+## Scenario
+
+A healthcare organization is experiencing recurring denials across multiple categories. While billing teams are resolving individual claims, similar issues continue to reappear.
+
+This case study evaluates denial activity from a systems perspective instead of a one-off correction approach.
 
 ---
 
 ## Problem Statement
 
-Denials are often handled as one-off issues, requiring rework at the billing stage. However, many denials are repeatable and predictable when viewed as patterns.
+Denials are often handled as isolated issues, requiring rework at the billing stage. However, many denials are repeatable and predictable when viewed as patterns.
 
 Common challenges include:
 
@@ -53,18 +66,18 @@ Common challenges include:
 
 ---
 
-## Sample Denial Pattern Table
+## Pattern Analysis
 
-| Denial Category | Frequency (Example) | Pattern Insight |
+| Denial Category | Pattern Signal | Insight |
 |---|---|---|
-| Eligibility | High | Verification gaps before service |
-| Authorization | Moderate | Payer rules not consistently checked |
-| Documentation | Moderate | Missing support for services billed |
-| Coding | Low | Occasional claim construction errors |
+| Eligibility | Repeating occurrences | Verification gaps before service |
+| Authorization | Moderate repetition | Payer rules not consistently checked |
+| Documentation | Consistent pattern | Missing support for billed services |
+| Coding | Lower frequency | Occasional claim construction issues |
 
 ---
 
-## Prevention Strategy
+## Proposed Prevention Strategy
 
 1. Standardize denial categories across the organization.
 2. Track denial frequency by category.
@@ -93,7 +106,20 @@ Monitor Repeat Denials
 
 ---
 
-## RCM Insight
+## Simulated Improvement Targets
+
+These targets are for educational demonstration only and are not based on employer or client data.
+
+| Metric | Current Risk Signal | Target Direction |
+|---|---|---|
+| Denial repeat rate | Persistent across categories | Reduce with root cause mapping |
+| Rework volume | High for repeat issues | Reduce through upstream fixes |
+| Workflow visibility | Limited | Improve with standardized tracking |
+| Feedback loops | Weak or inconsistent | Strengthen cross-team communication |
+
+---
+
+## Analyst Takeaway
 
 Denials are not random events.
 
@@ -117,4 +143,4 @@ Organizations that reduce denials effectively do not simply improve billing. The
 
 ## Ethical Note
 
-This is a self-directed educational portfolio project using simulated data and generalized workflow concepts. It does not represent real employer data, payer data, or protected health information.
+This is a self-directed educational portfolio case study using simulated data and generalized workflow concepts. It does not represent real employer data, payer data, or protected health information.
