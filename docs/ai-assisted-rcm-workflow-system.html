@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Assisted RCM Workflow Intelligence | Kori Pickle</title>
+  <style>
+    :root {
+      --orange: #FF8200;
+      --black: #111111;
+      --charcoal: #333333;
+      --gray: #D9D9D9;
+      --warm: #F7F4F0;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--black);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    .page { max-width: 1180px; margin: 0 auto; padding: 56px 28px; }
+    .topline { width: 96px; height: 3px; background: var(--orange); margin-bottom: 34px; }
+    h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; line-height: 1.05; margin: 0; }
+    h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -2px; max-width: 980px; }
+    h2 { font-size: clamp(30px, 4vw, 48px); margin-bottom: 18px; }
+    h3 { font-size: 24px; margin-bottom: 10px; }
+    p { color: var(--charcoal); font-size: 18px; margin: 0 0 18px; }
+    .subtitle { max-width: 760px; margin-top: 28px; font-size: 21px; }
+    .tagline { text-transform: uppercase; letter-spacing: 2px; color: var(--orange); font-weight: 700; font-size: 13px; margin-bottom: 18px; }
+    .hero { padding: 34px 0 68px; border-bottom: 1px solid var(--gray); }
+    .grid { display: grid; gap: 24px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    section { padding: 64px 0; border-bottom: 1px solid var(--gray); }
+    .card { border: 1px solid var(--gray); padding: 28px; background: var(--white); min-height: 100%; }
+    .card.accent { border-top: 5px solid var(--orange); }
+    .workflow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; align-items: stretch; margin-top: 34px; }
+    .node { border: 1px solid var(--gray); padding: 22px 16px; min-height: 190px; position: relative; background: #fff; }
+    .node:before { content: ''; width: 18px; height: 18px; border: 2px solid var(--orange); border-radius: 50%; display: block; margin-bottom: 18px; }
+    .node h3 { font-size: 20px; }
+    .node p { font-size: 15px; }
+    .metric { font-size: 13px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--orange); font-weight: 700; margin-top: 14px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 15px; }
+    th { text-align: left; background: var(--black); color: white; padding: 14px; }
+    td { border: 1px solid var(--gray); padding: 14px; vertical-align: top; }
+    .callout { background: var(--warm); border-left: 5px solid var(--orange); padding: 30px; margin-top: 26px; }
+    .footer { text-align: center; padding-top: 56px; }
+    .signature { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 34px; margin-top: 12px; }
+    @media (max-width: 880px) { .two, .three, .workflow { grid-template-columns: 1fr; } .page { padding: 36px 20px; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="topline"></div>
+      <div class="tagline">Healthcare Workflow Intelligence</div>
+      <h1>AI-Assisted Revenue Cycle Workflow System</h1>
+      <p class="subtitle">A no-Canva portfolio case study showing how AI can support upstream denial prevention, workflow visibility, and operational decision-making without replacing human review.</p>
+    </section>
+
+    <section>
+      <h2>The Core Problem</h2>
+      <div class="grid two">
+        <div class="card accent"><h3>Most denials start upstream.</h3><p>Revenue cycle failures often begin before billing sees the claim. Patient intake, eligibility verification, prior authorization, documentation quality, and handoff breakdowns create downstream rework.</p></div>
+        <div class="card accent"><h3>AI helps with visibility, not accountability.</h3><p>AI can summarize patterns, organize payer rules, categorize denial causes, and support reporting. Human staff must still validate identity, coverage, documentation, compliance, and final decisions.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Workflow Map</h2>
+      <p>This map shows where administrative breakdowns can move forward undetected and become claim rejections, denials, A/R delays, or patient frustration.</p>
+      <div class="workflow">
+        <div class="node"><h3>Patient Intake</h3><p>Incorrect demographics, duplicate records, or incomplete insurance fields.</p><div class="metric">KPI: Registration accuracy</div></div>
+        <div class="node"><h3>Insurance Verification</h3><p>Eligibility not confirmed before visit or payer response not documented clearly.</p><div class="metric">KPI: Eligibility denial rate</div></div>
+        <div class="node"><h3>Prior Authorization</h3><p>Missing authorization, incomplete clinical documentation, or unclear payer requirements.</p><div class="metric">KPI: Auth approval rate</div></div>
+        <div class="node"><h3>Claim Submission</h3><p>Claim submitted with missing data, mismatched documentation, or poor handoff quality.</p><div class="metric">KPI: Clean claim rate</div></div>
+        <div class="node"><h3>Denial Follow-Up</h3><p>Delayed appeals, no prioritization model, or unclear ownership of payer follow-up.</p><div class="metric">KPI: Days in A/R</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>AI Support vs. Human Oversight</h2>
+      <table>
+        <thead><tr><th>Workflow Area</th><th>AI Can Support</th><th>Human Review Must Control</th><th>No-Cost Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Patient Intake</td><td>Detect missing-field patterns and summarize repeat registration errors.</td><td>Verify patient identity, insurance card details, and record accuracy.</td><td>Required-field intake checklist.</td></tr>
+          <tr><td>Insurance Verification</td><td>Organize payer rules and flag missing verification status.</td><td>Confirm active coverage and payer-specific requirements.</td><td>Daily verification queue.</td></tr>
+          <tr><td>Prior Authorization</td><td>Draft payer requirement summaries and checklist templates.</td><td>Validate medical necessity documentation and final auth status.</td><td>Payer-specific authorization checklist.</td></tr>
+          <tr><td>Claim Submission</td><td>Summarize recurring claim edits and missing-data patterns.</td><td>Billing/coding validation before submission.</td><td>Pre-submission documentation audit.</td></tr>
+          <tr><td>Denial Follow-Up</td><td>Categorize denials by reason, payer, age, and urgency.</td><td>Determine appeal strategy and compliance-sensitive action.</td><td>Denial triage tracker.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><p><strong>Key insight:</strong> AI is strongest when it supports pattern recognition and administrative organization. It becomes risky when leaders treat it as a substitute for compliance, documentation accuracy, patient context, or final decision-making.</p></div>
+    </section>
+
+    <section>
+      <h2>Portfolio Value</h2>
+      <div class="grid three">
+        <div class="card"><h3>Healthcare Operations</h3><p>Shows practical understanding of patient access, eligibility, authorization, documentation, and denial prevention.</p></div>
+        <div class="card"><h3>Remote-Ready Skills</h3><p>Demonstrates digital workflow analysis using web-based tools, structured documentation, and portfolio-ready communication.</p></div>
+        <div class="card"><h3>AI Literacy</h3><p>Frames AI realistically as workflow support rather than hype, replacement, or unsupported automation.</p></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Created by Kori Pickle</p>
+      <div class="signature">Kori Pickle</div>
+      <p>Healthcare Administration | Revenue Cycle Workflow Intelligence | Patient-to-Professional Perspective</p>
+    </footer>
+  </main>
+</body>
+</html>
