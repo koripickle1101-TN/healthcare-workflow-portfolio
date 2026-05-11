@@ -21,6 +21,9 @@ Denial root cause analysis
 Revenue cycle workflow optimization
 Health information and documentation quality
 AI assisted workflow visibility
+Risk management and near-miss reporting
+Patient safety workflow analysis
+LinkedIn proof-of-work content systems
 
 ## How I Approach Revenue Cycle Management
 
@@ -31,6 +34,62 @@ They start upstream.
 This portfolio is built around analyzing where workflows break, why errors move forward undetected, how small intake or verification issues become denials, and how validation checkpoints can prevent avoidable claim problems before submission.
 
 The focus is shifting from reactive denial management to proactive denial prevention.
+
+## LinkedIn Brand System and Portfolio Proof Machine
+
+This repository also supports a repeatable LinkedIn authority system for healthcare operations, RCM, risk management, patient safety, and workflow integrity analysis.
+
+The system turns academic work, healthcare concepts, discussion posts, workflow ideas, and real-world operational observations into polished portfolio proof.
+
+### Workflow Integrity Intelligence System
+
+Raw healthcare content becomes:
+
+Academic work
+↓
+Operational insight
+↓
+LinkedIn post
+↓
+Carousel
+↓
+GitHub case study
+↓
+LinkedIn Featured proof
+↓
+Recruiter and client trust
+
+### Feminine Executive Brand Identity
+
+Primary colors:
+
+White #FFFFFF
+Tennessee Orange #FF8200
+Black #111111
+Warm Gray #E8E2DC
+Deep Gray #333333
+
+Visual style:
+
+High-contrast editorial serif headlines
+Clean sans-serif supporting text
+White background with warm gray structure
+Tennessee Orange accent system
+Double-ring circular nodes with soft glow
+Dotted or fading connector lines
+Intentional asymmetry
+40 to 50 percent whitespace
+Premium editorial healthcare strategy feel
+
+Mandatory footer:
+
+Created by Kori Pickle
+
+Handwritten cursive signature:
+
+Kori Pickle
+
+Minimal LinkedIn and GitHub icons
 
 ## Featured Projects
 
@@ -98,6 +157,70 @@ https://koripickle1101-tn.github.io/healthcare-workflow-portfolio/ai-assisted-rc
 GitHub file
 https://github.com/koripickle1101-TN/healthcare-workflow-portfolio/blob/main/docs/ai-assisted-rcm-workflow-system.html
 
+### 5. Risk Management Near-Miss Reporting Workflow
+
+Problem
+Near misses are often treated as isolated mistakes instead of workflow warning signals.
+
+Focus
+Just culture
+Psychological safety
+Near-miss reporting
+Medication safety workflow
+Patient safety risk visibility
+Leadership accountability
+
+Goal
+Show how risk management and quality management connect when leaders treat near misses as early warnings, not blame events.
+
+GitHub file
+case-studies/risk-management-near-miss-reporting.md
+
+## Repository Structure
+
+content/
+linkedin-posts/
+discussion-to-linkedin/
+risk-management/
+rcm-workflows/
+near-miss-reporting/
+
+design-system/
+brand-rules.md
+carousel-layout-rules.md
+hook-rotation-system.md
+
+templates/
+linkedin-post-template.md
+carousel-slide-template.md
+discussion-conversion-template.md
+
+exports/
+linkedin-carousels/
+post-graphics/
+screenshots/
+
+case-studies/
+risk-management-near-miss-reporting.md
+rcm-upstream-failure-points.md
+workflow-integrity-analysis.md
+
+## Weekly Operating System
+
+Monday: Pick one healthcare operations topic.
+
+Tuesday: Write one LinkedIn post using the conversion template.
+
+Wednesday: Turn the post into a 5 to 7 slide carousel.
+
+Thursday: Create the GitHub case study.
+
+Friday: Post the carousel to LinkedIn and add the case study link to Featured.
+
+Saturday: Comment on 10 healthcare operations, RCM, quality, or risk management posts.
+
+Sunday: Review profile views, saves, comments, and connection requests. Use the strongest topic for a deeper follow-up post.
+
 ## Skills Demonstrated
 
 Revenue cycle management
@@ -110,8 +233,14 @@ Health informatics
 Process improvement
 Data validation
 AI assisted healthcare operations
+Risk management
+Near-miss reporting analysis
+Just culture workflow thinking
+Patient safety improvement
 Professional documentation
 Portfolio case study development
+LinkedIn content strategy
+Executive visual communication
 
 ## Tools and Methods
 
@@ -123,10 +252,13 @@ SQL learning and application
 Documentation and case analysis
 GitHub portfolio development
 HTML and CSS portfolio page creation
+LinkedIn carousel planning
+Case study development
+Brand system documentation
 
 ## Professional Direction
 
-I am pursuing remote roles in healthcare operations and revenue cycle management, with a focus on revenue cycle, patient access, insurance verification, claims analysis, denial prevention, health informatics, and workflow improvement.
+I am pursuing remote roles in healthcare operations and revenue cycle management, with a focus on revenue cycle, patient access, insurance verification, claims analysis, denial prevention, health informatics, risk management, patient safety, and workflow improvement.
 
 ## Contact
 
