@@ -1,467 +1,192 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import time
 
-st.set_page_config(page_title="Responsible AI Healthcare Operations Intelligence", page_icon="🟧", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Healthcare Operations AI Evaluator", layout="wide")
 
 ORANGE = "#FF8200"
-BLACK = "#000000"
 WARM = "#E8E3DC"
 SOFT = "#F7F4EF"
-TOPIC_TAGS = "HealthcareOperations ResponsibleAI RevenueCycleManagement PatientAccess PriorAuthorization DenialPrevention HealthInformatics WorkflowIntelligence HealthcareAdministration OperationalExcellence"
 
 st.markdown(f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Allura&family=Great+Vibes&display=swap');
-html, body, [class*='css'] {{ font-family: 'Inter', sans-serif; color: {BLACK}; }}
-.stApp {{ background: radial-gradient(circle at 90% 5%, rgba(255,130,0,.12), transparent 28%), linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 75%,#FBF8F3 100%); }}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Playfair+Display:wght@700;900&family=Allura&display=swap');
+html, body, [class*='css'] {{ font-family: Inter, sans-serif; color: #000000; }}
+.stApp {{ background: linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 78%,#FBF8F3 100%); }}
 section[data-testid='stSidebar'] {{ background:#FFFFFF; border-right:1px solid {WARM}; }}
-section[data-testid='stSidebar'] p, section[data-testid='stSidebar'] span, section[data-testid='stSidebar'] label {{ color:{BLACK} !important; }}
-.block-container {{ max-width:1240px; padding-top:1.15rem; padding-bottom:2.5rem; }}
-.clean-title {{ font-family:'Playfair Display',serif; font-size:clamp(44px,6vw,88px); line-height:.95; letter-spacing:-2px; color:#000000; margin:0 0 24px 0; }}
-.clean-section {{ font-family:'Playfair Display',serif; font-size:44px; line-height:1; letter-spacing:-1px; margin:42px 0 16px 0; color:#000000; }}
-.clean-card-title {{ font-family:'Playfair Display',serif; font-size:29px; line-height:1.08; margin:0 0 12px 0; color:#000000; }}
+.block-container {{ max-width:1220px; padding-top:1.2rem; }}
+.brand {{ border:1px solid {WARM}; border-radius:34px; padding:30px; background:#FFFFFF; box-shadow:0 24px 64px rgba(0,0,0,.055); margin-bottom:28px; }}
+.sig {{ font-family:Allura,cursive; font-size:82px; text-align:center; line-height:.9; color:#111111; }}
+.kicker {{ text-align:center; letter-spacing:8px; text-transform:uppercase; font-weight:800; font-size:21px; margin-top:14px; }}
+.intel {{ text-align:center; letter-spacing:12px; text-transform:uppercase; font-weight:900; font-size:32px; color:{ORANGE}; }}
+.line {{ height:2px; width:78%; margin:18px auto; background:linear-gradient(90deg,transparent,{ORANGE},transparent); }}
+.hero {{ border:1px solid {WARM}; border-radius:36px; padding:48px; background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 68%,rgba(255,130,0,.08) 100%); box-shadow:0 28px 78px rgba(0,0,0,.07); }}
+.eyebrow {{ font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:900; display:inline-block; padding-bottom:8px; border-bottom:2px solid {ORANGE}; margin-bottom:24px; }}
+.title {{ font-family:Playfair Display,serif; font-size:clamp(42px,6vw,78px); line-height:.96; letter-spacing:-2px; margin:0 0 22px 0; }}
 .orange {{ color:{ORANGE}; }}
-.brand-lockup {{ border:1px solid {WARM}; border-radius:34px; background:#FFFFFF; padding:30px 34px; margin-bottom:28px; box-shadow:0 24px 64px rgba(0,0,0,.055); overflow:hidden; }}
-.brand-signature {{ font-family:'Allura','Great Vibes',cursive; font-size:88px; line-height:.88; color:#111111; text-align:center; margin:0 auto 26px auto; transform:rotate(-1deg); text-shadow:.35px .35px 0 rgba(0,0,0,.20); }}
-.brand-node-row {{ display:flex; align-items:center; justify-content:center; gap:18px; margin:8px 0 20px 0; }}
-.brand-line {{ height:2px; flex:1; max-width:360px; background:linear-gradient(90deg,rgba(255,130,0,.10),{ORANGE}); }}
-.brand-line.right {{ background:linear-gradient(90deg,{ORANGE},rgba(255,130,0,.10)); }}
-.brand-mark {{ width:96px; height:96px; border:7px solid {ORANGE}; border-radius:999px; box-shadow:0 0 0 12px rgba(255,130,0,.07),0 0 38px rgba(255,130,0,.20); position:relative; background:#FFFFFF; flex:0 0 auto; }}
-.brand-mark:before {{ content:''; position:absolute; inset:15px; border:7px solid {ORANGE}; border-radius:999px; }}
-.brand-kicker {{ text-align:center; font-size:25px; letter-spacing:10px; text-transform:uppercase; font-weight:700; margin-top:18px; color:#111111; }}
-.brand-intel {{ text-align:center; font-size:38px; letter-spacing:15px; text-transform:uppercase; color:{ORANGE}; font-weight:900; line-height:1.1; }}
-.brand-bottom-line {{ height:2px; width:78%; margin:18px auto 0 auto; background:linear-gradient(90deg, transparent, {ORANGE}, transparent); }}
-.hero {{ padding:54px 58px 48px 58px; border:1px solid {WARM}; border-radius:36px; background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 64%,rgba(255,130,0,.09) 100%); box-shadow:0 28px 78px rgba(0,0,0,.07); margin-bottom:30px; }}
-.eyebrow {{ font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:900; display:inline-block; padding-bottom:8px; border-bottom:2px solid {ORANGE}; margin-bottom:24px; color:#333333; }}
-.hero-copy {{ max-width:900px; font-size:18px; line-height:1.72; color:#242424; }}
-.node-row {{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:34px; }}
-.node {{ width:64px; height:64px; border-radius:999px; border:2px solid {ORANGE}; display:flex; align-items:center; justify-content:center; background:#FFFFFF; color:{ORANGE}; font-weight:900; box-shadow:0 0 0 10px rgba(255,130,0,.07),0 0 34px rgba(255,130,0,.22); }}
-.connector {{ width:78px; height:2px; background-image:linear-gradient(to right,rgba(255,130,0,.85) 45%,rgba(255,130,0,0) 0%); background-size:13px 2px; background-repeat:repeat-x; }}
-.card {{ border:1px solid {WARM}; border-radius:26px; padding:26px; background:#FFFFFF; box-shadow:0 18px 48px rgba(0,0,0,.05); height:100%; }}
-.card.accent {{ border-top:5px solid {ORANGE}; }}
-.subtle, .card p {{ color:#353535; line-height:1.68; font-size:16px; }}
-.metric {{ border:1px solid {WARM}; border-left:5px solid {ORANGE}; border-radius:22px; background:{SOFT}; padding:24px; min-height:138px; }}
-.big {{ font-family:'Playfair Display',serif; font-size:48px; font-weight:900; line-height:.9; color:#111111; }}
-.label {{ font-size:12px; font-weight:900; letter-spacing:1.4px; text-transform:uppercase; margin-top:12px; color:#555555; }}
-.pill {{ display:inline-block; border:1px solid {ORANGE}; background:rgba(255,130,0,.08); border-radius:999px; padding:8px 13px; margin:4px 5px 4px 0; font-size:12px; font-weight:900; letter-spacing:.55px; text-transform:uppercase; color:#111111; }}
-.callout {{ border:1px solid {WARM}; border-left:6px solid {ORANGE}; border-radius:24px; padding:24px 28px; background:#FFFFFF; box-shadow:0 18px 44px rgba(0,0,0,.045); margin:18px 0; color:#111111; }}
-.signature {{ font-family:'Allura','Great Vibes',cursive; font-size:48px; color:#151515; display:inline-block; transform:rotate(-1deg); margin-top:6px; text-shadow:.3px .3px 0 rgba(0,0,0,.20); }}
-.footer {{ text-align:center; border-top:1px solid {WARM}; margin-top:56px; padding:34px 0 18px 0; }}
-.icons {{ display:flex; gap:12px; justify-content:center; margin-top:12px; }}
-.icon-circle {{ width:31px; height:31px; border-radius:999px; border:1px solid {WARM}; display:inline-flex; align-items:center; justify-content:center; background:#FFFFFF; font-size:12px; font-weight:900; color:#111111; }}
-.sidebar-logo {{ text-align:center; border:1px solid {WARM}; border-radius:24px; padding:18px 12px; background:linear-gradient(180deg,#FFFFFF,rgba(255,130,0,.045)); margin-bottom:18px; }}
-.sidebar-signature {{ font-family:'Allura',cursive; font-size:44px; line-height:.85; color:#111111; }}
-.sidebar-title {{ font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:900; margin-top:10px; color:#111111; }}
-.sidebar-label {{ font-weight:900; margin:18px 0 8px 0; color:#111111; }}
-div.stButton > button, div.stDownloadButton > button {{ border-radius:999px; border:1px solid {ORANGE}; background:{ORANGE}; color:white; font-weight:900; padding:.72rem 1.15rem; }}
-div.stButton > button:hover, div.stDownloadButton > button:hover {{ background:#111111; border:1px solid #111111; color:white; }}
-textarea, input {{ border-radius:16px !important; }}
-@media(max-width:760px) {{ .brand-signature {{ font-size:60px; }} .brand-kicker {{ font-size:16px; letter-spacing:6px; }} .brand-intel {{ font-size:25px; letter-spacing:8px; }} .brand-mark {{ width:74px; height:74px; border-width:6px; }} .brand-mark:before {{ inset:12px; border-width:6px; }} .hero {{ padding:36px 26px; }} .connector {{ display:none; }} }}
+.copy {{ max-width:900px; font-size:18px; line-height:1.7; color:#242424; }}
+.card {{ border:1px solid {WARM}; border-top:5px solid {ORANGE}; border-radius:26px; padding:24px; background:#FFFFFF; box-shadow:0 18px 48px rgba(0,0,0,.05); height:100%; }}
+.cardtitle {{ font-family:Playfair Display,serif; font-size:28px; line-height:1.1; margin-bottom:10px; }}
+.section {{ font-family:Playfair Display,serif; font-size:42px; line-height:1; margin:38px 0 16px; }}
+.metricbox {{ border:1px solid {WARM}; border-left:5px solid {ORANGE}; border-radius:22px; background:{SOFT}; padding:24px; min-height:130px; }}
+.big {{ font-family:Playfair Display,serif; font-size:42px; font-weight:900; }}
+.label {{ font-size:12px; font-weight:900; letter-spacing:1.4px; text-transform:uppercase; color:#555555; }}
+.pill {{ display:inline-block; border:1px solid {ORANGE}; background:rgba(255,130,0,.08); border-radius:999px; padding:8px 13px; margin:4px 5px 4px 0; font-size:12px; font-weight:900; text-transform:uppercase; }}
+.callout {{ border:1px solid {WARM}; border-left:6px solid {ORANGE}; border-radius:24px; padding:24px; background:#FFFFFF; margin:18px 0; }}
+.footsig {{ font-family:Allura,cursive; font-size:48px; }}
+.footer {{ text-align:center; border-top:1px solid {WARM}; margin-top:56px; padding:34px 0 18px; }}
+div.stButton > button, div.stDownloadButton > button {{ border-radius:999px; border:1px solid {ORANGE}; background:{ORANGE}; color:white; font-weight:900; }}
 </style>
 """, unsafe_allow_html=True)
 
-MODULES = {
-    "Responsible AI Foundations": ["AI", "Useful Safe Human Guided", "AI should support people not replace judgment or hide accountability", "A prior authorization risk flag is useful only when staff can review the reason confirm payer policy and act safely"],
-    "Operational Sustainability": ["OS", "Stability Capacity Trust", "A workflow is sustainable when it can function reliably over time without creating hidden burden", "A faster claims process is not sustainable if it creates confusing exception queues and staff rework"],
-    "Strategic Foresight": ["SF", "Early Signals Prevention", "Foresight means detecting weak signals before denials delays complaints or burnout appear", "Authorization aging repeated payer requests and documentation gaps can warn teams before a denial occurs"],
-    "Systemic Risk": ["SR", "Cause Chain Downstream Damage", "Systemic risk spreads across connected workflows instead of staying in one department", "Wrong insurance information can trigger eligibility failure authorization delay denial A R rework and patient confusion"],
-    "Ethical Governance": ["EG", "Oversight Accountability Privacy", "Governance defines who reviews validates audits and owns AI supported workflow decisions", "A denial risk score needs no PHI safeguards human review audit trail bias review and clear escalation ownership"],
-    "Responsible Innovation": ["RI", "Problem First AI Second", "Responsible innovation starts with the workflow problem not the tool trend", "Before adding AI to patient access define whether the real issue is intake data eligibility accuracy authorization aging or handoff clarity"],
-    "Long Term Value": ["LV", "Beyond Speed Beyond Cost", "Value must include trust safety staff capacity quality access compliance and financial stability", "A faster workflow is not valuable if it creates appeals confusion complaints or compliance risk later"],
-    "Capstone Framework": ["CF", "Responsible AI Healthcare Operations", "The capstone connects responsible AI sustainability foresight systemic risk governance innovation and long term value", "A no PHI RCM dashboard should explain purpose limits risk signals oversight and governance boundaries"],
-}
-
-FLASHCARDS = [
-    ("Responsible AI", "AI that is useful safe monitored privacy conscious fair and designed to support human decision making"),
-    ("Operational Sustainability", "The ability of a healthcare workflow to remain reliable manageable and effective over time"),
-    ("Strategic Foresight", "Identifying early signals and future risks before they become costly or harmful"),
-    ("Systemic Risk", "A risk that spreads through connected workflows instead of staying isolated"),
-    ("Ethical Governance", "Rules oversight accountability auditability and correction processes for responsible AI use"),
-    ("No PHI Prototype", "A portfolio tool that uses simulated data only and avoids patient identifiable information"),
-]
-
-QUIZ = [
-    ("Responsible AI in healthcare operations should primarily", ["Replace staff judgment", "Support safer clearer more accountable workflows", "Remove compliance review"], "Support safer clearer more accountable workflows"),
-    ("Best example of a leading indicator", ["Final denial", "Authorization aging past threshold", "Monthly report after close"], "Authorization aging past threshold"),
-    ("Systemic risk means", ["A workflow issue can spread across connected processes", "Only finance is affected", "No operational impact"], "A workflow issue can spread across connected processes"),
-    ("Strongest governance question", ["Can AI sound confident", "Who reviews validates audits and remains accountable", "Can AI replace managers"], "Who reviews validates audits and remains accountable"),
-    ("No PHI means", ["No financial data", "No patient identifiable health information", "No healthcare examples"], "No patient identifiable health information"),
-]
-
-SCENARIOS = {
-    "Prior Authorization Delay": "Orthopedic authorization turnaround time is increasing. Risk signals include authorization aging repeated payer requests missing documentation and unclear escalation ownership.",
-    "Eligibility Verification Breakdown": "Insurance mismatches are discovered after service. Risk signals include registration gaps coordination of benefits uncertainty and downstream claim correction.",
-    "Denial Spike": "Medical necessity and authorization denials increased after a payer policy shift. Risk signals include denial trend spikes appeal backlog and A R aging.",
-    "Healthcare Staffing Friction": "Recruiters spend more time on compliance checks follow ups and scheduling friction than candidate engagement. Risk signals include slow placement and workload imbalance.",
-}
-
-GOVERNANCE_ITEMS = [
-    "Uses simulated no PHI data or clearly defines PHI protections",
-    "Requires human review before operational action",
-    "Explains the workflow risk being monitored",
-    "Identifies the human workflow owner",
-    "Includes bias and fairness review",
-    "Includes auditability and documentation trail",
-    "Validates recommendations against payer policy or operational rules",
-    "Measures staff burden and patient access impact",
-    "Defines escalation thresholds",
-    "Documents what AI should not decide",
-]
-
-if "completed" not in st.session_state:
-    st.session_state.completed = set()
-if "quiz_score" not in st.session_state:
-    st.session_state.quiz_score = 0
-if "reflections" not in st.session_state:
-    st.session_state.reflections = []
+if "alerts" not in st.session_state:
+    st.session_state.alerts = []
+if "pipeline" not in st.session_state:
+    st.session_state.pipeline = []
 
 
-def clean_text(value):
-    value = str(value)
-    for bad in ["#", "*", "|", "·"]:
-        value = value.replace(bad, " ")
-    return " ".join(value.split())
+def data_engine(n):
+    rng = np.random.default_rng(42)
+    df = pd.DataFrame({
+        "record_id": [f"CASE {i:04d}" for i in range(1, n + 1)],
+        "payer_group": rng.choice(["Commercial", "Medicaid", "Medicare", "Self Pay"], n),
+        "workflow_area": rng.choice(["Patient Access", "Prior Authorization", "Health Information", "Revenue Cycle"], n),
+        "documentation_score": rng.integers(60, 100, n),
+        "authorization_age_days": rng.integers(0, 12, n),
+        "queue_age_days": rng.integers(0, 16, n),
+    })
+    df["risk_score"] = (100 - df["documentation_score"] + df["authorization_age_days"] * 5 + df["queue_age_days"] * 2).clip(0, 100)
+    df["risk_level"] = pd.cut(df["risk_score"], [-1, 35, 65, 100], labels=["Low", "Moderate", "High"])
+    df["delay_flag"] = np.where(df["risk_score"] >= 60, 1, 0)
+    return df
 
 
-def multiline_clean(value):
-    value = str(value).replace("#", "").replace("*", "").replace("|", " ").replace("·", " ")
-    lines = [" ".join(line.split()) for line in value.splitlines()]
-    return "\n".join(lines)
+def make_safe(df):
+    out = df.copy()
+    out["record_id"] = [f"SAFE {i:05d}" for i in range(1, len(out) + 1)]
+    return out
 
 
-def section_title(text):
-    st.markdown(f"<div class='clean-section'>{clean_text(text)}</div>", unsafe_allow_html=True)
+def fairness(df):
+    table = df.groupby("payer_group", observed=True).agg(records=("record_id", "count"), delay_rate=("delay_flag", "mean"), average_risk=("risk_score", "mean")).reset_index()
+    table["delay_rate"] = table["delay_rate"].round(3)
+    table["average_risk"] = table["average_risk"].round(1)
+    high = table["delay_rate"].max()
+    low = table["delay_rate"].min()
+    ratio = 1.0 if high == 0 else round(low / high, 2)
+    return table, ratio
 
 
-def card_heading(text):
-    return f"<div class='clean-card-title'>{clean_text(text)}</div>"
+def brand():
+    st.markdown("<div class='brand'><div class='sig'>Kori Pickle</div><div class='line'></div><div class='kicker'>Healthcare Operations</div><div class='intel'>Intelligence</div></div>", unsafe_allow_html=True)
 
 
 def footer():
-    st.markdown("""
-    <div class='footer'>
-      <div style='font-weight:900; letter-spacing:.5px;'>Created by Kori Pickle</div>
-      <div class='signature'>Kori Pickle</div>
-      <div class='icons'><span class='icon-circle'>in</span><span class='icon-circle'>GH</span></div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("<div class='footer'><div style='font-weight:900;'>Created by Kori Pickle</div><div class='footsig'>Kori Pickle</div><div><span class='pill'>LinkedIn</span><span class='pill'>GitHub</span></div></div>", unsafe_allow_html=True)
 
 
-def brand_lockup():
-    st.markdown("""
-    <div class='brand-lockup'>
-      <div class='brand-signature'>Kori Pickle</div>
-      <div class='brand-node-row'><div class='brand-line'></div><div class='brand-mark'></div><div class='brand-line right'></div></div>
-      <div class='brand-kicker'>Healthcare Operations</div>
-      <div class='brand-intel'>Intelligence</div>
-      <div class='brand-bottom-line'></div>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-def branded_export(title, artifact_type, body, caption=""):
-    text = f"""{BRAND_IDENTITY}
-
-{clean_text(title)}
-Portfolio Artifact Type
-{clean_text(artifact_type)}
-
-{NO_PHI}
-
-{multiline_clean(body).strip()}
-
-{VISUAL_DIRECTIONS}
-"""
-    if caption:
-        text += f"\nLinkedIn Ready Caption\n{multiline_clean(caption)}\n\nTopic Tags\n{TOPIC_TAGS}\n"
-    text += f"\n{FOOTER_TEXT}"
-    return text
-
-
-def download(label, text, filename):
-    st.download_button(label, multiline_clean(text), file_name=filename, mime="text/plain")
-
-
-def metrics():
-    a, b, c, d = st.columns(4)
-    a.markdown(f"<div class='metric'><div class='big'>{len(st.session_state.completed)} of 8</div><div class='label'>Modules Complete</div></div>", unsafe_allow_html=True)
-    b.markdown(f"<div class='metric'><div class='big'>{st.session_state.quiz_score}</div><div class='label'>Latest Quiz Score</div></div>", unsafe_allow_html=True)
-    c.markdown(f"<div class='metric'><div class='big'>{len(st.session_state.reflections)}</div><div class='label'>Saved Reflections</div></div>", unsafe_allow_html=True)
-    d.markdown("<div class='metric'><div class='big'>No</div><div class='label'>PHI Used</div></div>", unsafe_allow_html=True)
-
-
-with st.sidebar:
-    st.markdown("""
-    <div class='sidebar-logo'>
-      <div class='sidebar-signature'>Kori Pickle</div>
-      <div class='sidebar-title'>Healthcare Operations Intelligence</div>
-    </div>
-    """, unsafe_allow_html=True)
-    st.caption("Responsible AI Workflow Intelligence Governance")
-    page = st.radio("Choose a study mode", ["Executive Home", "8 Module Study Path", "Flashcards", "Scenario Lab", "Quiz Bank", "Governance Checklist", "Risk Scorecard", "Portfolio Builder", "LinkedIn Post Generator", "Capstone Export", "Progress Dashboard"])
-    st.divider()
-    st.markdown("<div class='sidebar-label'>Brand System</div>", unsafe_allow_html=True)
-    st.markdown("<span class='pill'>White FFFFFF</span><span class='pill'>Vols Orange FF8200</span><span class='pill'>Black Typography</span>", unsafe_allow_html=True)
-    st.caption("Every generator exports brand locked Kori Pickle Healthcare Operations Intelligence content.")
-
-
-if page == "Executive Home":
-    brand_lockup()
-    st.markdown("""
-    <div class='hero'>
-      <div class='eyebrow'>Responsible AI for Healthcare Operations</div>
-      <div class='clean-title'>Build AI governance judgment through a <span class='orange'>workflow intelligence</span> lens.</div>
-      <div class='hero-copy'>This premium interactive study tool teaches responsible AI operational sustainability strategic foresight systemic risk ethical governance responsible innovation and long term value creation using healthcare operations examples.</div>
-      <div class='node-row'><div class='node'>AI</div><div class='connector'></div><div class='node'>RCM</div><div class='connector'></div><div class='node'>PA</div><div class='connector'></div><div class='node'>HIM</div><div class='connector'></div><div class='node'>QI</div></div>
-    </div>
-    """, unsafe_allow_html=True)
-    metrics()
-    section_title("What this tool helps you practice")
-    c1, c2 = st.columns([1.2, .8])
-    with c1:
-        st.markdown("""
-        <div class='card accent'>
-          <div class='clean-card-title'>From AI hype to healthcare operations judgment</div>
-          <p class='subtle'>This tool helps you explain AI responsibly in healthcare operations. The focus is governance workflow risk patient impact staff capacity compliance and long term operational value.</p>
-          <span class='pill'>Revenue Cycle</span><span class='pill'>Patient Access</span><span class='pill'>Prior Authorization</span><span class='pill'>Denial Prevention</span><span class='pill'>Health Informatics</span>
-        </div>
-        """, unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-        <div class='callout'>
-          <strong>Core professional sentence</strong><br><br>
-          Responsible AI in healthcare operations should not only make workflows faster. It should make them safer more visible more accountable and more sustainable for patients staff and the organization.
-        </div>
-        """, unsafe_allow_html=True)
-    section_title("Learning architecture")
-    cols = st.columns(4)
-    for i, (name, data) in enumerate(list(MODULES.items())[:4], start=1):
-        with cols[i - 1]:
-            st.markdown(f"<div class='card'><div class='node'>{data[0]}</div>{card_heading(str(i) + ' ' + name)}<span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p></div>", unsafe_allow_html=True)
-    cols = st.columns(4)
-    for j, (name, data) in enumerate(list(MODULES.items())[4:], start=5):
-        with cols[j - 5]:
-            st.markdown(f"<div class='card'><div class='node'>{data[0]}</div>{card_heading(str(j) + ' ' + name)}<span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p></div>", unsafe_allow_html=True)
-    footer()
-
-elif page == "8 Module Study Path":
-    brand_lockup()
-    section_title("8 Module Study Path")
-    name = st.selectbox("Select a module", list(MODULES.keys()))
-    data = MODULES[name]
-    st.markdown(f"<div class='card accent'><div class='node'>{data[0]}</div>{card_heading(name)}<span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p><p class='subtle'><strong>Healthcare example</strong><br>{data[3]}</p></div>", unsafe_allow_html=True)
-    reflection = st.text_area("Reflection prompt How does this concept apply to revenue cycle patient access prior authorization HIM denial prevention or staffing operations", height=180)
-    if st.button("Mark module complete"):
-        st.session_state.completed.add(name)
-        st.success("Module marked complete")
-    if reflection:
-        if st.button("Save reflection"):
-            st.session_state.reflections.append({"module": name, "reflection": reflection})
-            st.success("Reflection saved")
-        output = branded_export(f"{name} Reflection", "Responsible AI Learning Reflection", f"Module {name}\n\nReflection\n{reflection}", f"I am studying {name.lower()} through a healthcare operations and responsible AI lens. The goal is to connect AI governance with workflow visibility patient trust and operational sustainability.")
-        st.text_area("Brand locked export", output, height=360)
-        download("Download branded reflection", output, f"{name.lower().replace(' ','_')}_brand_locked_reflection.txt")
-    footer()
-
-elif page == "Flashcards":
-    brand_lockup()
-    section_title("Interactive Flashcards")
-    term, definition = FLASHCARDS[st.slider("Choose a flashcard", 1, len(FLASHCARDS), 1) - 1]
-    st.markdown(f"<div class='card accent'>{card_heading(term)}<p class='subtle'>{definition}</p></div>", unsafe_allow_html=True)
-    example = st.text_area("Translate this term into a healthcare operations example", height=150)
-    if example:
-        output = branded_export(f"{term} Study Note", "Healthcare Operations Flashcard Translation", f"Term {term}\nDefinition {definition}\nHealthcare Operations Example\n{example}", f"A concept I am studying in responsible AI for healthcare operations is {term}. I am connecting it to workflow visibility governance and patient centered operational sustainability.")
-        download("Download branded flashcard note", output, f"{term.lower().replace(' ','_')}_brand_locked_note.txt")
-    footer()
-
-elif page == "Scenario Lab":
-    brand_lockup()
-    section_title("Scenario Lab")
-    scenario = st.selectbox("Choose a scenario", list(SCENARIOS.keys()))
-    st.info(SCENARIOS[scenario])
-    root = st.text_input("Likely root workflow issue")
-    owner = st.text_input("Human owner or accountable role")
-    action = st.text_area("Immediate containment action", height=100)
-    kpi = st.text_input("KPI to monitor")
-    if root or owner or action or kpi:
-        body = f"Scenario {scenario}\nSummary {SCENARIOS[scenario]}\n\nLikely Root Workflow Issue\n{root}\n\nHuman Owner or Accountable Role\n{owner}\n\nImmediate Containment Action\n{action}\n\nKPI to Monitor\n{kpi}\n\nResponsible AI Boundary\nAI may support early risk visibility but human review must own validation escalation communication compliance and operational action."
-        output = branded_export(f"{scenario} Scenario Analysis", "No PHI Healthcare Operations Scenario Note", body, f"I analyzed a simulated {scenario.lower()} scenario through a responsible AI and healthcare workflow intelligence lens. The goal is earlier visibility clearer ownership and safer operational response.")
-        st.text_area("Generated brand locked scenario note", output, height=420)
-        download("Download branded scenario note", output, f"{scenario.lower().replace(' ','_')}_brand_locked_scenario.txt")
-    footer()
-
-elif page == "Quiz Bank":
-    brand_lockup()
-    section_title("Quiz Bank")
-    score = 0
-    answers = []
-    for i, (q, opts, ans) in enumerate(QUIZ, start=1):
-        choice = st.radio(q, opts, key=f"q{i}")
-        correct = choice == ans
-        score += int(correct)
-        answers.append((q, choice, ans, correct))
-    if st.button("Grade quiz"):
-        st.session_state.quiz_score = score
-        st.progress(score / len(QUIZ))
-        st.subheader(f"Score {score} of {len(QUIZ)}")
-        report = "\n".join([f"Question {q}\nYour answer {c}\nCorrect answer {a}\nResult {'Correct' if ok else 'Review needed'}\n" for q, c, a, ok in answers])
-        output = branded_export("Responsible AI Healthcare Operations Quiz Report", "Study Progress Artifact", f"Quiz Score {score} of {len(QUIZ)}\n\n{report}", "I completed a responsible AI healthcare operations knowledge check focused on governance workflow intelligence systemic risk and no PHI portfolio thinking.")
-        download("Download branded quiz report", output, "brand_locked_quiz_report.txt")
-    footer()
-
-elif page == "Governance Checklist":
-    brand_lockup()
-    section_title("Responsible AI Governance Checklist")
-    completed = [item for item in GOVERNANCE_ITEMS if st.checkbox(item)]
-    pct = len(completed) / len(GOVERNANCE_ITEMS)
-    st.progress(pct)
-    st.subheader(f"Governance readiness {len(completed)} of {len(GOVERNANCE_ITEMS)}")
-    verdict = "Strong governance foundation" if pct >= .85 else "Partial governance foundation. Strengthen the unchecked items" if pct >= .55 else "High governance risk. Add oversight accountability privacy and measurement"
-    st.info(verdict)
-    body = "Governance Checklist Results\n\n" + "\n".join([f"Completed {i}" if i in completed else f"Not completed {i}" for i in GOVERNANCE_ITEMS]) + f"\n\nReadiness Verdict\n{verdict}"
-    output = branded_export("Responsible AI Governance Checklist", "Brand Locked Governance Evaluation", body, "A responsible AI healthcare workflow needs human oversight no PHI safeguards auditability fairness review escalation logic and long term value measurement.")
-    st.text_area("Brand locked checklist export", output, height=320)
-    download("Download branded checklist", output, "brand_locked_governance_checklist.txt")
-    footer()
-
-elif page == "Risk Scorecard":
-    brand_lockup()
-    section_title("AI Workflow Risk Scorecard")
-    c1, c2 = st.columns(2)
-    with c1:
-        privacy = st.slider("Privacy and PHI protection", 0, 5, 3)
-        oversight = st.slider("Human oversight clarity", 0, 5, 3)
-        explain = st.slider("Explainability and reason visibility", 0, 5, 3)
-    with c2:
-        fairness = st.slider("Bias and fairness review", 0, 5, 3)
-        fit = st.slider("Workflow fit", 0, 5, 3)
-        measure = st.slider("Success measurement plan", 0, 5, 3)
-    total = privacy + oversight + explain + fairness + fit + measure
-    verdict = "Strong readiness" if total >= 25 else "Moderate readiness" if total >= 17 else "High risk"
-    st.markdown(f"<div class='metric'><div class='big'>{total} of 30</div><div class='label'>Responsible AI Readiness Score</div></div>", unsafe_allow_html=True)
-    st.info(verdict)
-    body = f"Score {total} of 30\nPrivacy and PHI protection {privacy} of 5\nHuman oversight clarity {oversight} of 5\nExplainability {explain} of 5\nBias and fairness review {fairness} of 5\nWorkflow fit {fit} of 5\nMeasurement plan {measure} of 5\nVerdict {verdict}"
-    output = branded_export("AI Workflow Risk Scorecard", "Brand Locked Responsible AI Readiness Report", body, "A healthcare AI workflow should be scored before it is trusted. Privacy oversight explainability fairness workflow fit and measurement all matter.")
-    download("Download branded risk scorecard", output, "brand_locked_risk_scorecard.txt")
-    footer()
-
-elif page == "Portfolio Builder":
-    brand_lockup()
-    section_title("Portfolio Builder")
-    project = st.text_input("Project name", "AI Assisted Revenue Cycle Workflow System")
-    area = st.selectbox("Workflow area", ["Revenue Cycle", "Prior Authorization", "Patient Access", "Eligibility Verification", "Denial Prevention", "Health Informatics", "Healthcare Staffing", "Documentation Quality"])
-    signal = st.text_input("Primary workflow risk signal", "Authorization aging and documentation gaps")
-    owner = st.text_input("Human review owner", "Revenue cycle lead patient access supervisor or operations analyst")
-    impact = st.text_area("Patient centered impact", "Earlier workflow visibility may reduce avoidable delays confusion rework and access friction.")
-    body = f"""Responsible AI Use Statement
-This no PHI healthcare operations portfolio artifact uses simulated data to explore how AI assisted workflow visibility can support {area.lower()} operations.
-
-Responsible AI Boundary
-This tool does not replace human review payer policy interpretation clinical judgment coding validation compliance oversight or patient communication.
-
-Purpose
-To demonstrate how early workflow risk signals can support better operational awareness stronger governance and earlier intervention before downstream disruption occurs.
-
-Primary Workflow Risk Signal
-{signal}
-
-Human Oversight Owner
-{owner}
-
-Patient Centered Impact
-{impact}
-
-Governance Considerations
-Human review is required before operational action.
-No PHI is used in this prototype.
-Recommendations must be validated against current policy and workflow rules.
-Bias fairness and access implications should be reviewed.
-Staff burden and downstream workflow effects should be measured.
-The purpose is early risk detection not autonomous decision making.
-"""
-    caption = f"I created a no PHI healthcare operations portfolio artifact focused on {area.lower()} responsible AI workflow visibility and patient centered operational sustainability."
-    output = branded_export(project, "Brand Locked Healthcare Operations Portfolio Artifact", body, caption)
-    st.text_area("Generated brand locked portfolio artifact", output, height=520)
-    download("Download brand locked portfolio artifact", output, "brand_locked_portfolio_artifact.txt")
-    footer()
-
-elif page == "LinkedIn Post Generator":
-    brand_lockup()
-    section_title("LinkedIn Post Generator")
-    angle = st.selectbox("Post angle", ["Responsible AI", "Strategic Foresight", "AI Governance", "Operational Sustainability", "Systemic Risk", "Long Term Value"])
-    focus = st.text_input("Healthcare focus area", "revenue cycle prior authorization patient access and denial prevention")
-    post = f"""HEALTHCARE OPERATIONS INTELLIGENCE
-
-One thing I am learning about {angle.lower()} in healthcare operations is that AI should not be measured by speed alone.
-
-In {focus} the real question is not only whether a tool can automate a task.
-
-The better question is whether it helps teams see workflow risk earlier protect human judgment reduce avoidable administrative burden support patient access and create more accountable operations.
-
-A faster workflow is not always a better workflow.
-
-A responsible workflow is one that is visible governed measurable and sustainable over time.
-
-From a patient to professional perspective I believe healthcare AI should support trust safety communication documentation quality and workflow reliability not just efficiency.
-
-Portfolio positioning
-This connects to my no PHI Healthcare Operations Intelligence portfolio where I am building simulated workflow tools around revenue cycle visibility patient access prior authorization denial prevention health informatics and responsible AI governance.
-
+def report_text(df, ratio, score, status):
+    high = int((df["risk_level"] == "High").sum())
+    return f"""HEALTHCARE OPERATIONS INTELLIGENCE
 Created by Kori Pickle
 
-Topic Tags
-{TOPIC_TAGS}
+Responsible AI Operations Evaluator
+
+Executive Summary
+This working study tool uses synthetic data to evaluate workflow risk explainability fairness alert readiness governance controls and safe export logic.
+
+Core Metrics
+Records reviewed {len(df)}
+High risk records {high}
+Fairness ratio {ratio}
+Governance readiness {score} of 10
+Pipeline status {status}
+
+Responsible Use Boundary
+This tool does not replace human review payer policy interpretation coding validation compliance oversight patient communication or operational leadership judgment.
+
+Created by Kori Pickle
+Kori Pickle
+LinkedIn and GitHub
 """
-    visual = f"Carousel Visual Direction\n{VISUAL_DIRECTIONS}\nSuggested Slide Headline\nAI should not only make healthcare workflows faster. It should make them safer more visible and more accountable.\n\nFooter\n{FOOTER_TEXT}"
-    st.text_area("Generated brand locked LinkedIn post", post, height=430)
-    st.text_area("Generated visual directions", visual, height=260)
-    download("Download LinkedIn post", post, "brand_locked_linkedin_post.txt")
-    download("Download visual directions", visual, "brand_locked_visual_directions.txt")
-    footer()
 
-elif page == "Capstone Export":
-    brand_lockup()
-    section_title("Capstone Export")
-    title = st.text_input("Framework title", "Responsible AI Healthcare Operations Framework")
-    focus = st.text_area("Framework focus", "Workflow intelligence patient access revenue cycle visibility denial prevention health informatics human oversight and long term operational sustainability.")
-    body = f"""Executive Summary
-This framework explains how responsible AI can support healthcare operations without replacing human judgment or ignoring patient impact.
+with st.sidebar:
+    st.markdown("<div class='sig'>Kori Pickle</div><div class='kicker'>Healthcare Operations Intelligence</div>", unsafe_allow_html=True)
+    workspace = st.radio("Choose a workspace", ["Command Center", "Explainability", "Fairness Alerts", "Safe Pipeline", "Governance Checklist", "Portfolio Export"])
+    n = st.slider("Synthetic record volume", 80, 500, 180, 20)
+    safety_floor = st.slider("Fairness safety floor", 50, 95, 80, 5)
+    st.markdown("<span class='pill'>White FFFFFF</span><span class='pill'>Vols Orange FF8200</span><span class='pill'>Black Typography</span>", unsafe_allow_html=True)
 
-Framework Focus
-{focus}
+df = data_engine(n)
+safe = make_safe(df)
+fair_table, ratio = fairness(df)
+brand()
 
-Core Principle
-Responsible AI in healthcare operations should not only make workflows faster. It should make them safer more visible more accountable and more sustainable for patients staff and the organization.
+if workspace == "Command Center":
+    st.markdown("<div class='hero'><div class='eyebrow'>Responsible AI Operations Evaluator</div><div class='title'>A working audit tool for <span class='orange'>workflow risk governance</span></div><div class='copy'>This premium simulator evaluates synthetic healthcare operations records for explainability fairness alert readiness safe export logic and governance discipline.</div></div>", unsafe_allow_html=True)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.markdown(f"<div class='metricbox'><div class='big'>{len(df)}</div><div class='label'>Synthetic Records</div></div>", unsafe_allow_html=True)
+    c2.markdown(f"<div class='metricbox'><div class='big'>{int((df['risk_level'] == 'High').sum())}</div><div class='label'>High Risk Records</div></div>", unsafe_allow_html=True)
+    c3.markdown(f"<div class='metricbox'><div class='big'>{ratio}</div><div class='label'>Fairness Ratio</div></div>", unsafe_allow_html=True)
+    c4.markdown("<div class='metricbox'><div class='big'>No</div><div class='label'>Protected Data Used</div></div>", unsafe_allow_html=True)
+    st.markdown("<div class='section'>Live Workflow Snapshot</div>", unsafe_allow_html=True)
+    st.dataframe(df.head(25), use_container_width=True, hide_index=True)
+    st.download_button("Download synthetic audit data", df.to_csv(index=False), file_name="synthetic_responsible_ai_audit_data.csv", mime="text/csv")
 
-Framework Pillars
-Responsible AI Foundations
-Operational Sustainability
-Strategic Foresight
-Systemic Risk Assessment
-Ethical Governance
-Responsible Innovation
-Long Term Value Creation
+elif workspace == "Explainability":
+    st.markdown("<div class='section'>Explainability Workspace</div>", unsafe_allow_html=True)
+    explain = pd.DataFrame({"factor": ["Authorization Age", "Documentation Gaps", "Queue Age", "Payer Pattern"], "weight": [38, 30, 20, 12]})
+    st.bar_chart(explain.set_index("factor"))
+    st.dataframe(explain, use_container_width=True, hide_index=True)
+    selected = st.selectbox("Select a record", df["record_id"].head(50))
+    row = df[df["record_id"] == selected].iloc[0]
+    st.markdown(f"<div class='callout'>Selected record {selected}<br>Risk score {row['risk_score']}<br>Risk level {row['risk_level']}<br>Main signal authorization age {row['authorization_age_days']} days</div>", unsafe_allow_html=True)
 
-Professional Positioning Statement
-From a patient to professional perspective responsible AI cannot only be measured by automation speed or cost reduction. It must also be measured by trust safety access communication documentation quality workflow reliability and human accountability.
-"""
-    output = branded_export(title, "Complete Brand Locked Capstone Framework", body, "I built a Responsible AI Healthcare Operations Framework to connect workflow intelligence governance systemic risk and patient centered operational sustainability.")
-    st.text_area("Brand locked capstone framework", output, height=620)
-    download("Download brand locked capstone", output, "brand_locked_capstone_framework.txt")
-    footer()
-
-elif page == "Progress Dashboard":
-    brand_lockup()
-    section_title("Progress Dashboard")
-    metrics()
-    st.markdown("<div class='clean-card-title'>Completed modules</div>", unsafe_allow_html=True)
-    st.write(pd.DataFrame({"Completed Module": sorted(st.session_state.completed)})) if st.session_state.completed else st.info("No modules marked complete yet")
-    st.markdown("<div class='clean-card-title'>Saved reflections</div>", unsafe_allow_html=True)
-    if st.session_state.reflections:
-        st.write(pd.DataFrame(st.session_state.reflections))
-        combined = "\n\n".join([f"{r['module']}\n{r['reflection']}" for r in st.session_state.reflections])
-        output = branded_export("Responsible AI Study Reflection Bundle", "Brand Locked Progress Export", combined, "I am building responsible AI healthcare operations knowledge through a workflow intelligence governance and no PHI portfolio lens.")
-        download("Download all branded reflections", output, "brand_locked_reflections.txt")
+elif workspace == "Fairness Alerts":
+    st.markdown("<div class='section'>Fairness Alert Simulator</div>", unsafe_allow_html=True)
+    st.dataframe(fair_table, use_container_width=True, hide_index=True)
+    simulated = st.slider("Simulated fairness ratio", 0.50, 1.00, float(ratio), 0.01)
+    if simulated < safety_floor / 100:
+        st.error("Fairness alert triggered. Human review is required before operational use.")
+        if st.button("Simulate team alert"):
+            alert = {"system": "Responsible AI Operations Evaluator", "alert_type": "Fairness safety boundary crossed", "current_ratio": round(simulated, 2), "required_action": "Pause use and review group performance", "created_by": "Kori Pickle"}
+            st.session_state.alerts.append(alert)
+            st.success("Team alert simulated and logged")
+            st.json(alert)
     else:
-        st.info("No saved reflections yet")
-    footer()
+        st.success("Fairness bounds stable")
+    st.dataframe(pd.DataFrame(st.session_state.alerts), use_container_width=True, hide_index=True)
+
+elif workspace == "Safe Pipeline":
+    st.markdown("<div class='section'>Safe Pipeline Simulator</div>", unsafe_allow_html=True)
+    c1, c2 = st.columns(2)
+    c1.dataframe(df[["record_id", "payer_group", "workflow_area", "risk_score"]].head(8), use_container_width=True, hide_index=True)
+    c2.dataframe(safe[["record_id", "payer_group", "workflow_area", "risk_score"]].head(8), use_container_width=True, hide_index=True)
+    if st.button("Execute safe stream simulation"):
+        progress = st.progress(0)
+        for step in range(100):
+            time.sleep(0.003)
+            progress.progress(step + 1)
+        event = {"pipeline_status": "Completed", "records_streamed": len(safe), "data_type": "Synthetic safe data", "destination": "Mock audit table"}
+        st.session_state.pipeline.append(event)
+        st.success("Safe export simulation completed")
+    st.dataframe(pd.DataFrame(st.session_state.pipeline), use_container_width=True, hide_index=True)
+    st.download_button("Download safe export", safe.to_csv(index=False), file_name="safe_mock_pipeline_export.csv", mime="text/csv")
+
+elif workspace == "Governance Checklist":
+    st.markdown("<div class='section'>Governance Checklist</div>", unsafe_allow_html=True)
+    items = ["Uses synthetic safe data only", "Requires human review before action", "Explains workflow risk", "Identifies accountable owner", "Checks fairness across groups", "Provides alert logic", "Creates audit record", "Avoids clinical decision replacement", "Supports portfolio export", "Includes responsible use boundary"]
+    done = [item for item in items if st.checkbox(item)]
+    st.markdown(f"<div class='metricbox'><div class='big'>{len(done)} of 10</div><div class='label'>Governance Readiness Score</div></div>", unsafe_allow_html=True)
+    st.text_area("Governance notes", height=150)
+
+elif workspace == "Portfolio Export":
+    st.markdown("<div class='section'>Portfolio Export</div>", unsafe_allow_html=True)
+    readiness = st.slider("Governance score to include", 0, 10, 8)
+    status = st.selectbox("Pipeline status", ["Not tested", "Simulated successfully", "Needs review"])
+    report = report_text(df, ratio, readiness, status)
+    st.text_area("Portfolio ready export", report, height=520)
+    st.download_button("Download portfolio report", report, file_name="responsible_ai_operations_report.txt", mime="text/plain")
+
+footer()
