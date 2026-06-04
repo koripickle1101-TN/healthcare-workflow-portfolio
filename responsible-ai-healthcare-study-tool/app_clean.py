@@ -3,166 +3,661 @@ import pandas as pd
 import numpy as np
 import time
 
-st.set_page_config(page_title="Healthcare Operations AI Evaluator", layout="wide")
+st.set_page_config(
+    page_title="Responsible AI Governance Lab",
+    page_icon="🟧",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
 ORANGE = "#FF8200"
+BLACK = "#000000"
 WARM = "#E8E3DC"
 SOFT = "#F7F4EF"
+INK = "#151515"
+GREEN = "#157347"
+RED = "#B42318"
+AMBER = "#B85C00"
 
-st.markdown(f"""
+st.markdown(
+    f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Playfair+Display:wght@700;900&family=Allura&display=swap');
-html, body, [class*='css'] {{ font-family: Inter, sans-serif; color: #000000; }}
-.stApp {{ background: linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 78%,#FBF8F3 100%); }}
-section[data-testid='stSidebar'] {{ background:#FFFFFF; border-right:1px solid {WARM}; }}
-.block-container {{ max-width:1220px; padding-top:1.2rem; }}
-.brand {{ border:1px solid {WARM}; border-radius:34px; padding:30px; background:#FFFFFF; box-shadow:0 24px 64px rgba(0,0,0,.055); margin-bottom:28px; }}
-.sig {{ font-family:Allura,cursive; font-size:82px; text-align:center; line-height:.9; color:#111111; }}
-.kicker {{ text-align:center; letter-spacing:8px; text-transform:uppercase; font-weight:800; font-size:21px; margin-top:14px; }}
-.intel {{ text-align:center; letter-spacing:12px; text-transform:uppercase; font-weight:900; font-size:32px; color:{ORANGE}; }}
-.line {{ height:2px; width:78%; margin:18px auto; background:linear-gradient(90deg,transparent,{ORANGE},transparent); }}
-.hero {{ border:1px solid {WARM}; border-radius:36px; padding:48px; background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 68%,rgba(255,130,0,.08) 100%); box-shadow:0 28px 78px rgba(0,0,0,.07); }}
-.eyebrow {{ font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:900; display:inline-block; padding-bottom:8px; border-bottom:2px solid {ORANGE}; margin-bottom:24px; }}
-.title {{ font-family:Playfair Display,serif; font-size:clamp(42px,6vw,78px); line-height:.96; letter-spacing:-2px; margin:0 0 22px 0; }}
-.orange {{ color:{ORANGE}; }}
-.copy {{ max-width:900px; font-size:18px; line-height:1.7; color:#242424; }}
-.card {{ border:1px solid {WARM}; border-top:5px solid {ORANGE}; border-radius:26px; padding:24px; background:#FFFFFF; box-shadow:0 18px 48px rgba(0,0,0,.05); height:100%; }}
-.cardtitle {{ font-family:Playfair Display,serif; font-size:28px; line-height:1.1; margin-bottom:10px; }}
-.section {{ font-family:Playfair Display,serif; font-size:42px; line-height:1; margin:38px 0 16px; }}
-.metricbox {{ border:1px solid {WARM}; border-left:5px solid {ORANGE}; border-radius:22px; background:{SOFT}; padding:24px; min-height:130px; }}
-.big {{ font-family:Playfair Display,serif; font-size:42px; font-weight:900; }}
-.label {{ font-size:12px; font-weight:900; letter-spacing:1.4px; text-transform:uppercase; color:#555555; }}
-.pill {{ display:inline-block; border:1px solid {ORANGE}; background:rgba(255,130,0,.08); border-radius:999px; padding:8px 13px; margin:4px 5px 4px 0; font-size:12px; font-weight:900; text-transform:uppercase; }}
-.callout {{ border:1px solid {WARM}; border-left:6px solid {ORANGE}; border-radius:24px; padding:24px; background:#FFFFFF; margin:18px 0; }}
-.footsig {{ font-family:Allura,cursive; font-size:48px; }}
-.footer {{ text-align:center; border-top:1px solid {WARM}; margin-top:56px; padding:34px 0 18px; }}
-div.stButton > button, div.stDownloadButton > button {{ border-radius:999px; border:1px solid {ORANGE}; background:{ORANGE}; color:white; font-weight:900; }}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Allura&display=swap');
+
+html, body, [class*='css'] {{
+    font-family: Inter, sans-serif;
+    color: {BLACK};
+}}
+
+.stApp {{
+    background:
+        radial-gradient(circle at 92% 8%, rgba(255,130,0,.10), transparent 30%),
+        linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 76%, #FBF8F3 100%);
+}}
+
+section[data-testid='stSidebar'] {{
+    background: #FFFFFF;
+    border-right: 1px solid {WARM};
+}}
+
+section[data-testid='stSidebar'] p,
+section[data-testid='stSidebar'] span,
+section[data-testid='stSidebar'] label {{
+    color: {BLACK};
+}}
+
+.block-container {{
+    max-width: 1240px;
+    padding-top: 1.2rem;
+    padding-bottom: 2.8rem;
+}}
+
+.brand-card {{
+    background: #FFFFFF;
+    border: 1px solid {WARM};
+    border-radius: 30px;
+    padding: 30px 34px;
+    margin-bottom: 28px;
+    box-shadow: 0 24px 64px rgba(0,0,0,.055);
+    overflow: hidden;
+}}
+
+.brand-signature {{
+    font-family: Allura, cursive;
+    font-size: clamp(58px, 11vw, 96px);
+    line-height: .88;
+    color: #111111;
+    text-align: center;
+    margin: 0 auto 22px auto;
+    transform: rotate(-1deg);
+}}
+
+.brand-line {{
+    height: 2px;
+    width: 84%;
+    margin: 14px auto 18px auto;
+    background: linear-gradient(90deg, transparent, {ORANGE}, transparent);
+}}
+
+.brand-kicker {{
+    text-align: center;
+    font-size: clamp(14px, 3vw, 22px);
+    letter-spacing: clamp(4px, 1.4vw, 9px);
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #111111;
+    margin-top: 10px;
+}}
+
+.brand-intel {{
+    text-align: center;
+    font-size: clamp(22px, 5vw, 38px);
+    letter-spacing: clamp(5px, 1.6vw, 12px);
+    text-transform: uppercase;
+    color: {ORANGE};
+    font-weight: 900;
+    line-height: 1.2;
+    overflow-wrap: normal;
+    word-break: keep-all;
+}}
+
+.hero {{
+    border: 1px solid {WARM};
+    border-radius: 34px;
+    padding: clamp(30px, 5vw, 56px);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 67%, rgba(255,130,0,.08) 100%);
+    box-shadow: 0 28px 78px rgba(0,0,0,.07);
+    margin-bottom: 30px;
+}}
+
+.eyebrow {{
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 900;
+    display: inline-block;
+    padding-bottom: 8px;
+    border-bottom: 2px solid {ORANGE};
+    margin-bottom: 24px;
+    color: #333333;
+}}
+
+.title {{
+    font-family: Playfair Display, serif;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: .96;
+    letter-spacing: -2px;
+    margin: 0 0 22px 0;
+    color: #000000;
+}}
+
+.orange {{
+    color: {ORANGE};
+}}
+
+.copy {{
+    max-width: 920px;
+    font-size: 18px;
+    line-height: 1.72;
+    color: #242424;
+}}
+
+.section-title {{
+    font-family: Playfair Display, serif;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1;
+    letter-spacing: -1px;
+    margin: 42px 0 18px 0;
+    color: #000000;
+}}
+
+.card {{
+    border: 1px solid {WARM};
+    border-top: 5px solid {ORANGE};
+    border-radius: 26px;
+    padding: 24px;
+    background: #FFFFFF;
+    box-shadow: 0 18px 48px rgba(0,0,0,.05);
+    height: 100%;
+}}
+
+.card-soft {{
+    border: 1px solid {WARM};
+    border-radius: 26px;
+    padding: 24px;
+    background: {SOFT};
+    height: 100%;
+}}
+
+.card-title {{
+    font-family: Playfair Display, serif;
+    font-size: 28px;
+    line-height: 1.08;
+    margin-bottom: 12px;
+    color: #000000;
+}}
+
+.subtle {{
+    color: #353535;
+    line-height: 1.68;
+    font-size: 16px;
+}}
+
+.metric-card {{
+    border: 1px solid {WARM};
+    border-left: 5px solid {ORANGE};
+    border-radius: 22px;
+    background: {SOFT};
+    padding: 22px;
+    min-height: 128px;
+}}
+
+.big {{
+    font-family: Playfair Display, serif;
+    font-size: clamp(34px, 5vw, 50px);
+    font-weight: 900;
+    line-height: .95;
+    color: #111111;
+}}
+
+.label {{
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    color: #555555;
+}}
+
+.pill {{
+    display: inline-block;
+    border: 1px solid {ORANGE};
+    background: rgba(255,130,0,.08);
+    border-radius: 999px;
+    padding: 8px 13px;
+    margin: 4px 5px 4px 0;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .55px;
+    text-transform: uppercase;
+    color: #111111;
+}}
+
+.callout {{
+    border: 1px solid {WARM};
+    border-left: 6px solid {ORANGE};
+    border-radius: 24px;
+    padding: 22px 26px;
+    background: #FFFFFF;
+    box-shadow: 0 18px 44px rgba(0,0,0,.045);
+    margin: 18px 0;
+    color: #111111;
+}}
+
+.node-row {{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}}
+
+.node {{
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    border: 2px solid {ORANGE};
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: {ORANGE};
+    background: #FFFFFF;
+    font-weight: 900;
+    box-shadow: 0 0 0 10px rgba(255,130,0,.07), 0 0 30px rgba(255,130,0,.18);
+}}
+
+.connector {{
+    width: 70px;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(255,130,0,.85) 45%, rgba(255,130,0,0) 0%);
+    background-size: 13px 2px;
+    background-repeat: repeat-x;
+}}
+
+.status-pass {{ color: {GREEN}; font-weight: 900; }}
+.status-warn {{ color: {AMBER}; font-weight: 900; }}
+.status-fail {{ color: {RED}; font-weight: 900; }}
+
+.footer {{
+    text-align: center;
+    border-top: 1px solid {WARM};
+    margin-top: 56px;
+    padding: 34px 0 18px 0;
+}}
+
+.footer-sig {{
+    font-family: Allura, cursive;
+    font-size: 50px;
+    color: #111111;
+    line-height: .9;
+}}
+
+.icon-row {{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}}
+
+.icon {{
+    border: 1px solid {WARM};
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 12px;
+    font-weight: 900;
+    background: #FFFFFF;
+}}
+
+.sidebar-brand {{
+    text-align: center;
+    border: 1px solid {WARM};
+    border-radius: 24px;
+    padding: 18px 12px;
+    background: linear-gradient(180deg, #FFFFFF, rgba(255,130,0,.045));
+    margin-bottom: 18px;
+}}
+
+.sidebar-sig {{
+    font-family: Allura, cursive;
+    font-size: 46px;
+    line-height: .85;
+    color: #111111;
+}}
+
+.sidebar-title {{
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-top: 10px;
+    color: #111111;
+}}
+
+div.stButton > button, div.stDownloadButton > button {{
+    border-radius: 999px;
+    border: 1px solid {ORANGE};
+    background: {ORANGE};
+    color: white;
+    font-weight: 900;
+    padding: .72rem 1.1rem;
+}}
+
+div.stButton > button:hover, div.stDownloadButton > button:hover {{
+    background: #111111;
+    border: 1px solid #111111;
+    color: white;
+}}
+
+textarea, input {{
+    border-radius: 16px !important;
+}}
+
+@media(max-width:760px) {{
+    .brand-card {{ padding: 24px 18px; }}
+    .brand-signature {{ font-size: 62px; }}
+    .brand-kicker {{ letter-spacing: 4px; font-size: 14px; }}
+    .brand-intel {{ letter-spacing: 5px; font-size: 24px; }}
+    .hero {{ padding: 32px 24px; }}
+    .connector {{ display: none; }}
+}}
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 if "alerts" not in st.session_state:
     st.session_state.alerts = []
 if "pipeline" not in st.session_state:
     st.session_state.pipeline = []
+if "case_reviews" not in st.session_state:
+    st.session_state.case_reviews = []
+if "governance_notes" not in st.session_state:
+    st.session_state.governance_notes = ""
 
 
-def data_engine(n):
+def brand_header():
+    st.markdown(
+        """
+        <div class='brand-card'>
+            <div class='brand-signature'>Kori Pickle</div>
+            <div class='brand-line'></div>
+            <div class='brand-kicker'>Healthcare Operations</div>
+            <div class='brand-intel'>Intelligence</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def footer():
+    st.markdown(
+        """
+        <div class='footer'>
+            <div style='font-weight:900; letter-spacing:.5px;'>Created by Kori Pickle</div>
+            <div class='footer-sig'>Kori Pickle</div>
+            <div class='icon-row'><span class='icon'>LinkedIn</span><span class='icon'>GitHub</span></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def section(text):
+    st.markdown(f"<div class='section-title'>{text}</div>", unsafe_allow_html=True)
+
+
+def create_data(volume, payer_pressure, documentation_pressure, queue_pressure):
     rng = np.random.default_rng(42)
-    df = pd.DataFrame({
-        "record_id": [f"CASE {i:04d}" for i in range(1, n + 1)],
-        "payer_group": rng.choice(["Commercial", "Medicaid", "Medicare", "Self Pay"], n),
-        "workflow_area": rng.choice(["Patient Access", "Prior Authorization", "Health Information", "Revenue Cycle"], n),
-        "documentation_score": rng.integers(60, 100, n),
-        "authorization_age_days": rng.integers(0, 12, n),
-        "queue_age_days": rng.integers(0, 16, n),
-    })
-    df["risk_score"] = (100 - df["documentation_score"] + df["authorization_age_days"] * 5 + df["queue_age_days"] * 2).clip(0, 100)
-    df["risk_level"] = pd.cut(df["risk_score"], [-1, 35, 65, 100], labels=["Low", "Moderate", "High"])
-    df["delay_flag"] = np.where(df["risk_score"] >= 60, 1, 0)
-    return df
+    data = pd.DataFrame(
+        {
+            "record_id": [f"CASE {i:04d}" for i in range(1, volume + 1)],
+            "payer_group": rng.choice(["Commercial", "Medicaid", "Medicare", "Self Pay"], volume, p=[.44, .22, .28, .06]),
+            "workflow_area": rng.choice(["Patient Access", "Prior Authorization", "Health Information", "Revenue Cycle"], volume),
+            "service_line": rng.choice(["Orthopedics", "Cardiology", "Rehabilitation", "Imaging", "Primary Care"], volume),
+            "documentation_score": rng.integers(55, 100, volume),
+            "authorization_age_days": rng.integers(0, 14, volume),
+            "queue_age_days": rng.integers(0, 18, volume),
+            "handoff_count": rng.integers(1, 6, volume),
+        }
+    )
+    payer_weight = data["payer_group"].map({"Commercial": 4, "Medicaid": 8 + payer_pressure, "Medicare": 6, "Self Pay": 10 + payer_pressure})
+    data["risk_score"] = (
+        100
+        - data["documentation_score"]
+        + data["authorization_age_days"] * 4
+        + data["queue_age_days"] * 2
+        + data["handoff_count"] * 3
+        + payer_weight
+        + documentation_pressure
+        + queue_pressure
+    ).clip(0, 100)
+    data["risk_level"] = pd.cut(data["risk_score"], [-1, 35, 65, 100], labels=["Low", "Moderate", "High"])
+    data["delay_flag"] = np.where(data["risk_score"] >= 60, 1, 0)
+    data["recommended_action"] = np.select(
+        [
+            data["risk_score"] >= 75,
+            data["risk_score"] >= 55,
+            data["risk_score"] < 55,
+        ],
+        [
+            "Escalate for human review",
+            "Monitor and validate documentation",
+            "Continue standard workflow",
+        ],
+    )
+    return data
 
 
-def make_safe(df):
-    out = df.copy()
-    out["record_id"] = [f"SAFE {i:05d}" for i in range(1, len(out) + 1)]
-    return out
+def safe_export(data):
+    safe = data.copy()
+    safe["record_id"] = [f"SAFE {i:05d}" for i in range(1, len(safe) + 1)]
+    return safe
 
 
-def fairness(df):
-    table = df.groupby("payer_group", observed=True).agg(records=("record_id", "count"), delay_rate=("delay_flag", "mean"), average_risk=("risk_score", "mean")).reset_index()
+def fairness_metrics(data):
+    table = (
+        data.groupby("payer_group", observed=True)
+        .agg(
+            records=("record_id", "count"),
+            delay_rate=("delay_flag", "mean"),
+            average_risk=("risk_score", "mean"),
+            average_queue_age=("queue_age_days", "mean"),
+        )
+        .reset_index()
+    )
     table["delay_rate"] = table["delay_rate"].round(3)
     table["average_risk"] = table["average_risk"].round(1)
+    table["average_queue_age"] = table["average_queue_age"].round(1)
     high = table["delay_rate"].max()
     low = table["delay_rate"].min()
     ratio = 1.0 if high == 0 else round(low / high, 2)
     return table, ratio
 
 
-def brand():
-    st.markdown("<div class='brand'><div class='sig'>Kori Pickle</div><div class='line'></div><div class='kicker'>Healthcare Operations</div><div class='intel'>Intelligence</div></div>", unsafe_allow_html=True)
-
-
-def footer():
-    st.markdown("<div class='footer'><div style='font-weight:900;'>Created by Kori Pickle</div><div class='footsig'>Kori Pickle</div><div><span class='pill'>LinkedIn</span><span class='pill'>GitHub</span></div></div>", unsafe_allow_html=True)
-
-
-def report_text(df, ratio, score, status):
-    high = int((df["risk_level"] == "High").sum())
+def report_text(data, fairness_ratio, governance_score, pipeline_status, scenario_name):
+    high_count = int((data["risk_level"] == "High").sum())
+    moderate_count = int((data["risk_level"] == "Moderate").sum())
     return f"""HEALTHCARE OPERATIONS INTELLIGENCE
 Created by Kori Pickle
 
-Responsible AI Operations Evaluator
+Responsible AI Governance Lab
 
 Executive Summary
-This working study tool uses synthetic data to evaluate workflow risk explainability fairness alert readiness governance controls and safe export logic.
+This interactive no data risk tool uses synthetic healthcare operations records to evaluate workflow risk explainability fairness alert readiness safe export logic governance controls and responsible AI boundaries.
+
+Scenario
+{scenario_name}
 
 Core Metrics
-Records reviewed {len(df)}
-High risk records {high}
-Fairness ratio {ratio}
-Governance readiness {score} of 10
-Pipeline status {status}
+Records reviewed {len(data)}
+High risk records {high_count}
+Moderate risk records {moderate_count}
+Fairness ratio {fairness_ratio}
+Governance readiness {governance_score} of 10
+Pipeline status {pipeline_status}
 
 Responsible Use Boundary
 This tool does not replace human review payer policy interpretation coding validation compliance oversight patient communication or operational leadership judgment.
+
+Portfolio Value
+This artifact demonstrates healthcare operations intelligence through workflow risk scoring fairness monitoring safe data handling governance review and no data risk portfolio documentation.
 
 Created by Kori Pickle
 Kori Pickle
 LinkedIn and GitHub
 """
 
+
 with st.sidebar:
-    st.markdown("<div class='sig'>Kori Pickle</div><div class='kicker'>Healthcare Operations Intelligence</div>", unsafe_allow_html=True)
-    workspace = st.radio("Choose a workspace", ["Command Center", "Explainability", "Fairness Alerts", "Safe Pipeline", "Governance Checklist", "Portfolio Export"])
-    n = st.slider("Synthetic record volume", 80, 500, 180, 20)
+    st.markdown(
+        """
+        <div class='sidebar-brand'>
+            <div class='sidebar-sig'>Kori Pickle</div>
+            <div class='sidebar-title'>Healthcare Operations Intelligence</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.caption("Responsible AI Workflow Intelligence Governance")
+    workspace = st.radio(
+        "Choose a workspace",
+        [
+            "Executive Command Center",
+            "Risk Explorer",
+            "Explainability Studio",
+            "Fairness Alert Lab",
+            "Safe Pipeline Simulator",
+            "Governance Checklist",
+            "Scenario Stress Test",
+            "Portfolio Export",
+        ],
+    )
+    st.divider()
+    volume = st.slider("Synthetic record volume", 100, 700, 220, 20)
     safety_floor = st.slider("Fairness safety floor", 50, 95, 80, 5)
+    payer_pressure = st.slider("Payer friction pressure", 0, 20, 8, 1)
+    documentation_pressure = st.slider("Documentation instability", 0, 20, 6, 1)
+    queue_pressure = st.slider("Queue aging pressure", 0, 20, 6, 1)
     st.markdown("<span class='pill'>White FFFFFF</span><span class='pill'>Vols Orange FF8200</span><span class='pill'>Black Typography</span>", unsafe_allow_html=True)
 
-df = data_engine(n)
-safe = make_safe(df)
-fair_table, ratio = fairness(df)
-brand()
 
-if workspace == "Command Center":
-    st.markdown("<div class='hero'><div class='eyebrow'>Responsible AI Operations Evaluator</div><div class='title'>A working audit tool for <span class='orange'>workflow risk governance</span></div><div class='copy'>This premium simulator evaluates synthetic healthcare operations records for explainability fairness alert readiness safe export logic and governance discipline.</div></div>", unsafe_allow_html=True)
+data = create_data(volume, payer_pressure, documentation_pressure, queue_pressure)
+safe = safe_export(data)
+fair_table, fairness_ratio = fairness_metrics(data)
+risk_high = int((data["risk_level"] == "High").sum())
+risk_moderate = int((data["risk_level"] == "Moderate").sum())
+readiness_score = 0
+
+brand_header()
+
+if workspace == "Executive Command Center":
+    st.markdown(
+        """
+        <div class='hero'>
+            <div class='eyebrow'>Responsible AI Governance Lab</div>
+            <div class='title'>A premium working command center for <span class='orange'>workflow risk governance</span></div>
+            <div class='copy'>This interactive simulator evaluates synthetic healthcare operations records for risk scoring explainability fairness alert readiness safe export logic governance controls and responsible AI boundaries.</div>
+            <div class='node-row'><span class='node'>AI</span><span class='connector'></span><span class='node'>Risk</span><span class='connector'></span><span class='node'>Fair</span><span class='connector'></span><span class='node'>Data</span><span class='connector'></span><span class='node'>Gov</span></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     c1, c2, c3, c4 = st.columns(4)
-    c1.markdown(f"<div class='metricbox'><div class='big'>{len(df)}</div><div class='label'>Synthetic Records</div></div>", unsafe_allow_html=True)
-    c2.markdown(f"<div class='metricbox'><div class='big'>{int((df['risk_level'] == 'High').sum())}</div><div class='label'>High Risk Records</div></div>", unsafe_allow_html=True)
-    c3.markdown(f"<div class='metricbox'><div class='big'>{ratio}</div><div class='label'>Fairness Ratio</div></div>", unsafe_allow_html=True)
-    c4.markdown("<div class='metricbox'><div class='big'>No</div><div class='label'>Protected Data Used</div></div>", unsafe_allow_html=True)
-    st.markdown("<div class='section'>Live Workflow Snapshot</div>", unsafe_allow_html=True)
-    st.dataframe(df.head(25), use_container_width=True, hide_index=True)
-    st.download_button("Download synthetic audit data", df.to_csv(index=False), file_name="synthetic_responsible_ai_audit_data.csv", mime="text/csv")
+    c1.markdown(f"<div class='metric-card'><div class='big'>{len(data)}</div><div class='label'>Synthetic Records</div></div>", unsafe_allow_html=True)
+    c2.markdown(f"<div class='metric-card'><div class='big'>{risk_high}</div><div class='label'>High Risk Records</div></div>", unsafe_allow_html=True)
+    c3.markdown(f"<div class='metric-card'><div class='big'>{fairness_ratio}</div><div class='label'>Fairness Ratio</div></div>", unsafe_allow_html=True)
+    c4.markdown("<div class='metric-card'><div class='big'>No</div><div class='label'>Protected Data Used</div></div>", unsafe_allow_html=True)
 
-elif workspace == "Explainability":
-    st.markdown("<div class='section'>Explainability Workspace</div>", unsafe_allow_html=True)
-    explain = pd.DataFrame({"factor": ["Authorization Age", "Documentation Gaps", "Queue Age", "Payer Pattern"], "weight": [38, 30, 20, 12]})
-    st.bar_chart(explain.set_index("factor"))
-    st.dataframe(explain, use_container_width=True, hide_index=True)
-    selected = st.selectbox("Select a record", df["record_id"].head(50))
-    row = df[df["record_id"] == selected].iloc[0]
-    st.markdown(f"<div class='callout'>Selected record {selected}<br>Risk score {row['risk_score']}<br>Risk level {row['risk_level']}<br>Main signal authorization age {row['authorization_age_days']} days</div>", unsafe_allow_html=True)
+    section("Operational Snapshot")
+    a, b = st.columns([1.3, .7])
+    with a:
+        st.dataframe(data.head(30), use_container_width=True, hide_index=True)
+    with b:
+        st.markdown(
+            f"""
+            <div class='card'>
+                <div class='card-title'>Executive Interpretation</div>
+                <div class='subtle'>High risk records show where workflow instability may require human review. The fairness ratio shows whether delay patterns appear uneven across payer groups. The pipeline workspace demonstrates safe export logic using synthetic records only.</div>
+                <br>
+                <span class='pill'>High Risk {risk_high}</span>
+                <span class='pill'>Moderate Risk {risk_moderate}</span>
+                <span class='pill'>Fairness {fairness_ratio}</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.download_button("Download synthetic audit data", data.to_csv(index=False), file_name="synthetic_responsible_ai_governance_data.csv", mime="text/csv")
 
-elif workspace == "Fairness Alerts":
-    st.markdown("<div class='section'>Fairness Alert Simulator</div>", unsafe_allow_html=True)
+elif workspace == "Risk Explorer":
+    section("Risk Explorer")
+    st.markdown("<div class='callout'>Use the filters below to inspect where operational pressure is forming by payer group workflow area service line and risk level.</div>", unsafe_allow_html=True)
+    c1, c2, c3 = st.columns(3)
+    payer_filter = c1.multiselect("Payer group", sorted(data["payer_group"].unique()), default=sorted(data["payer_group"].unique()))
+    area_filter = c2.multiselect("Workflow area", sorted(data["workflow_area"].unique()), default=sorted(data["workflow_area"].unique()))
+    level_filter = c3.multiselect("Risk level", ["Low", "Moderate", "High"], default=["Low", "Moderate", "High"])
+    filtered = data[data["payer_group"].isin(payer_filter) & data["workflow_area"].isin(area_filter) & data["risk_level"].astype(str).isin(level_filter)]
+    st.dataframe(filtered, use_container_width=True, hide_index=True)
+    st.bar_chart(filtered.groupby("workflow_area", observed=True)["risk_score"].mean())
+
+elif workspace == "Explainability Studio":
+    section("Explainability Studio")
+    explain = pd.DataFrame(
+        {
+            "factor": ["Authorization Age", "Documentation Gaps", "Queue Age", "Handoff Count", "Payer Friction"],
+            "impact_weight": [34, 28, 18, 12, 8],
+            "plain_language_meaning": [
+                "Older authorizations increase downstream risk",
+                "Lower documentation readiness increases preventable rework",
+                "Aging queues indicate operational pressure",
+                "More handoffs can create accountability gaps",
+                "Payer patterns require fairness and access review",
+            ],
+        }
+    )
+    c1, c2 = st.columns([.9, 1.1])
+    with c1:
+        st.bar_chart(explain.set_index("factor")[["impact_weight"]])
+    with c2:
+        st.dataframe(explain, use_container_width=True, hide_index=True)
+    selected = st.selectbox("Select a record to explain", data["record_id"].head(80))
+    row = data[data["record_id"] == selected].iloc[0]
+    st.markdown(
+        f"""
+        <div class='callout'>
+            Selected record {selected}<br>
+            Risk score {row['risk_score']}<br>
+            Risk level {row['risk_level']}<br>
+            Main signal authorization age {row['authorization_age_days']} days<br>
+            Recommended action {row['recommended_action']}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    if st.button("Save case review"):
+        st.session_state.case_reviews.append({"record_id": selected, "risk_score": int(row["risk_score"]), "action": row["recommended_action"]})
+        st.success("Case review saved")
+
+elif workspace == "Fairness Alert Lab":
+    section("Fairness Alert Lab")
     st.dataframe(fair_table, use_container_width=True, hide_index=True)
-    simulated = st.slider("Simulated fairness ratio", 0.50, 1.00, float(ratio), 0.01)
-    if simulated < safety_floor / 100:
-        st.error("Fairness alert triggered. Human review is required before operational use.")
+    simulated_ratio = st.slider("Simulated fairness ratio", 0.50, 1.00, float(fairness_ratio), 0.01)
+    st.markdown(f"<div class='metric-card'><div class='big'>{simulated_ratio:.2f}</div><div class='label'>Current Fairness Ratio</div></div>", unsafe_allow_html=True)
+    if simulated_ratio < safety_floor / 100:
+        st.markdown("<div class='callout'><span class='status-fail'>Fairness alert triggered</span><br>The ratio is below the selected safety floor. Human review is required before operational use.</div>", unsafe_allow_html=True)
         if st.button("Simulate team alert"):
-            alert = {"system": "Responsible AI Operations Evaluator", "alert_type": "Fairness safety boundary crossed", "current_ratio": round(simulated, 2), "required_action": "Pause use and review group performance", "created_by": "Kori Pickle"}
+            alert = {
+                "system": "Responsible AI Governance Lab",
+                "alert_type": "Fairness safety boundary crossed",
+                "current_ratio": round(simulated_ratio, 2),
+                "required_action": "Pause use and review group performance",
+                "created_by": "Kori Pickle",
+            }
             st.session_state.alerts.append(alert)
             st.success("Team alert simulated and logged")
             st.json(alert)
     else:
-        st.success("Fairness bounds stable")
+        st.markdown("<div class='callout'><span class='status-pass'>Fairness bounds stable</span><br>The simulated ratio is above the selected safety floor.</div>", unsafe_allow_html=True)
     st.dataframe(pd.DataFrame(st.session_state.alerts), use_container_width=True, hide_index=True)
 
-elif workspace == "Safe Pipeline":
-    st.markdown("<div class='section'>Safe Pipeline Simulator</div>", unsafe_allow_html=True)
+elif workspace == "Safe Pipeline Simulator":
+    section("Safe Pipeline Simulator")
     c1, c2 = st.columns(2)
-    c1.dataframe(df[["record_id", "payer_group", "workflow_area", "risk_score"]].head(8), use_container_width=True, hide_index=True)
-    c2.dataframe(safe[["record_id", "payer_group", "workflow_area", "risk_score"]].head(8), use_container_width=True, hide_index=True)
+    with c1:
+        st.markdown("<div class='card-title'>Standard Synthetic Feed</div>", unsafe_allow_html=True)
+        st.dataframe(data[["record_id", "payer_group", "workflow_area", "risk_score"]].head(10), use_container_width=True, hide_index=True)
+    with c2:
+        st.markdown("<div class='card-title'>Safe Downstream Export</div>", unsafe_allow_html=True)
+        st.dataframe(safe[["record_id", "payer_group", "workflow_area", "risk_score"]].head(10), use_container_width=True, hide_index=True)
     if st.button("Execute safe stream simulation"):
         progress = st.progress(0)
         for step in range(100):
@@ -175,18 +670,53 @@ elif workspace == "Safe Pipeline":
     st.download_button("Download safe export", safe.to_csv(index=False), file_name="safe_mock_pipeline_export.csv", mime="text/csv")
 
 elif workspace == "Governance Checklist":
-    st.markdown("<div class='section'>Governance Checklist</div>", unsafe_allow_html=True)
-    items = ["Uses synthetic safe data only", "Requires human review before action", "Explains workflow risk", "Identifies accountable owner", "Checks fairness across groups", "Provides alert logic", "Creates audit record", "Avoids clinical decision replacement", "Supports portfolio export", "Includes responsible use boundary"]
-    done = [item for item in items if st.checkbox(item)]
-    st.markdown(f"<div class='metricbox'><div class='big'>{len(done)} of 10</div><div class='label'>Governance Readiness Score</div></div>", unsafe_allow_html=True)
-    st.text_area("Governance notes", height=150)
+    section("Governance Checklist")
+    items = [
+        "Uses synthetic safe data only",
+        "Requires human review before action",
+        "Explains workflow risk clearly",
+        "Identifies accountable workflow owner",
+        "Checks fairness across groups",
+        "Provides alert logic for safety boundaries",
+        "Creates audit record for activity",
+        "Avoids clinical decision replacement",
+        "Supports portfolio export",
+        "Includes responsible use boundary",
+    ]
+    completed = []
+    cols = st.columns(2)
+    for index, item in enumerate(items):
+        with cols[index % 2]:
+            if st.checkbox(item):
+                completed.append(item)
+    readiness_score = len(completed)
+    st.markdown(f"<div class='metric-card'><div class='big'>{readiness_score} of 10</div><div class='label'>Governance Readiness Score</div></div>", unsafe_allow_html=True)
+    if readiness_score >= 8:
+        st.success("Strong governance foundation")
+    elif readiness_score >= 5:
+        st.warning("Partial governance foundation")
+    else:
+        st.error("High governance risk")
+    st.session_state.governance_notes = st.text_area("Governance notes", st.session_state.governance_notes, height=160)
+
+elif workspace == "Scenario Stress Test":
+    section("Scenario Stress Test")
+    scenario = st.selectbox("Select stress test", ["Payer policy shift", "Documentation backlog", "Authorization staffing shortage", "Queue aging surge"])
+    st.markdown(f"<div class='callout'>Current scenario {scenario}. Adjust the pressure sliders in the sidebar to simulate how workflow instability changes risk volume and fairness results.</div>", unsafe_allow_html=True)
+    summary = data.groupby(["workflow_area", "risk_level"], observed=True).size().reset_index(name="records")
+    st.dataframe(summary, use_container_width=True, hide_index=True)
+    st.bar_chart(data.groupby("workflow_area", observed=True)["risk_score"].mean())
+    if st.button("Save stress test snapshot"):
+        st.session_state.case_reviews.append({"scenario": scenario, "high_risk_records": risk_high, "fairness_ratio": fairness_ratio})
+        st.success("Stress test snapshot saved")
 
 elif workspace == "Portfolio Export":
-    st.markdown("<div class='section'>Portfolio Export</div>", unsafe_allow_html=True)
-    readiness = st.slider("Governance score to include", 0, 10, 8)
-    status = st.selectbox("Pipeline status", ["Not tested", "Simulated successfully", "Needs review"])
-    report = report_text(df, ratio, readiness, status)
+    section("Portfolio Export")
+    governance_score = st.slider("Governance score to include", 0, 10, 8)
+    pipeline_status = st.selectbox("Pipeline status", ["Not tested", "Simulated successfully", "Needs review"])
+    scenario_name = st.selectbox("Scenario label", ["Baseline simulation", "Payer policy shift", "Documentation backlog", "Authorization staffing shortage", "Queue aging surge"])
+    report = report_text(data, fairness_ratio, governance_score, pipeline_status, scenario_name)
     st.text_area("Portfolio ready export", report, height=520)
-    st.download_button("Download portfolio report", report, file_name="responsible_ai_operations_report.txt", mime="text/plain")
+    st.download_button("Download portfolio report", report, file_name="responsible_ai_governance_lab_report.txt", mime="text/plain")
 
 footer()
