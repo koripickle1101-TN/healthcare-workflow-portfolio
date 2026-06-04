@@ -2,13 +2,19 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 
-st.set_page_config(page_title="Responsible AI Healthcare Operations Intelligence", page_icon="🟧", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(
+    page_title="Responsible AI Healthcare Operations Intelligence",
+    page_icon="🟧",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
 ORANGE = "#FF8200"
 BLACK = "#000000"
 WHITE = "#FFFFFF"
 WARM = "#E8E3DC"
 SOFT = "#F7F4EF"
+CHARCOAL = "#151515"
 
 HASHTAGS = "#HealthcareOperations #ResponsibleAI #RevenueCycleManagement #PatientAccess #PriorAuthorization #DenialPrevention #HealthInformatics #WorkflowIntelligence #HealthcareAdministration #OperationalExcellence"
 
@@ -54,41 +60,256 @@ Kori Pickle
 LinkedIn | GitHub
 """
 
-st.markdown(f"""
+st.markdown(
+    f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Homemade+Apple&display=swap');
-html,body,[class*='css']{{font-family:'Inter',sans-serif;color:{BLACK};}}
-.stApp{{background:radial-gradient(circle at 92% 4%,rgba(255,130,0,.12),transparent 26%),linear-gradient(180deg,#fff 0%,#fff 72%,#FBF8F3 100%);}}
-section[data-testid='stSidebar']{{background:#fff;border-right:1px solid {WARM};}}
-.block-container{{max-width:1240px;padding-top:2.1rem;}}
-h1,h2,h3,.serif{{font-family:'Playfair Display',serif!important;}}
-.hero{{min-height:500px;padding:64px 58px 52px;border:1px solid {WARM};border-radius:36px;background:linear-gradient(135deg,#fff 0%,#fff 68%,rgba(255,130,0,.08) 100%);box-shadow:0 28px 78px rgba(0,0,0,.07);position:relative;overflow:hidden;margin-bottom:34px;}}
-.hero:before{{content:'';position:absolute;top:40px;right:46px;width:190px;height:190px;border:1px dashed rgba(255,130,0,.42);border-radius:999px;}}
-.eyebrow{{font-size:12px;letter-spacing:3.1px;text-transform:uppercase;font-weight:900;display:inline-block;padding-bottom:8px;border-bottom:2px solid {ORANGE};margin-bottom:24px;}}
-.hero h1{{font-size:clamp(48px,6.8vw,96px);line-height:.88;letter-spacing:-2.7px;margin:0 0 28px;max-width:990px;}}
-.hero p{{max-width:900px;font-size:18px;line-height:1.72;color:#242424;}}
-.orange{{color:{ORANGE};}}
-.node-row{{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:34px;}}
-.node{{width:64px;height:64px;border-radius:999px;border:2px solid {ORANGE};display:flex;align-items:center;justify-content:center;background:#fff;color:{ORANGE};font-weight:900;box-shadow:0 0 0 10px rgba(255,130,0,.07),0 0 34px rgba(255,130,0,.23);}}
-.connector{{width:78px;height:2px;background-image:linear-gradient(to right,rgba(255,130,0,.85) 45%,rgba(255,130,0,0) 0%);background-size:13px 2px;background-repeat:repeat-x;}}
-.card{{border:1px solid {WARM};border-radius:26px;padding:26px;background:#fff;box-shadow:0 18px 48px rgba(0,0,0,.05);height:100%;}}
-.card h3{{font-size:30px;line-height:1.05;margin:0 0 12px;}}
-.subtle,.card p{{color:#464646;line-height:1.68;font-size:16px;}}
-.metric{{border:1px solid {WARM};border-left:5px solid {ORANGE};border-radius:22px;background:{SOFT};padding:24px;min-height:138px;}}
-.big{{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;line-height:.9;}}
-.label{{font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;margin-top:12px;color:#555;}}
-.section-title{{font-family:'Playfair Display',serif;font-size:44px;line-height:.98;letter-spacing:-1px;margin:38px 0 14px;}}
-.pill{{display:inline-block;border:1px solid {ORANGE};background:rgba(255,130,0,.08);border-radius:999px;padding:8px 13px;margin:4px 5px 4px 0;font-size:12px;font-weight:900;letter-spacing:.55px;text-transform:uppercase;}}
-.callout{{border:1px solid {WARM};border-left:6px solid {ORANGE};border-radius:24px;padding:24px 28px;background:#fff;box-shadow:0 18px 44px rgba(0,0,0,.045);margin:18px 0;}}
-.signature{{font-family:'Homemade Apple',cursive;font-size:30px;color:#222;display:inline-block;transform:rotate(-1deg);margin-top:6px;}}
-.footer{{text-align:center;border-top:1px solid {WARM};margin-top:56px;padding:34px 0 18px;}}
-.icons{{display:flex;gap:12px;justify-content:center;margin-top:12px;}}
-.icon-circle{{width:31px;height:31px;border-radius:999px;border:1px solid {WARM};display:inline-flex;align-items:center;justify-content:center;background:#fff;font-size:12px;font-weight:900;}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Allura&family=Great+Vibes&display=swap');
+
+html, body, [class*='css'] {{
+    font-family:'Inter', sans-serif;
+    color:{BLACK};
+}}
+
+.stApp {{
+    background:
+        radial-gradient(circle at 92% 4%, rgba(255,130,0,.12), transparent 26%),
+        radial-gradient(circle at 8% 18%, rgba(255,130,0,.055), transparent 22%),
+        linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 68%,#FBF8F3 100%);
+}}
+
+section[data-testid='stSidebar'] {{
+    background:#FFFFFF;
+    border-right:1px solid {WARM};
+}}
+
+.block-container {{
+    max-width:1240px;
+    padding-top:1.35rem;
+    padding-bottom:2.4rem;
+}}
+
+h1,h2,h3,.serif {{
+    font-family:'Playfair Display',serif!important;
+}}
+
+.brand-lockup {{
+    border:1px solid {WARM};
+    border-radius:34px;
+    background:#fff;
+    padding:34px 38px 30px;
+    margin-bottom:28px;
+    box-shadow:0 24px 64px rgba(0,0,0,.055);
+    position:relative;
+    overflow:hidden;
+}}
+.brand-lockup:before {{
+    content:'';
+    position:absolute;
+    left:48px;
+    right:48px;
+    top:112px;
+    height:2px;
+    background:linear-gradient(90deg, rgba(255,130,0,.05), {ORANGE}, rgba(255,130,0,.05));
+}}
+.brand-signature {{
+    font-family:'Allura','Great Vibes',cursive;
+    font-size:86px;
+    line-height:.86;
+    color:#111;
+    letter-spacing:.5px;
+    text-align:center;
+    margin:0 auto 26px;
+    transform:rotate(-1.2deg);
+    text-shadow:.35px .35px 0 rgba(0,0,0,.22);
+}}
+.brand-node-row {{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    margin:6px 0 18px;
+}}
+.brand-line {{
+    height:2px;
+    flex:1;
+    max-width:360px;
+    background:linear-gradient(90deg, rgba(255,130,0,.12), {ORANGE});
+}}
+.brand-line.right {{
+    background:linear-gradient(90deg, {ORANGE}, rgba(255,130,0,.12));
+}}
+.brand-mark {{
+    width:102px;
+    height:102px;
+    border:7px solid {ORANGE};
+    border-radius:999px;
+    box-shadow:0 0 0 12px rgba(255,130,0,.07), 0 0 42px rgba(255,130,0,.22);
+    position:relative;
+    background:#fff;
+}}
+.brand-mark:before {{
+    content:'';
+    position:absolute;
+    inset:16px;
+    border:7px solid {ORANGE};
+    border-radius:999px;
+}}
+.brand-mark:after {{
+    content:'';
+    position:absolute;
+    right:-70px;
+    top:39px;
+    width:61px;
+    height:7px;
+    background:{ORANGE};
+    box-shadow:52px 0 0 -19px #fff, 52px 0 0 -12px {ORANGE};
+}}
+.brand-kicker {{
+    text-align:center;
+    font-size:28px;
+    letter-spacing:13px;
+    text-transform:uppercase;
+    font-weight:600;
+    margin-top:18px;
+}}
+.brand-intel {{
+    text-align:center;
+    font-size:42px;
+    letter-spacing:18px;
+    text-transform:uppercase;
+    color:{ORANGE};
+    font-weight:800;
+    line-height:1.1;
+}}
+.brand-bottom-line {{
+    height:2px;
+    width:78%;
+    margin:18px auto 0;
+    background:linear-gradient(90deg, transparent, {ORANGE}, transparent);
+}}
+
+.hero {{
+    min-height:475px;
+    padding:58px 58px 48px;
+    border:1px solid {WARM};
+    border-radius:36px;
+    background:linear-gradient(135deg,#fff 0%,#fff 64%,rgba(255,130,0,.095) 100%);
+    box-shadow:0 28px 78px rgba(0,0,0,.07);
+    position:relative;
+    overflow:hidden;
+    margin-bottom:30px;
+}}
+.hero:before {{
+    content:'';
+    position:absolute;
+    top:40px;
+    right:46px;
+    width:190px;
+    height:190px;
+    border:1px dashed rgba(255,130,0,.42);
+    border-radius:999px;
+}}
+.hero:after {{
+    content:'';
+    position:absolute;
+    right:-90px;
+    bottom:-120px;
+    width:320px;
+    height:320px;
+    border-radius:999px;
+    border:1px solid rgba(255,130,0,.18);
+}}
+.eyebrow {{
+    font-size:12px;
+    letter-spacing:3.1px;
+    text-transform:uppercase;
+    font-weight:900;
+    display:inline-block;
+    padding-bottom:8px;
+    border-bottom:2px solid {ORANGE};
+    margin-bottom:24px;
+}}
+.hero h1 {{
+    font-size:clamp(48px,6.8vw,96px);
+    line-height:.88;
+    letter-spacing:-2.7px;
+    margin:0 0 28px;
+    max-width:1000px;
+}}
+.hero p {{
+    max-width:900px;
+    font-size:18px;
+    line-height:1.72;
+    color:#242424;
+}}
+.orange {{ color:{ORANGE}; }}
+.node-row {{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:34px;}}
+.node {{
+    width:64px;height:64px;border-radius:999px;border:2px solid {ORANGE};
+    display:flex;align-items:center;justify-content:center;background:#fff;color:{ORANGE};font-weight:900;
+    box-shadow:0 0 0 10px rgba(255,130,0,.07),0 0 34px rgba(255,130,0,.23);
+}}
+.connector {{width:78px;height:2px;background-image:linear-gradient(to right,rgba(255,130,0,.85) 45%,rgba(255,130,0,0) 0%);background-size:13px 2px;background-repeat:repeat-x;}}
+.card {{
+    border:1px solid {WARM};
+    border-radius:26px;
+    padding:26px;
+    background:#fff;
+    box-shadow:0 18px 48px rgba(0,0,0,.05);
+    height:100%;
+}}
+.card.accent {{ border-top:5px solid {ORANGE}; }}
+.card h3 {{font-size:30px;line-height:1.05;margin:0 0 12px;}}
+.subtle,.card p {{color:#464646;line-height:1.68;font-size:16px;}}
+.metric {{border:1px solid {WARM};border-left:5px solid {ORANGE};border-radius:22px;background:{SOFT};padding:24px;min-height:138px;}}
+.big {{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;line-height:.9;}}
+.label {{font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;margin-top:12px;color:#555;}}
+.section-title {{font-family:'Playfair Display',serif;font-size:46px;line-height:.98;letter-spacing:-1px;margin:42px 0 16px;}}
+.pill {{display:inline-block;border:1px solid {ORANGE};background:rgba(255,130,0,.08);border-radius:999px;padding:8px 13px;margin:4px 5px 4px 0;font-size:12px;font-weight:900;letter-spacing:.55px;text-transform:uppercase;}}
+.callout {{border:1px solid {WARM};border-left:6px solid {ORANGE};border-radius:24px;padding:24px 28px;background:#fff;box-shadow:0 18px 44px rgba(0,0,0,.045);margin:18px 0;}}
+.signature {{
+    font-family:'Allura','Great Vibes',cursive;
+    font-size:48px;
+    color:#151515;
+    display:inline-block;
+    transform:rotate(-1.1deg);
+    margin-top:6px;
+    text-shadow:.3px .3px 0 rgba(0,0,0,.20);
+}}
+.footer {{text-align:center;border-top:1px solid {WARM};margin-top:56px;padding:34px 0 18px;}}
+.icons {{display:flex;gap:12px;justify-content:center;margin-top:12px;}}
+.icon-circle {{width:31px;height:31px;border-radius:999px;border:1px solid {WARM};display:inline-flex;align-items:center;justify-content:center;background:#fff;font-size:12px;font-weight:900;}}
+.sidebar-logo {{
+    text-align:center;
+    border:1px solid {WARM};
+    border-radius:24px;
+    padding:18px 12px;
+    background:linear-gradient(180deg,#fff,rgba(255,130,0,.045));
+    margin-bottom:18px;
+}}
+.sidebar-signature {{
+    font-family:'Allura',cursive;
+    font-size:44px;
+    line-height:.85;
+    color:#111;
+}}
+.sidebar-title {{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;font-weight:900;margin-top:10px;}}
 div.stButton>button,div.stDownloadButton>button{{border-radius:999px;border:1px solid {ORANGE};background:{ORANGE};color:white;font-weight:900;padding:.72rem 1.15rem;}}
 div.stButton>button:hover,div.stDownloadButton>button:hover{{background:#111;border:1px solid #111;color:white;}}
 textarea,input{{border-radius:16px!important;}}
+@media(max-width:760px){{
+  .brand-signature{{font-size:62px;}}
+  .brand-kicker{{font-size:17px;letter-spacing:7px;}}
+  .brand-intel{{font-size:26px;letter-spacing:10px;}}
+  .brand-mark{{width:76px;height:76px;border-width:6px;}}
+  .brand-mark:before{{inset:12px;border-width:6px;}}
+  .brand-mark:after{{display:none;}}
+  .hero{{padding:38px 28px;}}
+}}
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 MODULES = {
     "Responsible AI Foundations": ["AI", "Useful · Safe · Human-Guided", "AI should support people, not replace judgment or hide accountability.", "A prior authorization risk flag is useful only when staff can review the reason, confirm payer policy, and act safely."],
@@ -138,12 +359,36 @@ GOVERNANCE_ITEMS = [
     "Documents what AI should not decide",
 ]
 
-if "completed" not in st.session_state: st.session_state.completed = set()
-if "quiz_score" not in st.session_state: st.session_state.quiz_score = 0
-if "reflections" not in st.session_state: st.session_state.reflections = []
+if "completed" not in st.session_state:
+    st.session_state.completed = set()
+if "quiz_score" not in st.session_state:
+    st.session_state.quiz_score = 0
+if "reflections" not in st.session_state:
+    st.session_state.reflections = []
 
 def footer():
-    st.markdown("""<div class='footer'><div style='font-weight:900;'>Created by Kori Pickle</div><div class='signature'>Kori Pickle</div><div class='icons'><span class='icon-circle'>in</span><span class='icon-circle'>GH</span></div></div>""", unsafe_allow_html=True)
+    st.markdown("""
+    <div class='footer'>
+      <div style='font-weight:900; letter-spacing:.5px;'>Created by Kori Pickle</div>
+      <div class='signature'>Kori Pickle</div>
+      <div class='icons'><span class='icon-circle'>in</span><span class='icon-circle'>GH</span></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+def brand_lockup():
+    st.markdown("""
+    <div class='brand-lockup'>
+      <div class='brand-signature'>Kori Pickle</div>
+      <div class='brand-node-row'>
+        <div class='brand-line'></div>
+        <div class='brand-mark'></div>
+        <div class='brand-line right'></div>
+      </div>
+      <div class='brand-kicker'>Healthcare Operations</div>
+      <div class='brand-intel'>Intelligence</div>
+      <div class='brand-bottom-line'></div>
+    </div>
+    """, unsafe_allow_html=True)
 
 def branded_export(title, artifact_type, body, caption=""):
     text = f"""{BRAND_IDENTITY}
@@ -167,59 +412,92 @@ def download(label, text, filename):
     st.download_button(label, text, file_name=filename, mime="text/plain")
 
 def metrics():
-    a,b,c,d = st.columns(4)
+    a, b, c, d = st.columns(4)
     a.markdown(f"<div class='metric'><div class='big'>{len(st.session_state.completed)}/8</div><div class='label'>Modules Complete</div></div>", unsafe_allow_html=True)
     b.markdown(f"<div class='metric'><div class='big'>{st.session_state.quiz_score}</div><div class='label'>Latest Quiz Score</div></div>", unsafe_allow_html=True)
     c.markdown(f"<div class='metric'><div class='big'>{len(st.session_state.reflections)}</div><div class='label'>Saved Reflections</div></div>", unsafe_allow_html=True)
     d.markdown("<div class='metric'><div class='big'>No</div><div class='label'>PHI Used</div></div>", unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown("### Healthcare Operations Intelligence")
+    st.markdown("""
+    <div class='sidebar-logo'>
+      <div class='sidebar-signature'>Kori Pickle</div>
+      <div class='sidebar-title'>Healthcare Operations Intelligence</div>
+    </div>
+    """, unsafe_allow_html=True)
     st.caption("Responsible AI · Workflow Intelligence · Governance")
-    page = st.radio("Choose a study mode", ["Executive Home", "8-Module Study Path", "Flashcards", "Scenario Lab", "Quiz Bank", "Governance Checklist", "Risk Scorecard", "Portfolio Builder", "LinkedIn Post Generator", "Capstone Export", "Progress Dashboard"])
+    page = st.radio(
+        "Choose a study mode",
+        ["Executive Home", "8-Module Study Path", "Flashcards", "Scenario Lab", "Quiz Bank", "Governance Checklist", "Risk Scorecard", "Portfolio Builder", "LinkedIn Post Generator", "Capstone Export", "Progress Dashboard"],
+    )
     st.divider()
     st.markdown("**Brand System**")
     st.markdown("<span class='pill'>White #FFFFFF</span><span class='pill'>Vols Orange #FF8200</span><span class='pill'>Black Typography</span>", unsafe_allow_html=True)
     st.caption("Every generator exports brand-locked Kori Pickle | Healthcare Operations Intelligence content.")
 
 if page == "Executive Home":
-    st.markdown("""<div class='hero'><div class='eyebrow'>Responsible AI for Healthcare Operations</div><h1>Build AI governance judgment through a <span class='orange'>workflow intelligence</span> lens.</h1><p>This premium interactive study tool teaches responsible AI, operational sustainability, strategic foresight, systemic risk, ethical governance, responsible innovation, and long-term value creation using healthcare operations examples.</p><div class='node-row'><div class='node'>AI</div><div class='connector'></div><div class='node'>RCM</div><div class='connector'></div><div class='node'>PA</div><div class='connector'></div><div class='node'>HIM</div><div class='connector'></div><div class='node'>QI</div></div></div>""", unsafe_allow_html=True)
+    brand_lockup()
+    st.markdown("""
+    <div class='hero'>
+      <div class='eyebrow'>Responsible AI for Healthcare Operations</div>
+      <h1>Build AI governance judgment through a <span class='orange'>workflow intelligence</span> lens.</h1>
+      <p>This premium interactive study tool teaches responsible AI, operational sustainability, strategic foresight, systemic risk, ethical governance, responsible innovation, and long-term value creation using healthcare operations examples.</p>
+      <div class='node-row'><div class='node'>AI</div><div class='connector'></div><div class='node'>RCM</div><div class='connector'></div><div class='node'>PA</div><div class='connector'></div><div class='node'>HIM</div><div class='connector'></div><div class='node'>QI</div></div>
+    </div>
+    """, unsafe_allow_html=True)
     metrics()
     st.markdown("<div class='section-title'>What this tool helps you practice</div>", unsafe_allow_html=True)
     c1, c2 = st.columns([1.2, .8])
     with c1:
-        st.markdown("""<div class='card'><h3>From AI hype to healthcare operations judgment</h3><p class='subtle'>This tool helps you explain AI responsibly in healthcare operations. The focus is governance, workflow risk, patient impact, staff capacity, compliance, and long-term operational value.</p><span class='pill'>Revenue Cycle</span><span class='pill'>Patient Access</span><span class='pill'>Prior Authorization</span><span class='pill'>Denial Prevention</span><span class='pill'>Health Informatics</span></div>""", unsafe_allow_html=True)
+        st.markdown("""
+        <div class='card accent'>
+          <h3>From AI hype to healthcare operations judgment</h3>
+          <p class='subtle'>This tool helps you explain AI responsibly in healthcare operations. The focus is governance, workflow risk, patient impact, staff capacity, compliance, and long-term operational value.</p>
+          <span class='pill'>Revenue Cycle</span><span class='pill'>Patient Access</span><span class='pill'>Prior Authorization</span><span class='pill'>Denial Prevention</span><span class='pill'>Health Informatics</span>
+        </div>
+        """, unsafe_allow_html=True)
     with c2:
-        st.markdown("""<div class='callout'><strong>Core professional sentence:</strong><br><br>Responsible AI in healthcare operations should not only make workflows faster. It should make them safer, more visible, more accountable, and more sustainable for patients, staff, and the organization.</div>""", unsafe_allow_html=True)
+        st.markdown("""
+        <div class='callout'>
+          <strong>Core professional sentence:</strong><br><br>
+          Responsible AI in healthcare operations should not only make workflows faster. It should make them safer, more visible, more accountable, and more sustainable for patients, staff, and the organization.
+        </div>
+        """, unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Learning architecture</div>", unsafe_allow_html=True)
     cols = st.columns(4)
     for i, (name, data) in enumerate(list(MODULES.items())[:4], start=1):
-        with cols[i-1]: st.markdown(f"<div class='card'><div class='node'>{data[0]}</div><h3>{i}. {name}</h3><span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p></div>", unsafe_allow_html=True)
+        with cols[i - 1]:
+            st.markdown(f"<div class='card'><div class='node'>{data[0]}</div><h3>{i}. {name}</h3><span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p></div>", unsafe_allow_html=True)
     cols = st.columns(4)
     for j, (name, data) in enumerate(list(MODULES.items())[4:], start=5):
-        with cols[j-5]: st.markdown(f"<div class='card'><div class='node'>{data[0]}</div><h3>{j}. {name}</h3><span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p></div>", unsafe_allow_html=True)
+        with cols[j - 5]:
+            st.markdown(f"<div class='card'><div class='node'>{data[0]}</div><h3>{j}. {name}</h3><span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p></div>", unsafe_allow_html=True)
     footer()
 
 elif page == "8-Module Study Path":
+    brand_lockup()
     st.markdown("<div class='section-title'>8-Module Study Path</div>", unsafe_allow_html=True)
     name = st.selectbox("Select a module", list(MODULES.keys()))
     data = MODULES[name]
-    st.markdown(f"<div class='card'><div class='node'>{data[0]}</div><h3>{name}</h3><span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p><p class='subtle'><strong>Healthcare example:</strong> {data[3]}</p></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='card accent'><div class='node'>{data[0]}</div><h3>{name}</h3><span class='pill'>{data[1]}</span><p class='subtle'>{data[2]}</p><p class='subtle'><strong>Healthcare example:</strong> {data[3]}</p></div>", unsafe_allow_html=True)
     reflection = st.text_area("Reflection prompt: How does this concept apply to revenue cycle, patient access, prior authorization, HIM, denial prevention, or staffing operations?", height=180)
     if st.button("Mark module complete"):
         st.session_state.completed.add(name)
         st.success("Module marked complete.")
     if reflection:
-        st.session_state.reflections.append({"module": name, "reflection": reflection}) if st.button("Save reflection") else None
+        if st.button("Save reflection"):
+            st.session_state.reflections.append({"module": name, "reflection": reflection})
+            st.success("Reflection saved.")
         output = branded_export(f"{name} Reflection", "Responsible AI Learning Reflection", f"Module: {name}\n\nReflection:\n{reflection}", f"I am studying {name.lower()} through a healthcare operations and responsible AI lens. The goal is to connect AI governance with workflow visibility, patient trust, and operational sustainability.")
         st.text_area("Brand-locked export", output, height=360)
         download("Download branded reflection", output, f"{name.lower().replace(' ','_')}_brand_locked_reflection.txt")
     footer()
 
 elif page == "Flashcards":
+    brand_lockup()
     st.markdown("<div class='section-title'>Interactive Flashcards</div>", unsafe_allow_html=True)
     term, definition = FLASHCARDS[st.slider("Choose a flashcard", 1, len(FLASHCARDS), 1) - 1]
-    st.markdown(f"<div class='card'><h3>{term}</h3><p class='subtle'>{definition}</p></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='card accent'><h3>{term}</h3><p class='subtle'>{definition}</p></div>", unsafe_allow_html=True)
     example = st.text_area("Translate this term into a healthcare operations example.", height=150)
     if example:
         output = branded_export(f"{term} Study Note", "Healthcare Operations Flashcard Translation", f"Term: {term}\nDefinition: {definition}\nHealthcare Operations Example:\n{example}", f"A concept I am studying in responsible AI for healthcare operations is {term}. I am connecting it to workflow visibility, governance, and patient-centered operational sustainability.")
@@ -227,6 +505,7 @@ elif page == "Flashcards":
     footer()
 
 elif page == "Scenario Lab":
+    brand_lockup()
     st.markdown("<div class='section-title'>Scenario Lab</div>", unsafe_allow_html=True)
     scenario = st.selectbox("Choose a scenario", list(SCENARIOS.keys()))
     st.info(SCENARIOS[scenario])
@@ -242,6 +521,7 @@ elif page == "Scenario Lab":
     footer()
 
 elif page == "Quiz Bank":
+    brand_lockup()
     st.markdown("<div class='section-title'>Quiz Bank</div>", unsafe_allow_html=True)
     score = 0
     answers = []
@@ -260,6 +540,7 @@ elif page == "Quiz Bank":
     footer()
 
 elif page == "Governance Checklist":
+    brand_lockup()
     st.markdown("<div class='section-title'>Responsible AI Governance Checklist</div>", unsafe_allow_html=True)
     completed = [item for item in GOVERNANCE_ITEMS if st.checkbox(item)]
     pct = len(completed) / len(GOVERNANCE_ITEMS)
@@ -274,6 +555,7 @@ elif page == "Governance Checklist":
     footer()
 
 elif page == "Risk Scorecard":
+    brand_lockup()
     st.markdown("<div class='section-title'>AI Workflow Risk Scorecard</div>", unsafe_allow_html=True)
     c1, c2 = st.columns(2)
     with c1:
@@ -294,6 +576,7 @@ elif page == "Risk Scorecard":
     footer()
 
 elif page == "Portfolio Builder":
+    brand_lockup()
     st.markdown("<div class='section-title'>Portfolio Builder</div>", unsafe_allow_html=True)
     project = st.text_input("Project name", "AI-Assisted Revenue Cycle Workflow System")
     area = st.selectbox("Workflow area", ["Revenue Cycle", "Prior Authorization", "Patient Access", "Eligibility Verification", "Denial Prevention", "Health Informatics", "Healthcare Staffing", "Documentation Quality"])
@@ -333,6 +616,7 @@ Governance Considerations:
     footer()
 
 elif page == "LinkedIn Post Generator":
+    brand_lockup()
     st.markdown("<div class='section-title'>LinkedIn Post Generator</div>", unsafe_allow_html=True)
     angle = st.selectbox("Post angle", ["Responsible AI", "Strategic Foresight", "AI Governance", "Operational Sustainability", "Systemic Risk", "Long-Term Value"])
     focus = st.text_input("Healthcare focus area", "revenue cycle, prior authorization, patient access, and denial prevention")
@@ -365,6 +649,7 @@ Created by Kori Pickle
     footer()
 
 elif page == "Capstone Export":
+    brand_lockup()
     st.markdown("<div class='section-title'>Capstone Export</div>", unsafe_allow_html=True)
     title = st.text_input("Framework title", "Responsible AI Healthcare Operations Framework")
     focus = st.text_area("Framework focus", "Workflow intelligence, patient access, revenue cycle visibility, denial prevention, health informatics, human oversight, and long-term operational sustainability.")
@@ -395,6 +680,7 @@ From a patient-to-professional perspective, responsible AI cannot only be measur
     footer()
 
 elif page == "Progress Dashboard":
+    brand_lockup()
     st.markdown("<div class='section-title'>Progress Dashboard</div>", unsafe_allow_html=True)
     metrics()
     st.markdown("### Completed modules")
