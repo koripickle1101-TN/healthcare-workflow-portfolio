@@ -28,7 +28,7 @@ st.markdown(
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
 
 html, body, [class*='css'] {{ font-family: Inter, sans-serif; color: {BLACK}; }}
-.stApp {{ background: radial-gradient(circle at 93% 3%, rgba(255,130,0,.10), transparent 28%), linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 68%, #FBF8F3 100%); }}
+.stApp {{ background: radial-gradient(circle at 93% 3%, rgba(255,130,0,.10), transparent 28%), linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 70%, #FBF8F3 100%); }}
 .block-container {{ max-width: 1320px; padding-top: 1.1rem; padding-bottom: 3.2rem; }}
 section[data-testid='stSidebar'] {{ background: #FFFFFF; border-right: 1px solid {WARM}; }}
 section[data-testid='stSidebar'] .block-container {{ padding-top: 1.2rem; }}
@@ -41,10 +41,10 @@ section[data-testid='stSidebar'] .block-container {{ padding-top: 1.2rem; }}
 
 .hero {{ border: 1px solid {WARM}; border-radius: 34px; padding: clamp(30px, 5vw, 58px); background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 68%, rgba(255,130,0,.085) 100%); box-shadow: 0 28px 78px rgba(0,0,0,.07); margin-bottom: 30px; }}
 .eyebrow {{ font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 900; display: inline-block; padding-bottom: 8px; border-bottom: 2px solid {ORANGE}; margin-bottom: 24px; color: #333333; }}
-.title {{ font-family: Playfair Display, serif; font-size: clamp(39px, 6vw, 78px); line-height: .96; letter-spacing: -2px; margin: 0 0 22px 0; color: #000000; }}
+.title {{ font-family: Playfair Display, serif; font-size: clamp(38px, 6vw, 78px); line-height: .96; letter-spacing: -2px; margin: 0 0 22px 0; color: #000000; }}
 .orange {{ color: {ORANGE}; }}
-.copy {{ max-width: 960px; font-size: 18px; line-height: 1.72; color: #242424; }}
-.section-title {{ font-family: Playfair Display, serif; font-size: clamp(33px, 5vw, 54px); line-height: 1; letter-spacing: -1px; margin: 42px 0 18px 0; color: #000000; }}
+.copy {{ max-width: 980px; font-size: 18px; line-height: 1.72; color: #242424; }}
+.section-title {{ font-family: Playfair Display, serif; font-size: clamp(32px, 5vw, 54px); line-height: 1; letter-spacing: -1px; margin: 42px 0 18px 0; color: #000000; }}
 
 .metric-card {{ border: 1px solid {WARM}; border-left: 5px solid {ORANGE}; border-radius: 22px; background: {SOFT}; padding: 22px; min-height: 132px; box-shadow: 0 14px 34px rgba(0,0,0,.035); }}
 .big {{ font-family: Inter, sans-serif; font-size: clamp(32px, 4.3vw, 48px); font-weight: 900; letter-spacing: -1.5px; line-height: .95; color: #111111; }}
@@ -54,15 +54,19 @@ section[data-testid='stSidebar'] .block-container {{ padding-top: 1.2rem; }}
 .card-title {{ font-family: Playfair Display, serif; font-size: 29px; line-height: 1.08; margin-bottom: 12px; color: #000000; }}
 .subtle {{ color: #353535; line-height: 1.68; font-size: 16px; }}
 .callout {{ border: 1px solid {WARM}; border-left: 6px solid {ORANGE}; border-radius: 24px; padding: 22px 26px; background: #FFFFFF; box-shadow: 0 18px 44px rgba(0,0,0,.045); margin: 18px 0; color: #111111; line-height: 1.65; }}
-.black-panel {{ background: {CHARCOAL}; color: #FFFFFF; border-radius: 24px; padding: 24px; box-shadow: 0 24px 52px rgba(0,0,0,.12); }}
-.black-panel-title {{ font-family: Playfair Display, serif; font-size: 31px; color: #FFFFFF; margin-bottom: 10px; }}
-.black-panel-copy {{ color: #F3F3F3; line-height: 1.65; }}
+.boundary {{ border: 1px solid #2A2A2A; border-left: 6px solid {ORANGE}; border-radius: 24px; padding: 22px 26px; background: #111111; box-shadow: 0 18px 44px rgba(0,0,0,.12); margin: 24px 0; color: #FFFFFF; line-height: 1.65; }}
+.boundary-title {{ font-family: Playfair Display, serif; color: #FFFFFF; font-size: 30px; margin-bottom: 10px; }}
+.boundary-copy {{ color: #F4F4F4; font-size: 15px; line-height: 1.65; }}
+.exec-panel {{ background: #FFFFFF; color: #111111; border: 1px solid {WARM}; border-top: 6px solid {ORANGE}; border-radius: 28px; padding: 26px; box-shadow: 0 24px 58px rgba(0,0,0,.08); }}
+.exec-title {{ font-family: Playfair Display, serif; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; color: #111111; margin-bottom: 16px; }}
+.exec-copy {{ color: #202020; line-height: 1.72; font-size: 17px; }}
+.status-dot {{ display: inline-block; width: 10px; height: 10px; border-radius: 99px; background: {ORANGE}; margin-right: 8px; box-shadow: 0 0 0 7px rgba(255,130,0,.12); }}
 
 .node-grid {{ display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 30px; }}
 .node {{ width: 66px; height: 66px; border-radius: 999px; border: 2px solid {ORANGE}; display: inline-flex; align-items: center; justify-content: center; color: {ORANGE}; background: #FFFFFF; font-weight: 900; box-shadow: 0 0 0 10px rgba(255,130,0,.07), 0 0 30px rgba(255,130,0,.18); flex: 0 0 auto; }}
 .pill-row {{ display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }}
 .pill {{ display: inline-flex; align-items: center; justify-content: center; border: 1px solid {ORANGE}; background: rgba(255,130,0,.08); border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 900; letter-spacing: .55px; text-transform: uppercase; color: #111111; white-space: nowrap; }}
-.status-dot {{ display: inline-block; width: 10px; height: 10px; border-radius: 99px; background: {ORANGE}; margin-right: 8px; box-shadow: 0 0 0 7px rgba(255,130,0,.12); }}
+.dark-pill {{ display: inline-flex; align-items: center; justify-content: center; border: 1px solid {ORANGE}; background: #FFFFFF; border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 900; letter-spacing: .55px; text-transform: uppercase; color: #111111; white-space: nowrap; }}
 
 .brand-system {{ border: 1px solid {WARM}; border-radius: 20px; background: {SOFT}; padding: 16px; margin-top: 18px; }}
 .brand-system-title {{ font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px; margin-bottom: 10px; }}
@@ -95,7 +99,7 @@ textarea {{ border-radius: 18px !important; font-family: Inter, sans-serif !impo
     .node-grid {{ gap: 12px; }}
     .node {{ width: 56px; height: 56px; font-size: 13px; }}
     .pill-row {{ gap: 9px; }}
-    .pill {{ font-size: 11px; padding: 7px 11px; }}
+    .pill, .dark-pill {{ font-size: 11px; padding: 7px 11px; }}
     .footer-link {{ min-width: 112px; padding: 10px 14px; font-size: 12px; }}
 }}
 </style>
@@ -143,6 +147,18 @@ def section(text):
     st.markdown(f"<div class='section-title'>{text}</div>", unsafe_allow_html=True)
 
 
+def responsible_boundary():
+    st.markdown(
+        """
+        <div class='boundary'>
+            <div class='boundary-title'>Responsible Use Boundary</div>
+            <div class='boundary-copy'>This tool does not make clinical decisions, payer decisions, coding decisions, billing determinations, or patient specific recommendations. It uses synthetic no PHI data to demonstrate workflow risk visibility, operational prioritization, governance thinking, and safe reporting logic. All flagged cases require human review.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def create_synthetic_operations_data(volume, payer_pressure, documentation_pressure, staffing_pressure, queue_pressure, denial_pressure, operating_mode, service_focus):
     rng = np.random.default_rng(1101)
     start_date = datetime.today() - timedelta(days=30)
@@ -178,27 +194,27 @@ def create_synthetic_operations_data(volume, payer_pressure, documentation_press
     )
     records["created_date"] = [(start_date + timedelta(days=int(x))).strftime("%Y-%m-%d") for x in rng.integers(0, 30, volume)]
 
-    payer_weight = records["payer_group"].map({"Commercial": 2, "Medicare": 4, "Medicaid": 6, "Marketplace": 6, "Self Pay": 8}) + payer_pressure * 0.65
-    eligibility_weight = records["eligibility_status"].map({"Verified": 0, "Needs Recheck": 6, "Mismatch": 12, "Missing": 15})
-    status_weight = records["authorization_status"].map({"Approved": 0, "Submitted": 5, "Pending": 9, "Not Started": 13, "Escalated": 16})
-    workflow_weight = records["workflow_area"].map({"Eligibility Verification": 5, "Prior Authorization": 9, "Patient Access": 4, "Documentation Review": 7, "Denial Prevention": 8})
+    payer_weight = records["payer_group"].map({"Commercial": 1, "Medicare": 2, "Medicaid": 4, "Marketplace": 4, "Self Pay": 5}) + payer_pressure * 0.28
+    eligibility_weight = records["eligibility_status"].map({"Verified": 0, "Needs Recheck": 4, "Mismatch": 8, "Missing": 11})
+    status_weight = records["authorization_status"].map({"Approved": 0, "Submitted": 3, "Pending": 6, "Not Started": 9, "Escalated": 12})
+    workflow_weight = records["workflow_area"].map({"Eligibility Verification": 2, "Prior Authorization": 5, "Patient Access": 2, "Documentation Review": 4, "Denial Prevention": 4})
 
     raw_score = (
-        22
-        + (100 - records["documentation_score"]) * 0.45
-        + records["request_age_days"] * 1.65
-        + records["queue_age_days"] * 1.35
-        + records["handoff_count"] * 2.1
-        + (100 - records["staffing_capacity"]) * 0.28
-        + np.maximum(0, 7 - records["days_to_visit"]) * 1.15
+        8
+        + (100 - records["documentation_score"]) * 0.28
+        + records["request_age_days"] * 0.88
+        + records["queue_age_days"] * 0.72
+        + records["handoff_count"] * 1.05
+        + (100 - records["staffing_capacity"]) * 0.16
+        + np.maximum(0, 7 - records["days_to_visit"]) * 0.75
         + payer_weight
         + eligibility_weight
         + status_weight
         + workflow_weight
-        + documentation_pressure * 0.70
-        + staffing_pressure * 0.65
-        + queue_pressure * 0.72
-        + denial_pressure * 0.58
+        + documentation_pressure * 0.30
+        + staffing_pressure * 0.30
+        + queue_pressure * 0.31
+        + denial_pressure * 0.27
     )
     records["risk_score"] = raw_score.round(0).clip(0, 100).astype(int)
     records["risk_level"] = pd.cut(records["risk_score"], bins=[-1, 39, 69, 100], labels=["Low", "Moderate", "High"])
@@ -244,6 +260,87 @@ def safe_export(records):
     safe["case_id"] = [f"SAFE AUTH {i:05d}" for i in range(1, len(safe) + 1)]
     safe["created_date"] = "Synthetic date bucket"
     return safe
+
+
+def get_top_patterns(records):
+    payer = records.groupby("payer_group", observed=True)["risk_score"].mean().sort_values(ascending=False)
+    service = records.groupby("service_line", observed=True)["risk_score"].mean().sort_values(ascending=False)
+    workflow = records.groupby("workflow_area", observed=True)["risk_score"].mean().sort_values(ascending=False)
+    combo = records.groupby(["payer_group", "service_line"], observed=True).agg(
+        average_risk=("risk_score", "mean"),
+        average_queue_age=("queue_age_days", "mean"),
+        authorization_age=("request_age_days", "mean"),
+        exposure=("financial_exposure", "sum"),
+        records=("case_id", "count"),
+    ).reset_index().sort_values("average_risk", ascending=False)
+    return payer, service, workflow, combo
+
+
+def leadership_brief(records, fairness_ratio, exposure, sla_at_risk, operating_mode, service_focus):
+    payer, service, workflow, combo = get_top_patterns(records)
+    high = int((records["risk_level"] == "High").sum())
+    top_combo = combo.iloc[0]
+    top_three = workflow.head(3)
+    lines = [f"{idx}: average risk {val:.1f}" for idx, val in top_three.items()]
+    return f"""HEALTHCARE OPERATIONS INTELLIGENCE
+Leadership Brief
+Created by Kori Pickle
+
+Current Operational Risk Summary
+The synthetic command center reviewed {len(records)} no PHI workflow records. The current simulation shows {high} high risk records, {sla_at_risk} SLA at risk records, and ${exposure:,} in estimated synthetic exposure. These results are operational review signals only and require human validation.
+
+Top 3 Workflow Pressure Points
+{lines[0] if len(lines) > 0 else 'No pattern available'}
+{lines[1] if len(lines) > 1 else 'No pattern available'}
+{lines[2] if len(lines) > 2 else 'No pattern available'}
+
+Highest Risk Payer Group
+{payer.index[0]} with average risk {payer.iloc[0]:.1f}
+
+Highest Risk Service Line
+{service.index[0]} with average risk {service.iloc[0]:.1f}
+
+Highest Risk Payer and Service Line Combination
+{top_combo['payer_group']} plus {top_combo['service_line']} with average risk {top_combo['average_risk']:.1f}
+
+SLA Risk Summary
+{sla_at_risk} open synthetic requests are older than 7 days and not approved. These should be reviewed for documentation readiness, payer follow up, queue ownership, and downstream denial risk.
+
+Recommended Leadership Action
+Prioritize high risk records in the highest risk payer and service line combination. Assign owner queues, validate documentation readiness, review payer follow up status, and confirm whether each record needs escalation before additional downstream delay occurs.
+
+Responsible Use Statement
+This tool does not make clinical decisions, payer decisions, coding decisions, billing determinations, or patient specific recommendations. It uses synthetic no PHI data to demonstrate workflow risk visibility, operational prioritization, governance thinking, and safe reporting logic.
+
+Operating Mode
+{operating_mode}
+
+Service Focus
+{service_focus}
+
+Created by Kori Pickle
+LinkedIn: {LINKEDIN_URL}
+GitHub: {GITHUB_URL}
+"""
+
+
+def daily_huddle(records, exposure, sla_at_risk):
+    payer, service, workflow, combo = get_top_patterns(records)
+    top_combo = combo.iloc[0]
+    return f"""Daily Revenue Cycle Huddle Brief
+
+Today's synthetic command center shows the highest workflow pressure in {workflow.index[0]} with payer and service line concentration around {top_combo['payer_group']} and {top_combo['service_line']}. The dashboard is showing {int((records['risk_level'] == 'High').sum())} high risk records, {sla_at_risk} SLA at risk records, and ${exposure:,} in estimated synthetic exposure.
+
+Recommended first action: validate documentation readiness, assign ownership for aged requests, review payer follow up status, and confirm whether high risk records need escalation before downstream denial risk increases.
+
+Huddle questions:
+1. Which aged authorization records can move today?
+2. Which documentation gaps are blocking progress?
+3. Which payer group requires focused follow up?
+4. Which records need human escalation instead of passive monitoring?
+
+Responsible use reminder: this is synthetic no PHI data and all flagged records require human review.
+"""
 
 
 def make_report(records, fairness_ratio, scenario, governance_score, pipeline_status, operating_mode, service_focus):
@@ -320,6 +417,10 @@ with st.sidebar:
         "Choose a workspace",
         [
             "Executive Command Center",
+            "Leadership Brief Generator",
+            "Root Cause Pattern Finder",
+            "Payer Friction Heatmap",
+            "Daily Huddle Script",
             "Live Operations Board",
             "Synthetic Data Lab",
             "Prior Authorization Risk Queue",
@@ -362,6 +463,7 @@ average_risk = round(float(records["risk_score"].mean()), 1)
 escalations = int((records["recommended_action"] == "Immediate workflow intervention required").sum())
 exposure = int(records["financial_exposure"].sum())
 sla_at_risk = int(((records["request_age_days"] >= 7) & (records["authorization_status"] != "Approved")).sum())
+payer_series, service_series, workflow_series, combo_table = get_top_patterns(records)
 
 brand_header()
 
@@ -402,21 +504,68 @@ if workspace == "Executive Command Center":
         risk_mix = pd.DataFrame({"Risk Level": ["High", "Moderate", "Low"], "Records": [high_count, moderate_count, low_count]})
         st.markdown(
             f"""
-            <div class='black-panel'>
-                <div class='black-panel-title'>Executive Interpretation</div>
-                <div class='black-panel-copy'><span class='status-dot'></span>The command center is showing {high_count} high risk records, {sla_at_risk} SLA at risk records, and ${exposure:,} in synthetic exposure. These are not automated decisions. They are review signals for prioritization, documentation validation, payer follow up, and safe escalation.</div>
+            <div class='exec-panel'>
+                <div class='exec-title'>Executive Interpretation</div>
+                <div class='exec-copy'><span class='status-dot'></span>The command center is showing {high_count} high risk records, {sla_at_risk} SLA at risk records, and ${exposure:,} in synthetic exposure. These are not automated decisions. They are review signals for prioritization, documentation validation, payer follow up, and safe escalation.</div>
                 <div class='pill-row'>
-                    <span class='pill'>High Risk {high_count}</span>
-                    <span class='pill'>Moderate {moderate_count}</span>
-                    <span class='pill'>Escalations {escalations}</span>
-                    <span class='pill'>No PHI</span>
+                    <span class='dark-pill'>High Risk {high_count}</span>
+                    <span class='dark-pill'>Moderate {moderate_count}</span>
+                    <span class='dark-pill'>Low {low_count}</span>
+                    <span class='dark-pill'>No PHI</span>
                 </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
         st.bar_chart(risk_mix.set_index("Risk Level"))
+    responsible_boundary()
     st.download_button("Download synthetic operations data", records.to_csv(index=False), file_name="synthetic_healthcare_operations_data.csv", mime="text/csv")
+
+elif workspace == "Leadership Brief Generator":
+    section("Leadership Brief Generator")
+    responsible_boundary()
+    brief = leadership_brief(records, fairness_ratio, exposure, sla_at_risk, operating_mode, service_focus)
+    st.text_area("Executive ready leadership brief", brief, height=560)
+    st.download_button("Download leadership brief", brief, file_name="healthcare_operations_leadership_brief.txt", mime="text/plain")
+
+elif workspace == "Root Cause Pattern Finder":
+    section("Root Cause Pattern Finder")
+    st.markdown("<div class='callout'>This workspace explains where risk is clustering. It is designed around the question: Where did the workflow first lose control?</div>", unsafe_allow_html=True)
+    top_combo = combo_table.iloc[0]
+    p1 = f"{top_combo['payer_group']} {top_combo['service_line']} records show the highest combined risk pattern with average risk {top_combo['average_risk']:.1f}."
+    p2 = f"{workflow_series.index[0]} is the highest pressure workflow area with average risk {workflow_series.iloc[0]:.1f}."
+    doc_cluster = records.groupby("service_line", observed=True)["documentation_score"].mean().sort_values().head(1)
+    p3 = f"Documentation instability is strongest in {doc_cluster.index[0]} with average documentation score {doc_cluster.iloc[0]:.1f}."
+    queue_cluster = records.groupby("workflow_area", observed=True)["queue_age_days"].mean().sort_values(ascending=False).head(1)
+    p4 = f"Queue aging pressure is strongest in {queue_cluster.index[0]} with average queue age {queue_cluster.iloc[0]:.1f} days."
+    handoff_corr = records[["handoff_count", "risk_score"]].corr().iloc[0, 1]
+    p5 = f"Handoff count correlation with risk score is {handoff_corr:.2f}, showing whether ownership fragmentation is contributing to risk."
+    for item in [p1, p2, p3, p4, p5]:
+        st.markdown(f"<div class='callout'>{item}</div>", unsafe_allow_html=True)
+    st.dataframe(combo_table.head(20), use_container_width=True, hide_index=True)
+
+elif workspace == "Payer Friction Heatmap":
+    section("Payer Friction Heatmap")
+    st.markdown("<div class='callout'>This view compares payer groups and service lines so concentrated friction can be reviewed before delays become denials or downstream rework.</div>", unsafe_allow_html=True)
+    heat = combo_table.copy()
+    heat["average_risk"] = heat["average_risk"].round(1)
+    heat["average_queue_age"] = heat["average_queue_age"].round(1)
+    heat["authorization_age"] = heat["authorization_age"].round(1)
+    heat["action"] = np.select(
+        [heat["average_risk"] >= 70, heat["average_risk"] >= 50],
+        ["Escalate", "Review"],
+        default="Monitor",
+    )
+    st.dataframe(heat[["payer_group", "service_line", "average_risk", "average_queue_age", "authorization_age", "exposure", "action"]].sort_values("average_risk", ascending=False), use_container_width=True, hide_index=True)
+    st.bar_chart(heat.pivot_table(index="payer_group", columns="service_line", values="average_risk", aggfunc="mean").fillna(0))
+    responsible_boundary()
+
+elif workspace == "Daily Huddle Script":
+    section("Daily Huddle Script")
+    script = daily_huddle(records, exposure, sla_at_risk)
+    st.text_area("Operations huddle script", script, height=420)
+    st.download_button("Download daily huddle script", script, file_name="daily_revenue_cycle_huddle_script.txt", mime="text/plain")
+    responsible_boundary()
 
 elif workspace == "Live Operations Board":
     section("Live Operations Board")
@@ -428,6 +577,7 @@ elif workspace == "Live Operations Board":
     b.markdown(f"<div class='card'><div class='card-title'>Owner Queue</div><div class='subtle'>{board.iloc[0]['owner_queue']} should validate status, documentation readiness, and next escalation step.</div></div>", unsafe_allow_html=True)
     c.markdown(f"<div class='card'><div class='card-title'>Huddle Question</div><div class='subtle'>Which high risk records can be moved today through documentation completion, payer follow up, or ownership clarification?</div></div>", unsafe_allow_html=True)
     st.session_state.command_notes = st.text_area("Daily command center notes", st.session_state.command_notes, height=160)
+    responsible_boundary()
 
 elif workspace == "Synthetic Data Lab":
     section("Synthetic Data Lab")
@@ -436,6 +586,7 @@ elif workspace == "Synthetic Data Lab":
     st.download_button("Download generated synthetic dataset", records.to_csv(index=False), file_name="synthetic_no_phi_operations_dataset.csv", mime="text/csv")
     with st.expander("Data Use Statement"):
         st.write("This dataset is synthetic and no PHI. It was generated for healthcare operations workflow analysis practice, portfolio demonstration, risk scoring, and responsible AI governance simulation. It must not be interpreted as real patient, payer, claim, authorization, or medical record data.")
+    responsible_boundary()
 
 elif workspace == "Prior Authorization Risk Queue":
     section("Prior Authorization Risk Queue")
@@ -463,6 +614,7 @@ elif workspace == "Prior Authorization Risk Queue":
             st.session_state.saved_cases.append({"case_id": selected_case, "risk_score": int(row["risk_score"]), "recommended_action": row["recommended_action"]})
             st.success("Case review saved")
     st.dataframe(pd.DataFrame(st.session_state.saved_cases), use_container_width=True, hide_index=True)
+    responsible_boundary()
 
 elif workspace == "Payer Fairness Monitor":
     section("Payer Fairness Monitor")
@@ -479,6 +631,7 @@ elif workspace == "Payer Fairness Monitor":
             st.session_state.alert_log.append(alert)
             st.success("Fairness alert logged")
     st.dataframe(pd.DataFrame(st.session_state.alert_log), use_container_width=True, hide_index=True)
+    responsible_boundary()
 
 elif workspace == "Explainability Studio":
     section("Explainability Studio")
@@ -497,6 +650,7 @@ elif workspace == "Explainability Studio":
         <div class='subtle'>This case has a risk score of {row['risk_score']} because the workflow includes request age of {row['request_age_days']} days, queue age of {row['queue_age_days']} days, documentation score of {row['documentation_score']}, staffing capacity of {row['staffing_capacity']}, {row['handoff_count']} handoffs, and {row['days_to_visit']} days to visit. The recommended action is: {row['recommended_action']}.</div>
     </div>
     """, unsafe_allow_html=True)
+    responsible_boundary()
 
 elif workspace == "Safe Export Pipeline":
     section("Safe Export Pipeline")
@@ -517,6 +671,7 @@ elif workspace == "Safe Export Pipeline":
         st.success("Safe export simulation completed")
     st.dataframe(pd.DataFrame(st.session_state.pipeline_log), use_container_width=True, hide_index=True)
     st.download_button("Download safe export", safe_records.to_csv(index=False), file_name="safe_synthetic_operations_export.csv", mime="text/csv")
+    responsible_boundary()
 
 elif workspace == "Governance Checklist":
     section("Governance Checklist")
@@ -547,6 +702,7 @@ elif workspace == "Governance Checklist":
     else:
         st.error("High governance risk")
     st.session_state.governance_notes = st.text_area("Governance notes", st.session_state.governance_notes, height=160)
+    responsible_boundary()
 
 elif workspace == "Portfolio Report Builder":
     section("Portfolio Report Builder")
@@ -556,5 +712,6 @@ elif workspace == "Portfolio Report Builder":
     report = make_report(records, fairness_ratio, scenario, governance_score, pipeline_status, operating_mode, service_focus)
     st.text_area("Portfolio ready report", report, height=620)
     st.download_button("Download portfolio report", report, file_name="synthetic_healthcare_operations_command_center_report.txt", mime="text/plain")
+    responsible_boundary()
 
 footer()
