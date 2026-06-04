@@ -14,6 +14,9 @@ ORANGE = "#FF8200"
 WARM = "#E8E3DC"
 SOFT = "#F7F4EF"
 BLACK = "#000000"
+LINKEDIN_URL = "https://www.linkedin.com/in/koripickle1101"
+GITHUB_URL = "https://github.com/koripickle1101-TN"
+PORTFOLIO_REPO_URL = "https://github.com/koripickle1101-TN/healthcare-workflow-portfolio"
 
 st.markdown(
     f"""
@@ -55,10 +58,15 @@ section[data-testid='stSidebar'] {{ background: #FFFFFF; border-right: 1px solid
 .brand-system-title {{ font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px; margin-bottom: 10px; }}
 .brand-system-item {{ border-left: 3px solid {ORANGE}; padding: 6px 0 6px 10px; margin: 6px 0; font-size: 13px; font-weight: 700; }}
 
-.footer {{ text-align: center; border-top: 1px solid {WARM}; margin-top: 60px; padding: 36px 0 22px 0; }}
-.footer-sig {{ font-family: Allura, cursive; font-size: 50px; color: #111111; line-height: .9; margin-top: 8px; margin-bottom: 14px; }}
-.footer-icon-row {{ display: flex; justify-content: center; gap: 12px; align-items: center; margin-top: 10px; }}
-.footer-icon {{ border: 1px solid {WARM}; border-radius: 999px; padding: 8px 14px; background: #FFFFFF; font-size: 12px; font-weight: 900; letter-spacing: .7px; text-transform: uppercase; }}
+.footer {{ text-align: center; border-top: 1px solid {WARM}; margin-top: 60px; padding: 38px 0 26px 0; opacity: 1 !important; }}
+.footer-created {{ font-weight: 900; letter-spacing: .5px; color: #111111 !important; opacity: 1 !important; }}
+.footer-sig {{ font-family: Allura, cursive; font-size: 54px; color: #111111 !important; line-height: .9; margin-top: 8px; margin-bottom: 18px; opacity: 1 !important; }}
+.footer-icon-row {{ display: flex; justify-content: center; gap: 14px; align-items: center; margin-top: 12px; flex-wrap: wrap; }}
+.footer-link {{ display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid {ORANGE}; border-radius: 999px; padding: 10px 18px; background: #FFFFFF; color: #111111 !important; font-size: 13px; font-weight: 900; letter-spacing: .7px; text-transform: uppercase; text-decoration: none !important; box-shadow: 0 12px 28px rgba(255,130,0,.10); opacity: 1 !important; }}
+.footer-link:hover {{ background: {ORANGE}; color: #FFFFFF !important; text-decoration: none !important; }}
+.footer-url {{ margin-top: 14px; font-size: 12px; color: #333333 !important; opacity: 1 !important; word-break: break-word; }}
+.footer-url a {{ color: #111111 !important; font-weight: 800; text-decoration: underline; text-decoration-color: {ORANGE}; }}
+
 .sidebar-brand {{ text-align: center; border: 1px solid {WARM}; border-radius: 24px; padding: 18px 12px; background: linear-gradient(180deg, #FFFFFF, rgba(255,130,0,.045)); margin-bottom: 18px; }}
 .sidebar-sig {{ font-family: Allura, cursive; font-size: 46px; line-height: .85; color: #111111; }}
 .sidebar-title {{ font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; margin-top: 10px; color: #111111; }}
@@ -66,7 +74,6 @@ section[data-testid='stSidebar'] {{ background: #FFFFFF; border-right: 1px solid
 
 div.stButton > button, div.stDownloadButton > button {{ border-radius: 999px; border: 1px solid {ORANGE}; background: {ORANGE}; color: white; font-weight: 900; padding: .72rem 1.1rem; }}
 div.stButton > button:hover, div.stDownloadButton > button:hover {{ background: #111111; border: 1px solid #111111; color: white; }}
-
 textarea {{ border-radius: 18px !important; font-family: Inter, sans-serif !important; line-height: 1.55 !important; }}
 
 @media(max-width:760px) {{
@@ -79,7 +86,9 @@ textarea {{ border-radius: 18px !important; font-family: Inter, sans-serif !impo
     .node {{ width: 54px; height: 54px; font-size: 13px; }}
     .pill-row {{ gap: 8px; }}
     .pill {{ font-size: 11px; padding: 7px 11px; }}
+    .footer {{ padding-bottom: 34px; }}
     .footer-icon-row {{ gap: 10px; }}
+    .footer-link {{ min-width: 112px; padding: 10px 14px; font-size: 12px; }}
 }}
 </style>
 """,
@@ -109,14 +118,15 @@ def brand_header():
 
 def footer():
     st.markdown(
-        """
+        f"""
         <div class='footer'>
-            <div style='font-weight:900; letter-spacing:.5px;'>Created by Kori Pickle</div>
+            <div class='footer-created'>Created by Kori Pickle</div>
             <div class='footer-sig'>Kori Pickle</div>
             <div class='footer-icon-row'>
-                <span class='footer-icon'>LinkedIn</span>
-                <span class='footer-icon'>GitHub</span>
+                <a class='footer-link' href='{LINKEDIN_URL}' target='_blank' rel='noopener noreferrer'>Open LinkedIn</a>
+                <a class='footer-link' href='{GITHUB_URL}' target='_blank' rel='noopener noreferrer'>Open GitHub</a>
             </div>
+            <div class='footer-url'>Portfolio repository: <a href='{PORTFOLIO_REPO_URL}' target='_blank' rel='noopener noreferrer'>healthcare workflow portfolio</a></div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -224,7 +234,9 @@ Tennessee Orange accent: FF8200
 Black typography: 000000
 Created by Kori Pickle
 Signature: Kori Pickle
-Footer: LinkedIn and GitHub
+LinkedIn: {LINKEDIN_URL}
+GitHub: {GITHUB_URL}
+Portfolio Repository: {PORTFOLIO_REPO_URL}
 """
 
 
