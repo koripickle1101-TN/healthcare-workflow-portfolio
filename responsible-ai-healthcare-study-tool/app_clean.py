@@ -11,356 +11,58 @@ st.set_page_config(
 )
 
 ORANGE = "#FF8200"
-BLACK = "#000000"
 WARM = "#E8E3DC"
 SOFT = "#F7F4EF"
-INK = "#151515"
-GREEN = "#157347"
-RED = "#B42318"
-AMBER = "#B85C00"
+BLACK = "#000000"
 
 st.markdown(
     f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Allura&display=swap');
 
-html, body, [class*='css'] {{
-    font-family: Inter, sans-serif;
-    color: {BLACK};
-}}
+html, body, [class*='css'] {{ font-family: Inter, sans-serif; color: {BLACK}; }}
+.stApp {{ background: radial-gradient(circle at 92% 8%, rgba(255,130,0,.10), transparent 30%), linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 76%, #FBF8F3 100%); }}
+section[data-testid='stSidebar'] {{ background: #FFFFFF; border-right: 1px solid {WARM}; }}
+.block-container {{ max-width: 1240px; padding-top: 1.2rem; padding-bottom: 2.8rem; }}
 
-.stApp {{
-    background:
-        radial-gradient(circle at 92% 8%, rgba(255,130,0,.10), transparent 30%),
-        linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 76%, #FBF8F3 100%);
-}}
+.brand-card {{ background: #FFFFFF; border: 1px solid {WARM}; border-radius: 30px; padding: 30px 28px; margin-bottom: 28px; box-shadow: 0 24px 64px rgba(0,0,0,.055); overflow: hidden; }}
+.brand-signature {{ font-family: Allura, cursive; font-size: clamp(56px, 11vw, 96px); line-height: .88; color: #111111; text-align: center; margin-bottom: 22px; transform: rotate(-1deg); }}
+.brand-line {{ height: 2px; width: 84%; margin: 14px auto 18px auto; background: linear-gradient(90deg, transparent, {ORANGE}, transparent); }}
+.brand-kicker {{ text-align: center; font-size: clamp(14px, 3vw, 22px); letter-spacing: clamp(4px, 1.4vw, 9px); text-transform: uppercase; font-weight: 800; color: #111111; }}
+.brand-intel {{ text-align: center; font-size: clamp(22px, 5vw, 38px); letter-spacing: clamp(5px, 1.6vw, 12px); text-transform: uppercase; color: {ORANGE}; font-weight: 900; line-height: 1.2; word-break: keep-all; }}
 
-section[data-testid='stSidebar'] {{
-    background: #FFFFFF;
-    border-right: 1px solid {WARM};
-}}
+.hero {{ border: 1px solid {WARM}; border-radius: 34px; padding: clamp(30px, 5vw, 56px); background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 67%, rgba(255,130,0,.08) 100%); box-shadow: 0 28px 78px rgba(0,0,0,.07); margin-bottom: 30px; }}
+.eyebrow {{ font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 900; display: inline-block; padding-bottom: 8px; border-bottom: 2px solid {ORANGE}; margin-bottom: 24px; color: #333333; }}
+.title {{ font-family: Playfair Display, serif; font-size: clamp(40px, 6vw, 82px); line-height: .96; letter-spacing: -2px; margin: 0 0 22px 0; color: #000000; }}
+.orange {{ color: {ORANGE}; }}
+.copy {{ max-width: 920px; font-size: 18px; line-height: 1.72; color: #242424; }}
+.section-title {{ font-family: Playfair Display, serif; font-size: clamp(34px, 5vw, 52px); line-height: 1; letter-spacing: -1px; margin: 42px 0 18px 0; color: #000000; }}
 
-section[data-testid='stSidebar'] p,
-section[data-testid='stSidebar'] span,
-section[data-testid='stSidebar'] label {{
-    color: {BLACK};
-}}
-
-.block-container {{
-    max-width: 1240px;
-    padding-top: 1.2rem;
-    padding-bottom: 2.8rem;
-}}
-
-.brand-card {{
-    background: #FFFFFF;
-    border: 1px solid {WARM};
-    border-radius: 30px;
-    padding: 30px 34px;
-    margin-bottom: 28px;
-    box-shadow: 0 24px 64px rgba(0,0,0,.055);
-    overflow: hidden;
-}}
-
-.brand-signature {{
-    font-family: Allura, cursive;
-    font-size: clamp(58px, 11vw, 96px);
-    line-height: .88;
-    color: #111111;
-    text-align: center;
-    margin: 0 auto 22px auto;
-    transform: rotate(-1deg);
-}}
-
-.brand-line {{
-    height: 2px;
-    width: 84%;
-    margin: 14px auto 18px auto;
-    background: linear-gradient(90deg, transparent, {ORANGE}, transparent);
-}}
-
-.brand-kicker {{
-    text-align: center;
-    font-size: clamp(14px, 3vw, 22px);
-    letter-spacing: clamp(4px, 1.4vw, 9px);
-    text-transform: uppercase;
-    font-weight: 800;
-    color: #111111;
-    margin-top: 10px;
-}}
-
-.brand-intel {{
-    text-align: center;
-    font-size: clamp(22px, 5vw, 38px);
-    letter-spacing: clamp(5px, 1.6vw, 12px);
-    text-transform: uppercase;
-    color: {ORANGE};
-    font-weight: 900;
-    line-height: 1.2;
-    overflow-wrap: normal;
-    word-break: keep-all;
-}}
-
-.hero {{
-    border: 1px solid {WARM};
-    border-radius: 34px;
-    padding: clamp(30px, 5vw, 56px);
-    background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 67%, rgba(255,130,0,.08) 100%);
-    box-shadow: 0 28px 78px rgba(0,0,0,.07);
-    margin-bottom: 30px;
-}}
-
-.eyebrow {{
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 900;
-    display: inline-block;
-    padding-bottom: 8px;
-    border-bottom: 2px solid {ORANGE};
-    margin-bottom: 24px;
-    color: #333333;
-}}
-
-.title {{
-    font-family: Playfair Display, serif;
-    font-size: clamp(40px, 6vw, 84px);
-    line-height: .96;
-    letter-spacing: -2px;
-    margin: 0 0 22px 0;
-    color: #000000;
-}}
-
-.orange {{
-    color: {ORANGE};
-}}
-
-.copy {{
-    max-width: 920px;
-    font-size: 18px;
-    line-height: 1.72;
-    color: #242424;
-}}
-
-.section-title {{
-    font-family: Playfair Display, serif;
-    font-size: clamp(34px, 5vw, 52px);
-    line-height: 1;
-    letter-spacing: -1px;
-    margin: 42px 0 18px 0;
-    color: #000000;
-}}
-
-.card {{
-    border: 1px solid {WARM};
-    border-top: 5px solid {ORANGE};
-    border-radius: 26px;
-    padding: 24px;
-    background: #FFFFFF;
-    box-shadow: 0 18px 48px rgba(0,0,0,.05);
-    height: 100%;
-}}
-
-.card-soft {{
-    border: 1px solid {WARM};
-    border-radius: 26px;
-    padding: 24px;
-    background: {SOFT};
-    height: 100%;
-}}
-
-.card-title {{
-    font-family: Playfair Display, serif;
-    font-size: 28px;
-    line-height: 1.08;
-    margin-bottom: 12px;
-    color: #000000;
-}}
-
-.subtle {{
-    color: #353535;
-    line-height: 1.68;
-    font-size: 16px;
-}}
-
-.metric-card {{
-    border: 1px solid {WARM};
-    border-left: 5px solid {ORANGE};
-    border-radius: 22px;
-    background: {SOFT};
-    padding: 22px;
-    min-height: 128px;
-}}
-
-.big {{
-    font-family: Playfair Display, serif;
-    font-size: clamp(34px, 5vw, 50px);
-    font-weight: 900;
-    line-height: .95;
-    color: #111111;
-}}
-
-.label {{
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    margin-top: 12px;
-    color: #555555;
-}}
-
-.pill {{
-    display: inline-block;
-    border: 1px solid {ORANGE};
-    background: rgba(255,130,0,.08);
-    border-radius: 999px;
-    padding: 8px 13px;
-    margin: 4px 5px 4px 0;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: .55px;
-    text-transform: uppercase;
-    color: #111111;
-}}
-
-.callout {{
-    border: 1px solid {WARM};
-    border-left: 6px solid {ORANGE};
-    border-radius: 24px;
-    padding: 22px 26px;
-    background: #FFFFFF;
-    box-shadow: 0 18px 44px rgba(0,0,0,.045);
-    margin: 18px 0;
-    color: #111111;
-}}
-
-.node-row {{
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}}
-
-.node {{
-    width: 60px;
-    height: 60px;
-    border-radius: 999px;
-    border: 2px solid {ORANGE};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: {ORANGE};
-    background: #FFFFFF;
-    font-weight: 900;
-    box-shadow: 0 0 0 10px rgba(255,130,0,.07), 0 0 30px rgba(255,130,0,.18);
-}}
-
-.connector {{
-    width: 70px;
-    height: 2px;
-    background-image: linear-gradient(to right, rgba(255,130,0,.85) 45%, rgba(255,130,0,0) 0%);
-    background-size: 13px 2px;
-    background-repeat: repeat-x;
-}}
-
-.status-pass {{ color: {GREEN}; font-weight: 900; }}
-.status-warn {{ color: {AMBER}; font-weight: 900; }}
-.status-fail {{ color: {RED}; font-weight: 900; }}
-
-.footer {{
-    text-align: center;
-    border-top: 1px solid {WARM};
-    margin-top: 56px;
-    padding: 34px 0 18px 0;
-}}
-
-.footer-sig {{
-    font-family: Allura, cursive;
-    font-size: 50px;
-    color: #111111;
-    line-height: .9;
-}}
-
-.icon-row {{
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 12px;
-}}
-
-.icon {{
-    border: 1px solid {WARM};
-    border-radius: 999px;
-    padding: 7px 12px;
-    font-size: 12px;
-    font-weight: 900;
-    background: #FFFFFF;
-}}
-
-.sidebar-brand {{
-    text-align: center;
-    border: 1px solid {WARM};
-    border-radius: 24px;
-    padding: 18px 12px;
-    background: linear-gradient(180deg, #FFFFFF, rgba(255,130,0,.045));
-    margin-bottom: 18px;
-}}
-
-.sidebar-sig {{
-    font-family: Allura, cursive;
-    font-size: 46px;
-    line-height: .85;
-    color: #111111;
-}}
-
-.sidebar-title {{
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin-top: 10px;
-    color: #111111;
-}}
-
-div.stButton > button, div.stDownloadButton > button {{
-    border-radius: 999px;
-    border: 1px solid {ORANGE};
-    background: {ORANGE};
-    color: white;
-    font-weight: 900;
-    padding: .72rem 1.1rem;
-}}
-
-div.stButton > button:hover, div.stDownloadButton > button:hover {{
-    background: #111111;
-    border: 1px solid #111111;
-    color: white;
-}}
-
-textarea, input {{
-    border-radius: 16px !important;
-}}
-
-@media(max-width:760px) {{
-    .brand-card {{ padding: 24px 18px; }}
-    .brand-signature {{ font-size: 62px; }}
-    .brand-kicker {{ letter-spacing: 4px; font-size: 14px; }}
-    .brand-intel {{ letter-spacing: 5px; font-size: 24px; }}
-    .hero {{ padding: 32px 24px; }}
-    .connector {{ display: none; }}
-}}
+.metric-card {{ border: 1px solid {WARM}; border-left: 5px solid {ORANGE}; border-radius: 22px; background: {SOFT}; padding: 22px; min-height: 128px; }}
+.big {{ font-family: Playfair Display, serif; font-size: clamp(34px, 5vw, 50px); font-weight: 900; line-height: .95; color: #111111; }}
+.label {{ font-size: 12px; font-weight: 900; letter-spacing: 1.4px; text-transform: uppercase; margin-top: 12px; color: #555555; }}
+.card {{ border: 1px solid {WARM}; border-top: 5px solid {ORANGE}; border-radius: 26px; padding: 24px; background: #FFFFFF; box-shadow: 0 18px 48px rgba(0,0,0,.05); height: 100%; }}
+.card-title {{ font-family: Playfair Display, serif; font-size: 28px; line-height: 1.08; margin-bottom: 12px; color: #000000; }}
+.subtle {{ color: #353535; line-height: 1.68; font-size: 16px; }}
+.callout {{ border: 1px solid {WARM}; border-left: 6px solid {ORANGE}; border-radius: 24px; padding: 22px 26px; background: #FFFFFF; box-shadow: 0 18px 44px rgba(0,0,0,.045); margin: 18px 0; color: #111111; }}
+.pill {{ display: inline-block; border: 1px solid {ORANGE}; background: rgba(255,130,0,.08); border-radius: 999px; padding: 8px 13px; margin: 4px 5px 4px 0; font-size: 12px; font-weight: 900; letter-spacing: .55px; text-transform: uppercase; color: #111111; }}
+.node {{ width: 60px; height: 60px; border-radius: 999px; border: 2px solid {ORANGE}; display: inline-flex; align-items: center; justify-content: center; color: {ORANGE}; background: #FFFFFF; font-weight: 900; margin: 6px; box-shadow: 0 0 0 10px rgba(255,130,0,.07), 0 0 30px rgba(255,130,0,.18); }}
+.footer {{ text-align: center; border-top: 1px solid {WARM}; margin-top: 56px; padding: 34px 0 18px 0; }}
+.footer-sig {{ font-family: Allura, cursive; font-size: 50px; color: #111111; line-height: .9; }}
+.sidebar-brand {{ text-align: center; border: 1px solid {WARM}; border-radius: 24px; padding: 18px 12px; background: linear-gradient(180deg, #FFFFFF, rgba(255,130,0,.045)); margin-bottom: 18px; }}
+.sidebar-sig {{ font-family: Allura, cursive; font-size: 46px; line-height: .85; color: #111111; }}
+.sidebar-title {{ font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; margin-top: 10px; color: #111111; }}
+div.stButton > button, div.stDownloadButton > button {{ border-radius: 999px; border: 1px solid {ORANGE}; background: {ORANGE}; color: white; font-weight: 900; padding: .72rem 1.1rem; }}
+div.stButton > button:hover, div.stDownloadButton > button:hover {{ background: #111111; border: 1px solid #111111; color: white; }}
+@media(max-width:760px) {{ .brand-card {{ padding: 24px 18px; }} .brand-signature {{ font-size: 62px; }} .brand-kicker {{ letter-spacing: 4px; font-size: 14px; }} .brand-intel {{ letter-spacing: 5px; font-size: 24px; }} .hero {{ padding: 32px 24px; }} }}
 </style>
 """,
     unsafe_allow_html=True,
 )
 
-if "alerts" not in st.session_state:
-    st.session_state.alerts = []
-if "pipeline" not in st.session_state:
-    st.session_state.pipeline = []
-if "case_reviews" not in st.session_state:
-    st.session_state.case_reviews = []
+for key in ["alerts", "pipeline", "case_reviews"]:
+    if key not in st.session_state:
+        st.session_state[key] = []
 if "governance_notes" not in st.session_state:
     st.session_state.governance_notes = ""
 
@@ -385,7 +87,7 @@ def footer():
         <div class='footer'>
             <div style='font-weight:900; letter-spacing:.5px;'>Created by Kori Pickle</div>
             <div class='footer-sig'>Kori Pickle</div>
-            <div class='icon-row'><span class='icon'>LinkedIn</span><span class='icon'>GitHub</span></div>
+            <div><span class='pill'>LinkedIn</span><span class='pill'>GitHub</span></div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -423,18 +125,9 @@ def create_data(volume, payer_pressure, documentation_pressure, queue_pressure):
     ).clip(0, 100)
     data["risk_level"] = pd.cut(data["risk_score"], [-1, 35, 65, 100], labels=["Low", "Moderate", "High"])
     data["delay_flag"] = np.where(data["risk_score"] >= 60, 1, 0)
-    data["recommended_action"] = np.select(
-        [
-            data["risk_score"] >= 75,
-            data["risk_score"] >= 55,
-            data["risk_score"] < 55,
-        ],
-        [
-            "Escalate for human review",
-            "Monitor and validate documentation",
-            "Continue standard workflow",
-        ],
-    )
+    data["recommended_action"] = "Continue standard workflow"
+    data.loc[data["risk_score"] >= 55, "recommended_action"] = "Monitor and validate documentation"
+    data.loc[data["risk_score"] >= 75, "recommended_action"] = "Escalate for human review"
     return data
 
 
@@ -530,13 +223,11 @@ with st.sidebar:
     queue_pressure = st.slider("Queue aging pressure", 0, 20, 6, 1)
     st.markdown("<span class='pill'>White FFFFFF</span><span class='pill'>Vols Orange FF8200</span><span class='pill'>Black Typography</span>", unsafe_allow_html=True)
 
-
 data = create_data(volume, payer_pressure, documentation_pressure, queue_pressure)
 safe = safe_export(data)
 fair_table, fairness_ratio = fairness_metrics(data)
 risk_high = int((data["risk_level"] == "High").sum())
 risk_moderate = int((data["risk_level"] == "Moderate").sum())
-readiness_score = 0
 
 brand_header()
 
@@ -547,7 +238,7 @@ if workspace == "Executive Command Center":
             <div class='eyebrow'>Responsible AI Governance Lab</div>
             <div class='title'>A premium working command center for <span class='orange'>workflow risk governance</span></div>
             <div class='copy'>This interactive simulator evaluates synthetic healthcare operations records for risk scoring explainability fairness alert readiness safe export logic governance controls and responsible AI boundaries.</div>
-            <div class='node-row'><span class='node'>AI</span><span class='connector'></span><span class='node'>Risk</span><span class='connector'></span><span class='node'>Fair</span><span class='connector'></span><span class='node'>Data</span><span class='connector'></span><span class='node'>Gov</span></div>
+            <div style='margin-top:28px;'><span class='node'>AI</span><span class='node'>Risk</span><span class='node'>Fair</span><span class='node'>Data</span><span class='node'>Gov</span></div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -557,25 +248,21 @@ if workspace == "Executive Command Center":
     c2.markdown(f"<div class='metric-card'><div class='big'>{risk_high}</div><div class='label'>High Risk Records</div></div>", unsafe_allow_html=True)
     c3.markdown(f"<div class='metric-card'><div class='big'>{fairness_ratio}</div><div class='label'>Fairness Ratio</div></div>", unsafe_allow_html=True)
     c4.markdown("<div class='metric-card'><div class='big'>No</div><div class='label'>Protected Data Used</div></div>", unsafe_allow_html=True)
-
     section("Operational Snapshot")
-    a, b = st.columns([1.3, .7])
-    with a:
+    left, right = st.columns([1.3, 0.7])
+    with left:
         st.dataframe(data.head(30), use_container_width=True, hide_index=True)
-    with b:
-        st.markdown(
-            f"""
-            <div class='card'>
-                <div class='card-title'>Executive Interpretation</div>
-                <div class='subtle'>High risk records show where workflow instability may require human review. The fairness ratio shows whether delay patterns appear uneven across payer groups. The pipeline workspace demonstrates safe export logic using synthetic records only.</div>
-                <br>
-                <span class='pill'>High Risk {risk_high}</span>
-                <span class='pill'>Moderate Risk {risk_moderate}</span>
-                <span class='pill'>Fairness {fairness_ratio}</span>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+    with right:
+        st.markdown(f"""
+        <div class='card'>
+            <div class='card-title'>Executive Interpretation</div>
+            <div class='subtle'>High risk records show where workflow instability may require human review. The fairness ratio shows whether delay patterns appear uneven across payer groups. The pipeline workspace demonstrates safe export logic using synthetic records only.</div>
+            <br>
+            <span class='pill'>High Risk {risk_high}</span>
+            <span class='pill'>Moderate Risk {risk_moderate}</span>
+            <span class='pill'>Fairness {fairness_ratio}</span>
+        </div>
+        """, unsafe_allow_html=True)
     st.download_button("Download synthetic audit data", data.to_csv(index=False), file_name="synthetic_responsible_ai_governance_data.csv", mime="text/csv")
 
 elif workspace == "Risk Explorer":
@@ -591,38 +278,27 @@ elif workspace == "Risk Explorer":
 
 elif workspace == "Explainability Studio":
     section("Explainability Studio")
-    explain = pd.DataFrame(
-        {
-            "factor": ["Authorization Age", "Documentation Gaps", "Queue Age", "Handoff Count", "Payer Friction"],
-            "impact_weight": [34, 28, 18, 12, 8],
-            "plain_language_meaning": [
-                "Older authorizations increase downstream risk",
-                "Lower documentation readiness increases preventable rework",
-                "Aging queues indicate operational pressure",
-                "More handoffs can create accountability gaps",
-                "Payer patterns require fairness and access review",
-            ],
-        }
-    )
-    c1, c2 = st.columns([.9, 1.1])
-    with c1:
+    explain = pd.DataFrame({
+        "factor": ["Authorization Age", "Documentation Gaps", "Queue Age", "Handoff Count", "Payer Friction"],
+        "impact_weight": [34, 28, 18, 12, 8],
+        "plain_language_meaning": ["Older authorizations increase downstream risk", "Lower documentation readiness increases preventable rework", "Aging queues indicate operational pressure", "More handoffs can create accountability gaps", "Payer patterns require fairness and access review"],
+    })
+    left, right = st.columns([0.9, 1.1])
+    with left:
         st.bar_chart(explain.set_index("factor")[["impact_weight"]])
-    with c2:
+    with right:
         st.dataframe(explain, use_container_width=True, hide_index=True)
     selected = st.selectbox("Select a record to explain", data["record_id"].head(80))
     row = data[data["record_id"] == selected].iloc[0]
-    st.markdown(
-        f"""
-        <div class='callout'>
-            Selected record {selected}<br>
-            Risk score {row['risk_score']}<br>
-            Risk level {row['risk_level']}<br>
-            Main signal authorization age {row['authorization_age_days']} days<br>
-            Recommended action {row['recommended_action']}
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.markdown(f"""
+    <div class='callout'>
+        Selected record {selected}<br>
+        Risk score {row['risk_score']}<br>
+        Risk level {row['risk_level']}<br>
+        Main signal authorization age {row['authorization_age_days']} days<br>
+        Recommended action {row['recommended_action']}
+    </div>
+    """, unsafe_allow_html=True)
     if st.button("Save case review"):
         st.session_state.case_reviews.append({"record_id": selected, "risk_score": int(row["risk_score"]), "action": row["recommended_action"]})
         st.success("Case review saved")
@@ -635,13 +311,7 @@ elif workspace == "Fairness Alert Lab":
     if simulated_ratio < safety_floor / 100:
         st.markdown("<div class='callout'><span class='status-fail'>Fairness alert triggered</span><br>The ratio is below the selected safety floor. Human review is required before operational use.</div>", unsafe_allow_html=True)
         if st.button("Simulate team alert"):
-            alert = {
-                "system": "Responsible AI Governance Lab",
-                "alert_type": "Fairness safety boundary crossed",
-                "current_ratio": round(simulated_ratio, 2),
-                "required_action": "Pause use and review group performance",
-                "created_by": "Kori Pickle",
-            }
+            alert = {"system": "Responsible AI Governance Lab", "alert_type": "Fairness safety boundary crossed", "current_ratio": round(simulated_ratio, 2), "required_action": "Pause use and review group performance", "created_by": "Kori Pickle"}
             st.session_state.alerts.append(alert)
             st.success("Team alert simulated and logged")
             st.json(alert)
@@ -651,11 +321,11 @@ elif workspace == "Fairness Alert Lab":
 
 elif workspace == "Safe Pipeline Simulator":
     section("Safe Pipeline Simulator")
-    c1, c2 = st.columns(2)
-    with c1:
+    left, right = st.columns(2)
+    with left:
         st.markdown("<div class='card-title'>Standard Synthetic Feed</div>", unsafe_allow_html=True)
         st.dataframe(data[["record_id", "payer_group", "workflow_area", "risk_score"]].head(10), use_container_width=True, hide_index=True)
-    with c2:
+    with right:
         st.markdown("<div class='card-title'>Safe Downstream Export</div>", unsafe_allow_html=True)
         st.dataframe(safe[["record_id", "payer_group", "workflow_area", "risk_score"]].head(10), use_container_width=True, hide_index=True)
     if st.button("Execute safe stream simulation"):
@@ -671,18 +341,7 @@ elif workspace == "Safe Pipeline Simulator":
 
 elif workspace == "Governance Checklist":
     section("Governance Checklist")
-    items = [
-        "Uses synthetic safe data only",
-        "Requires human review before action",
-        "Explains workflow risk clearly",
-        "Identifies accountable workflow owner",
-        "Checks fairness across groups",
-        "Provides alert logic for safety boundaries",
-        "Creates audit record for activity",
-        "Avoids clinical decision replacement",
-        "Supports portfolio export",
-        "Includes responsible use boundary",
-    ]
+    items = ["Uses synthetic safe data only", "Requires human review before action", "Explains workflow risk clearly", "Identifies accountable workflow owner", "Checks fairness across groups", "Provides alert logic for safety boundaries", "Creates audit record for activity", "Avoids clinical decision replacement", "Supports portfolio export", "Includes responsible use boundary"]
     completed = []
     cols = st.columns(2)
     for index, item in enumerate(items):
