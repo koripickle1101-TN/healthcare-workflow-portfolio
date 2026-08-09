@@ -17,13 +17,6 @@ st.set_page_config(
 inject_global_css()
 render_sidebar_header()
 
-st.sidebar.markdown("""
-<div style='padding:0 0.5rem;font-size:0.72rem;color:#aaa;line-height:2;'>
-    <b style='color:#FF8200;'>PORTFOLIO SECTIONS</b>
-</div>
-""", unsafe_allow_html=True)
-
-# ── Hero ──────────────────────────────────────────────
 st.markdown("""
 <div class='hero-banner'>
     <div class='hero-eyebrow'>Healthcare Operations Intelligence Engine</div>
@@ -53,7 +46,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── About ─────────────────────────────────────────────
 st.markdown("## About This Portfolio")
 st.markdown("""
 <div class='body-text'>
@@ -62,15 +54,13 @@ management, prior authorization, patient access, denial prevention, and workflow
 Every section contains real analysis, synthetic data tools, and documented thinking —
 not placeholder content.
 <br/><br/>
-<b>The core argument:</b> Most revenue cycle failures don't start in billing.
+<b>The core argument:</b> Most revenue cycle failures do not start in billing.
 They start upstream — in intake, eligibility, authorization, and documentation.
 This portfolio is built around finding those upstream breaks before they cost the organization money.
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-
-# ── Portfolio Sections Grid ───────────────────────────
 st.markdown("## Portfolio Sections")
 
 cols = st.columns(3)
@@ -101,9 +91,8 @@ for i, (icon, title, tag, desc) in enumerate(sections):
         """, unsafe_allow_html=True)
 
 st.markdown("---")
-
-# ── KPI Strip ─────────────────────────────────────────
 st.markdown("## Portfolio At a Glance")
+
 k1, k2, k3, k4 = st.columns(4)
 kpis = [
     ("7", "Portfolio Sections"),
@@ -121,20 +110,14 @@ for col, (val, label) in zip([k1, k2, k3, k4], kpis):
         """, unsafe_allow_html=True)
 
 st.markdown("---")
-
-# ── Remote Readiness ──────────────────────────────────
-st.markdown("## Remote Work Readiness")
-rc1, rc2, rc3 = st.columns(3)
-remote = [
-    ("☁️", "Cloud Tools", "GitHub, Streamlit, Google Workspace"),
-    ("📊", "Data Analysis", "Synthetic data, workflow scoring, pattern tracking"),
-    ("📝", "Documentation", "Case studies, process maps, leadership briefs"),
-]
-for col, (icon, title, desc) in zip([rc1, rc2, rc3], remote):
-    with col:
-        st.markdown(f"""
-        <div class='remote-card'>
-            <div style='font-size:1.8rem;margin-bottom:0.4rem;'>{icon}</div>
-            <div style='font-weight:700;font-size:0.85rem;color:#111;
-                        margin-bottom:0.2rem;'>{title}</div>
-            <div style='font-size:0.72rem;color:#666;line-height:1.5;'>{desc}</div>
+st.markdown("""
+<div class='footer'>
+    Created by <b>Kori Pickle</b> · Healthcare Operations Portfolio · Tennessee · Remote Ready<br/>
+    <a href='https://github.com/koripickle1101-TN/healthcare-workflow-portfolio'
+       target='_blank' style='color:#FF8200;'>GitHub</a>
+    &nbsp;·&nbsp;
+    <span style='color:#aaa;font-size:0.7rem;'>
+        All data is synthetic. No PHI. No clinical decisions.
+    </span>
+</div>
+""", unsafe_allow_html=True)
