@@ -1,5 +1,3 @@
-"""Denials Management — root cause analysis and prevention."""
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -10,123 +8,52 @@ st.set_page_config(page_title="Denials Management | Kori Pickle", page_icon="�
 inject_global_css()
 render_sidebar_header()
 
-st.markdown("""
-<div class='page-header'>
-    <div class='page-header-eyebrow'>Section 04 · Denial Prevention</div>
-    <div class='page-header-title'>Denials Management</div>
-    <div class='page-header-sub'>
-        Root cause pattern analysis · Repeat denial identification · Prevention checkpoints
-    </div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<div class='page-header'><div class='page-header-eyebrow'>Section 04 · Denial Prevention</div><div class='page-header-title'>Denials Management</div><div class='page-header-sub'>Root cause pattern analysis · Repeat denial identification · Prevention checkpoints</div></div>", unsafe_allow_html=True)
+st.markdown("<div class='orange-callout'><strong>Core Argument:</strong> A denial is not a billing problem — it is a workflow failure that started upstream. Sustainable denial reduction requires identifying where the process broke, not just resubmitting the claim.</div>", unsafe_allow_html=True)
 
-st.markdown("""
-<div class='orange-callout'>
-    <strong>Core Argument:</strong> Denials are not random. They are patterns.
-    When the same denial type repeats across multiple payers or providers,
-    it is a workflow problem — not a billing problem. Fix the workflow, not just the claim.
-</div>
-""", unsafe_allow_html=True)
-
-tab1, tab2, tab3 = st.tabs(["📊 Denial Patterns", "🔁 Repeat Denials", "🛡️ Prevention Plan"])
+tab1, tab2, tab3 = st.tabs(["Denial Patterns", "Repeat Denials", "Prevention Plan"])
 
 with tab1:
-    st.markdown("### Denial Volume by Category and Payer (Synthetic)")
-    data = {
-        "Payer": ["Aetna","Aetna","BCBS","BCBS","Humana","Humana",
-                  "Medicaid","Medicaid","UHC","UHC"],
-        "Denial Type": ["Eligibility","Prior Auth","Eligibility","Documentation",
-                        "Prior Auth","Coding","Eligibility","Prior Auth",
-                        "Documentation","Coding"],
-        "Volume": [42, 31, 38, 25, 55, 18, 67, 48, 29, 22],
-        "Avg Days to Resolve": [8, 21, 6, 14, 25, 10, 30, 28, 12, 9]
-    }
-    df = pd.DataFrame(data)
-    fig = px.bar(
-        df, x="Payer", y="Volume", color="Denial Type",
-        barmode="group",
-        color_discrete_sequence=["#FF8200","#CC6800","#111111","#888888","#FFB366"],
-        title="Denial Volume by Payer and Type"
-    )
-    fig.update_layout(
-        plot_bgcolor="white", paper_bgcolor="white",
-        font_family="Inter", xaxis_title="", yaxis_title="Denial Count"
-    )
+    st.markdown("### Denial Volume by Payer and Type (Synthetic Data)")
+    df = pd.DataFrame({
+        "Payer": ["United","Cigna","Aetna","BCBS","Medicaid","Medicare Adv"],
+        "Authorization": [18,14,8,11,6,3],
+        "Eligibility": [12,9,7,8,14,4],
+        "Coding": [6,8,5,7,3,4],
+        "Documentation": [9,6,4,5,8,2]
+    })
+    df_melt = df.melt(id_vars="Payer", var_name="Denial Type", value_name="Volume")
+    fig = px.bar(df_melt, x="Payer", y="Volume", color="Denial Type", barmode="stack", title="Denial Volume by Payer and Type", color_discrete_sequence=["#FF8200","#CC6600","#994C00","#663300"])
+    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", font_family="Inter")
     st.plotly_chart(fig, use_container_width=True)
-
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total Denials (Sample)", "375")
-    c2.metric("Medicaid — Highest Volume", "115 denials")
-    c3.metric("Avg Resolution Time", "16.3 days")
-    c4.metric("Prior Auth — Longest Resolve", "24.7 days avg")
+    c1.metric("Top Denial Payer", "United Healthcare")
+    c2.metric("Top Denial Type", "Authorization — 60 cases")
+    c3.metric("Eligibility Denials", "54 cases")
+    c4.metric("Preventable Denials", "73%")
 
 with tab2:
-    st.markdown("### Repeat Denial Pattern Tracker")
-    repeat_data = {
-        "Denial Type": ["Prior Auth — Medicaid", "Eligibility — Humana",
-                        "Documentation — UHC", "Prior Auth — Humana",
-                        "Eligibility — Medicaid", "Coding — Aetna"],
-        "Occurrences (90 Days)": [48, 38, 29, 27, 22, 18],
-        "Risk Level": ["Critical","High","High","High","Medium","Low"],
-        "Root Cause": [
-            "PA not initiated at scheduling",
-            "Coverage lapsed, not reverified",
-            "Missing medical necessity language",
-            "Auth expired before service date",
-            "Inactive insurance on file",
-            "Modifier missing on claim"
-        ]
-    }
-    df2 = pd.DataFrame(repeat_data)
-    fig2 = px.bar(
-        df2, x="Occurrences (90 Days)", y="Denial Type",
-        orientation="h", color="Risk Level",
-        color_discrete_map={
-            "Critical": "#CC0000", "High": "#FF8200",
-            "Medium": "#FFB366", "Low": "#AAAAAA"
-        },
-        title="Top Repeat Denial Patterns — Last 90 Days"
-    )
-    fig2.update_layout(
-        plot_bgcolor="white", paper_bgcolor="white",
-        font_family="Inter", yaxis_title="", xaxis_title="Occurrences"
-    )
-    st.plotly_chart(fig2, use_container_width=True)
-
-    st.markdown("### Root Cause Detail")
-    for _, row in df2.iterrows():
-        st.markdown(f"""
-        <div class='info-card'>
-            <div class='info-card-title'>⚠️ {row['Denial Type']} — {row['Occurrences (90 Days)']} occurrences</div>
-            <div class='info-card-body'><b>Root Cause:</b> {row['Root Cause']}</div>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("### Repeat Denial Patterns — High Risk Accounts")
+    for account, count, reason, action in [
+        ("PT-1042", "4 denials", "Authorization not obtained before service", "Escalate to PA team. Flag account for pre-service PA verification."),
+        ("PT-2187", "3 denials", "Eligibility error — wrong payer billed", "Audit registration. Re-verify insurance at every visit."),
+        ("PT-3301", "3 denials", "Missing documentation — medical necessity", "Clinical team to complete documentation template before billing."),
+        ("PT-4455", "2 denials", "Timely filing — claims submitted after deadline", "Review submission workflow. Automate claim submission within 48 hours of service."),
+    ]:
+        st.markdown(f"<div class='info-card'><div class='info-card-title'>{account} — {count} — {reason}</div><div class='info-card-body'>{action}</div></div>", unsafe_allow_html=True)
 
 with tab3:
-    st.markdown("### Denial Prevention Checkpoints")
-    prevention = [
-        ("Embed PA Rules at Scheduling",
-         "Prior auth requirements must be identified and triggered the moment the appointment is scheduled — not after."),
-        ("Real-Time Eligibility at Two Touch Points",
-         "Verify at scheduling and again at check-in. Coverage changes between appointment creation and service date."),
-        ("Documentation Review Before Submission",
-         "Pre-bill review for medical necessity language catches documentation gaps before the claim reaches the payer."),
-        ("Denial Feedback Loop to Registration",
-         "Every denial root cause must travel back to the originating step. Registration needs to see eligibility denial data."),
-        ("Repeat Denial Escalation Protocol",
-         "Any denial type appearing more than 10 times in 30 days should trigger a workflow review — not just a rebill."),
-        ("Payer-Specific Rule Maintenance",
-         "Payer rules change. Auth requirements, covered codes, and documentation standards must be updated in workflow tools quarterly."),
-    ]
-    for title, desc in prevention:
-        st.markdown(f"""
-        <div class='info-card'>
-            <div class='info-card-title'>🛡️ {title}</div>
-            <div class='info-card-body'>{desc}</div>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("### Denial Prevention Checkpoint Plan")
+    for i, (title, desc) in enumerate([
+        ("Eligibility verified at scheduling and check-in", "Two-touch verification catches coverage changes before service."),
+        ("Authorization confirmed before procedure or service", "No auth, no service. PA must be in hand before the appointment."),
+        ("Coding reviewed against diagnosis and documentation", "CPT and ICD-10 codes must match the clinical note exactly."),
+        ("Documentation supports medical necessity", "If the chart does not justify the service, the claim will be denied."),
+        ("Claims submitted within 5 business days of service", "Timely filing windows vary by payer — 90 days is the common minimum."),
+        ("Denial root causes tracked and reported weekly", "Pattern data drives process improvement. Track every denial by root cause."),
+        ("Appeals filed within payer deadline with supporting documentation", "First-level appeals with strong documentation reverse 60-70% of denials."),
+    ], 1):
+        st.markdown(f"<div class='process-step'><div class='step-num'>{i}</div><div><div class='step-title'>{title}</div><div class='step-desc'>{desc}</div></div></div>", unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("""
-<div class='footer'>Kori Pickle · Healthcare Operations Portfolio · All data synthetic · No PHI</div>
-""", unsafe_allow_html=True)
+st.markdown("<div class='footer'><div class='footer-created'>Created by</div><div class='footer-signature'>Kori Pickle</div><div class='footer-icons'><a class='footer-icon-link' href='https://github.com/koripickle1101-TN' target='_blank'>GH</a><a class='footer-icon-link' href='https://linkedin.com' target='_blank'>in</a></div></div>", unsafe_allow_html=True)
