@@ -1,430 +1,452 @@
-"""
-Global CSS injection — Tennessee Orange branding, editorial serif aesthetic.
-"""
-
 import streamlit as st
 
-
 def inject_global_css():
-    st.markdown(
-        """
-        <style>
-        /* ── Google Fonts ── */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap');
 
-        /* ── Root Variables ── */
-        :root {
-            --tn-orange: #FF8200;
-            --tn-orange-light: #FFA040;
-            --tn-orange-dark: #CC6800;
-            --black: #111111;
-            --white: #FFFFFF;
-            --gray-50: #FAFAFA;
-            --gray-100: #F5F5F5;
-            --gray-200: #EEEEEE;
-            --gray-400: #AAAAAA;
-            --gray-600: #666666;
-            --gray-800: #333333;
-            --font-serif: 'Playfair Display', Georgia, serif;
-            --font-sans: 'Inter', system-ui, sans-serif;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
-            --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
-            --radius: 8px;
-            --radius-lg: 14px;
-        }
+    /* ── BASE ── */
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+        background-color: #FFFFFF;
+        color: #1a1a1a;
+    }
+    .stApp { background-color: #FFFFFF; }
+    .block-container {
+        padding: 2.5rem 3rem 4rem 3rem;
+        max-width: 1100px;
+    }
 
-        /* ── Base ── */
-        html, body, [class*="css"] {
-            font-family: var(--font-sans);
-            color: var(--black);
-        }
+    /* ── SIDEBAR ── */
+    section[data-testid="stSidebar"] {
+        background: #000000 !important;
+        border-right: 1px solid #1a1a1a;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #FFFFFF !important;
+    }
+    section[data-testid="stSidebar"] a {
+        color: #FF8200 !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        padding: 0.45rem 0.75rem;
+        display: block;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+    section[data-testid="stSidebar"] a:hover {
+        background: rgba(255,130,0,0.12);
+    }
+    .stSidebarNav { padding-top: 0.5rem; }
 
-        /* ── Streamlit chrome cleanup ── */
-        #MainMenu, footer, header { visibility: hidden; }
-        .block-container {
-            padding: 1.5rem 2rem 3rem 2rem;
-            max-width: 1200px;
-        }
+    /* ── HERO BANNER ── */
+    .hero-banner {
+        background: #000000;
+        border-radius: 4px;
+        padding: 4rem 3.5rem 3.5rem 3.5rem;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-banner::before {
+        content: '';
+        position: absolute;
+        top: -60px; right: -60px;
+        width: 220px; height: 220px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,130,0,0.15);
+        box-shadow: 0 0 60px rgba(255,130,0,0.08);
+    }
+    .hero-banner::after {
+        content: '';
+        position: absolute;
+        top: -30px; right: -30px;
+        width: 140px; height: 140px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,130,0,0.25);
+    }
+    .hero-eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #FF8200;
+        margin-bottom: 1.2rem;
+    }
+    .hero-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.8rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        line-height: 1.1;
+        margin-bottom: 1.2rem;
+    }
+    .hero-name span { color: #FF8200; }
+    .hero-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        max-width: 520px;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .hero-tag {
+        background: rgba(255,130,0,0.12);
+        border: 1px solid rgba(255,130,0,0.3);
+        color: #FF8200 !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.75rem;
+        border-radius: 2px;
+    }
 
-        /* ── Headings ── */
-        h1, h2, h3 {
-            font-family: var(--font-serif);
-            color: var(--black);
-            letter-spacing: -0.01em;
-        }
-        h1 { font-size: 2.4rem; font-weight: 900; }
-        h2 { font-size: 1.7rem; font-weight: 700; }
-        h3 { font-size: 1.2rem; font-weight: 600; border-bottom: 2px solid var(--tn-orange);
-             padding-bottom: 0.35rem; display: inline-block; margin-bottom: 1rem; }
+    /* ── SIGNATURE QUESTION ── */
+    .signature-question {
+        border-left: 3px solid #FF8200;
+        padding: 1.5rem 2rem;
+        margin: 2.5rem 0;
+        background: #FAFAF9;
+    }
+    .sq-label {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #FF8200;
+        margin-bottom: 0.6rem;
+    }
+    .sq-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.25rem;
+        font-style: italic;
+        color: #000000;
+        line-height: 1.5;
+    }
 
-        /* ── Sidebar ── */
-        [data-testid="stSidebar"] {
-            background: var(--black) !important;
-            border-right: 3px solid var(--tn-orange);
-        }
-        [data-testid="stSidebar"] * { color: #DDD !important; }
-        [data-testid="stSidebar"] a { color: var(--tn-orange) !important; }
-        [data-testid="stSidebar"] hr { border-color: var(--tn-orange) !important; }
-        [data-testid="stSidebarNavLink"] {
-            border-radius: var(--radius);
-            margin: 2px 0;
-            transition: background 0.15s;
-        }
-        [data-testid="stSidebarNavLink"]:hover,
-        [data-testid="stSidebarNavLink"][aria-current="page"] {
-            background: rgba(255,130,0,0.18) !important;
-            color: var(--tn-orange) !important;
-        }
+    /* ── PAGE HEADER ── */
+    .page-header {
+        padding: 3rem 0 2.5rem 0;
+        border-bottom: 1px solid #F0EDE8;
+        margin-bottom: 2.5rem;
+    }
+    .page-header-eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #FF8200;
+        margin-bottom: 0.75rem;
+    }
+    .page-header-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #000000;
+        line-height: 1.15;
+        margin-bottom: 0.75rem;
+    }
+    .page-header-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: #888888;
+        line-height: 1.7;
+    }
 
-        /* ── Hero Banner ── */
-        .hero-banner {
-            background: linear-gradient(135deg, #111 0%, #1a1a1a 50%, #1f0f00 100%);
-            border-left: 6px solid var(--tn-orange);
-            border-radius: var(--radius-lg);
-            padding: 2.8rem 3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-banner::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 35%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,130,0,0.06));
-            pointer-events: none;
-        }
-        .hero-eyebrow {
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--tn-orange);
-            margin-bottom: 0.8rem;
-        }
-        .hero-name {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--white);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-        }
-        .hero-name span { color: var(--tn-orange); }
-        .hero-subtitle {
-            font-size: 1.05rem;
-            color: #ccc;
-            margin-bottom: 1.2rem;
-            line-height: 1.6;
-            max-width: 600px;
-        }
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .hero-tag {
-            background: rgba(255,130,0,0.15);
-            border: 1px solid rgba(255,130,0,0.4);
-            color: var(--tn-orange);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 0.3rem 0.75rem;
-            border-radius: 100px;
-        }
+    /* ── ORANGE CALLOUT ── */
+    .orange-callout {
+        background: #FFF8F2;
+        border-left: 3px solid #FF8200;
+        border-radius: 0 4px 4px 0;
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.88rem;
+        color: #333333;
+        line-height: 1.7;
+    }
+    .orange-callout strong { color: #FF8200; font-weight: 600; }
 
-        /* ── Signature Question ── */
-        .signature-question {
-            background: var(--tn-orange);
-            border-radius: var(--radius-lg);
-            padding: 1.4rem 2rem;
-            text-align: center;
-            margin: 0.5rem 0 1.5rem 0;
-        }
-        .sq-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(0,0,0,0.6);
-        }
-        .sq-text {
-            display: block;
-            font-family: var(--font-serif);
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: var(--black);
-            margin-top: 0.35rem;
-            font-style: italic;
-        }
+    /* ── SECTION CARDS ── */
+    .section-card {
+        background: #FFFFFF;
+        border: 1px solid #F0EDE8;
+        border-radius: 4px;
+        padding: 2rem 1.5rem;
+        margin-bottom: 1rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+    }
+    .section-card:hover {
+        border-color: #FF8200;
+        box-shadow: 0 4px 24px rgba(255,130,0,0.08);
+    }
+    .section-card::before {
+        content: '';
+        position: absolute;
+        top: 1.5rem; right: 1.5rem;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255,130,0,0.2);
+        box-shadow: 0 0 12px rgba(255,130,0,0.08);
+    }
+    .section-card::after {
+        content: '';
+        position: absolute;
+        top: 1.85rem; right: 1.85rem;
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: rgba(255,130,0,0.15);
+    }
+    .sc-icon {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        line-height: 1;
+    }
+    .sc-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #000000;
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+    }
+    .sc-tag {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #FF8200;
+        margin-bottom: 0.75rem;
+    }
+    .sc-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        color: #777777;
+        line-height: 1.6;
+        font-weight: 300;
+    }
 
-        /* ── Metric Cards ── */
-        .metric-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            padding: 1.1rem 0.9rem;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s, transform 0.2s;
-            height: 100%;
-        }
-        .metric-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-        .metric-icon { font-size: 1.6rem; margin-bottom: 0.4rem; }
-        .metric-title {
-            font-weight: 700; font-size: 0.82rem;
-            color: var(--black); margin-bottom: 0.25rem;
-        }
-        .metric-desc { font-size: 0.7rem; color: var(--gray-600); line-height: 1.45; }
+    /* ── KPI BOXES ── */
+    .kpi-box {
+        background: #000000;
+        border-radius: 4px;
+        padding: 1.75rem 1.25rem;
+        text-align: center;
+    }
+    .kpi-value {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #FF8200;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    .kpi-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+    }
 
-        /* ── Section Cards ── */
-        .section-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 1.4rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            height: 100%;
-            transition: box-shadow 0.2s, transform 0.2s;
-            margin-bottom: 0.5rem;
-        }
-        .section-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-        }
-        .sc-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .sc-title {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--black);
-            margin-bottom: 0.2rem;
-        }
-        .sc-tag {
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--tn-orange);
-            margin-bottom: 0.55rem;
-        }
-        .sc-desc { font-size: 0.77rem; color: var(--gray-600); line-height: 1.55; }
+    /* ── INFO CARDS ── */
+    .info-card {
+        background: #FAFAF9;
+        border: 1px solid #F0EDE8;
+        border-left: 3px solid #FF8200;
+        border-radius: 0 4px 4px 0;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 0.85rem;
+    }
+    .info-card-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #000000;
+        margin-bottom: 0.4rem;
+    }
+    .info-card-body {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        color: #666666;
+        line-height: 1.65;
+        font-weight: 300;
+    }
 
-        /* ── Remote Cards ── */
-        .remote-card {
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            padding: 1.1rem;
-            text-align: center;
-            height: 100%;
-        }
+    /* ── PROCESS STEPS ── */
+    .process-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+        border-bottom: 1px dotted #E8E4DF;
+    }
+    .step-num {
+        background: #FF8200;
+        color: #FFFFFF;
+        font-family: 'Playfair Display', serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 0 0 4px rgba(255,130,0,0.15);
+    }
+    .step-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #000000;
+        margin-bottom: 0.3rem;
+    }
+    .step-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        color: #777777;
+        line-height: 1.6;
+        font-weight: 300;
+    }
 
-        /* ── Page Header ── */
-        .page-header {
-            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-            border-left: 5px solid var(--tn-orange);
-            border-radius: var(--radius-lg);
-            padding: 2rem 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-        .page-header-eyebrow {
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--tn-orange);
-            margin-bottom: 0.5rem;
-        }
-        .page-header-title {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--white);
-            margin-bottom: 0.4rem;
-        }
-        .page-header-sub {
-            font-size: 0.88rem;
-            color: #ccc;
-            line-height: 1.55;
-        }
+    /* ── BODY TEXT ── */
+    .body-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        color: #444444;
+        line-height: 1.8;
+        font-weight: 300;
+        max-width: 680px;
+    }
 
-        /* ── Info Cards ── */
-        .info-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 1.3rem 1.4rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-200);
-            margin-bottom: 0.75rem;
-        }
-        .info-card-title {
-            font-weight: 700;
-            font-size: 0.88rem;
-            color: var(--black);
-            margin-bottom: 0.3rem;
-        }
-        .info-card-body {
-            font-size: 0.78rem;
-            color: var(--gray-600);
-            line-height: 1.6;
-        }
+    /* ── SECTION HEADINGS ── */
+    h1, h2, h3 {
+        font-family: 'Playfair Display', serif !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    h2 { font-size: 1.6rem !important; margin-bottom: 1rem !important; }
+    h3 { font-size: 1.2rem !important; margin-bottom: 0.75rem !important; }
 
-        /* ── Orange Callout ── */
-        .orange-callout {
-            background: rgba(255,130,0,0.08);
-            border-left: 4px solid var(--tn-orange);
-            border-radius: 0 var(--radius) var(--radius) 0;
-            padding: 1rem 1.2rem;
-            margin: 1rem 0;
-        }
-        .orange-callout strong { color: var(--tn-orange); }
+    /* ── TABS ── */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0;
+        border-bottom: 2px solid #F0EDE8;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #999999 !important;
+        padding: 0.75rem 1.5rem !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid transparent !important;
+        margin-bottom: -2px;
+    }
+    .stTabs [aria-selected="true"] {
+        color: #FF8200 !important;
+        border-bottom: 2px solid #FF8200 !important;
+    }
+    .stTabs [data-baseweb="tab-panel"] { padding-top: 1.5rem; }
 
-        /* ── KPI Grid ── */
-        .kpi-box {
-            background: var(--black);
-            border-radius: var(--radius);
-            padding: 1.2rem;
-            text-align: center;
-        }
-        .kpi-value {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--tn-orange);
-        }
-        .kpi-label {
-            font-size: 0.72rem;
-            color: #ccc;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 0.2rem;
-        }
+    /* ── METRIC CARDS ── */
+    .metric-card {
+        background: #FFFFFF;
+        border: 1px solid #F0EDE8;
+        border-radius: 4px;
+        padding: 1rem 1.25rem;
+    }
+    .metric-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #000000;
+        margin-bottom: 0.25rem;
+    }
+    .metric-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.75rem;
+        color: #888888;
+        font-weight: 300;
+    }
 
-        /* ── Process Step ── */
-        .process-step {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-        .step-num {
-            background: var(--tn-orange);
-            color: var(--black);
-            font-weight: 900;
-            font-size: 0.85rem;
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
-        .step-body { flex: 1; }
-        .step-title { font-weight: 700; font-size: 0.85rem; color: var(--black); }
-        .step-desc { font-size: 0.76rem; color: var(--gray-600); line-height: 1.5; margin-top: 0.15rem; }
+    /* ── DIVIDER ── */
+    hr {
+        border: none;
+        border-top: 1px solid #F0EDE8;
+        margin: 2.5rem 0;
+    }
 
-        /* ── Tag Chips ── */
-        .chip {
-            display: inline-block;
-            background: var(--gray-100);
-            border: 1px solid var(--gray-200);
-            border-radius: 100px;
-            font-size: 0.68rem;
-            font-weight: 600;
-            color: var(--gray-800);
-            padding: 0.2rem 0.6rem;
-            margin: 0.15rem;
-        }
-        .chip-orange {
-            background: rgba(255,130,0,0.12);
-            border-color: rgba(255,130,0,0.4);
-            color: var(--tn-orange-dark);
-        }
+    /* ── FOOTER ── */
+    .footer {
+        text-align: center;
+        padding: 3rem 0 2rem 0;
+        border-top: 1px solid #F0EDE8;
+        margin-top: 3rem;
+    }
+    .footer-created {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #AAAAAA;
+        margin-bottom: 0.5rem;
+    }
+    .footer-signature {
+        font-family: 'Great Vibes', cursive;
+        font-size: 2.8rem;
+        color: #000000;
+        line-height: 1.2;
+        margin-bottom: 1.25rem;
+        letter-spacing: 0.02em;
+    }
+    .footer-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        margin-top: 0.5rem;
+    }
+    .footer-icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid #E0DDD8;
+        color: #555555 !important;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-icon-link:hover {
+        border-color: #FF8200;
+        color: #FF8200 !important;
+    }
 
-        /* ── Body text helper ── */
-        .body-text {
-            font-size: 0.86rem;
-            line-height: 1.75;
-            color: var(--gray-800);
-        }
-
-        /* ── Footer ── */
-        .footer {
-            border-top: 1px solid var(--gray-200);
-            padding-top: 1.2rem;
-            text-align: center;
-            font-size: 0.76rem;
-            color: var(--gray-600);
-            line-height: 2;
-        }
-
-        /* ── Streamlit widget overrides ── */
-        div[data-testid="stMetric"] {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            padding: 0.8rem 1rem;
-            box-shadow: var(--shadow-sm);
-        }
-        div[data-testid="stMetric"] label {
-            font-size: 0.7rem !important;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--gray-600) !important;
-        }
-        div[data-testid="stMetricValue"] {
-            font-family: var(--font-serif);
-            color: var(--tn-orange) !important;
-            font-weight: 700 !important;
-        }
-
-        /* ── Tab styling ── */
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 0.25rem;
-            border-bottom: 2px solid var(--gray-200);
-        }
-        .stTabs [data-baseweb="tab"] {
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.6rem 1.2rem;
-            color: var(--gray-600);
-        }
-        .stTabs [aria-selected="true"] {
-            color: var(--tn-orange) !important;
-            border-bottom-color: var(--tn-orange) !important;
-        }
-
-        /* ── Expander ── */
-        details summary {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--black);
-        }
-        details[open] summary { color: var(--tn-orange); }
-
-        /* ── Button ── */
-        .stButton > button {
-            background: var(--tn-orange) !important;
-            color: var(--black) !important;
-            border: none !important;
-            font-weight: 700 !important;
-            border-radius: var(--radius) !important;
-            letter-spacing: 0.04em;
-        }
-        .stButton > button:hover {
-            background: var(--tn-orange-dark) !important;
-            color: var(--white) !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    /* ── HIDE STREAMLIT CHROME ── */
+    #MainMenu, footer, header { visibility: hidden; }
+    .stDeployButton { display: none; }
+    </style>
+    """, unsafe_allow_html=True)
