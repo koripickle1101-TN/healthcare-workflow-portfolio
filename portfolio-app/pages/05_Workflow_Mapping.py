@@ -30,11 +30,19 @@ with tab1:
     ]
     for num, title, desc, phase, risk in steps:
         color = "#CC0000" if risk in ["5/5"] and phase in ["Front End","Back End"] else "#FF8200" if risk == "4/5" else "#228B22"
-        st.markdown(f"<div class='process-step'><div class='step-num'>{num}</div><div><div class='step-title'> in a centralized aging queue", "Untracked PAs expire or time out without staff awareness."),
-        ("Escalate to peer-to-peer within 48 hours of denial", "Peer-to-peer reversal rates are significantly higher than written appeals."),
-        ("Communicate PA status to patient before service date", "Patients should never arrive for services with unresolved PA issues."),
-    ], 1):
-        st.markdown(f"<div class='process-step'><div class='step-num'>{i}</div><div><div class='step-title'>{title}</div><div class='step-desc'>{desc}</div></div></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='process-step'><div class='step-num'>{num}</div><div><div class='step-title'>{title} <span style='color:{color};font-size:0.7rem;font-weight:700;'>· {phase} · Risk {risk}</span></div><div class='step-desc'>{desc}</div></div></div>", unsafe_allow_html=True)
+
+with tab2:
+    st.markdown("### Revenue Cycle Step Risk Scores (Synthetic Data)")
+    df = pd.DataFrame({
+        "Step": ["Scheduling","Eligibility","Prior Auth","Check-In","Documentation","Charge Capture","Claim Scrub","Submission","Payment Post","Denial Mgmt","Patient Billing"],
+        "Risk Score": [5,4,5,4,3,3,4,5,4,5,3]
+    })
+    fig = px.bar(df, x="Step", y="Risk Score", text="Risk Score", title="Revenue Cycle Step Risk Score (5 = Highest Risk)", color="Risk Score", color_continuous_scale=["#228B22","#FF8200","#CC0000"])
+    fig.update_traces(texttemplate="%{text}/5", textposition="outside")
+    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", yaxis_range=[0,6], coloraxis_showscale=False, font_family="Inter")
+    st.plotly_chart(fig, use_container_width=True)
+    st.markdown("<div class='orange-callout'><strong>Key Finding:</strong> Scheduling, Prior Authorization, Claim Submission, and Denial Management carry the highest risk scores. Three of the four are front-end steps — reinforcing that upstream prevention is the highest-leverage intervention in the revenue cycle.</div>", unsafe_allow_html=True)
 
 st.markdown("---")
 st.markdown("<div class='footer'><div class='footer-created'>Created by</div><div class='footer-signature'>Kori Pickle</div><div class='footer-icons'><a class='footer-icon-link' href='https://github.com/koripickle1101-TN' target='_blank'>GH</a><a class='footer-icon-link' href='https://linkedin.com' target='_blank'>in</a></div></div>", unsafe_allow_html=True)
