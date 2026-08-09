@@ -1,82 +1,52 @@
 import streamlit as st
 
 def inject_global_css():
-    st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap');
-
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #1a1a1a; }
-.stApp { background: #FFFFFF; }
-.block-container { padding: 2rem 2.5rem 4rem 2.5rem; max-width: 1100px; }
-#MainMenu, footer, header { visibility: hidden; }
-.stDeployButton { display: none; }
-
-section[data-testid="stSidebar"] { background: #000000 !important; }
-section[data-testid="stSidebar"] * { color: #FFFFFF !important; }
-section[data-testid="stSidebar"] a { color: #FF8200 !important; font-size: 0.82rem; font-weight: 500; text-decoration: none; display: block; padding: 0.4rem 0.75rem; border-radius: 4px; }
-section[data-testid="stSidebar"] a:hover { background: rgba(255,130,0,0.12); }
-
-h1, h2, h3 { font-family: 'Playfair Display', serif !important; color: #000000 !important; font-weight: 700 !important; }
-h2 { font-size: 1.6rem !important; }
-h3 { font-size: 1.2rem !important; }
-
-.hero-banner { background: #000000; border-radius: 4px; padding: 3.5rem; margin-bottom: 2.5rem; }
-.hero-eyebrow { font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #FF8200; margin-bottom: 1rem; }
-.hero-name { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 700; color: #FFFFFF; line-height: 1.1; margin-bottom: 1rem; }
-.hero-name span { color: #FF8200; }
-.hero-subtitle { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 1.75rem; }
-.hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.hero-tag { background: rgba(255,130,0,0.12); border: 1px solid rgba(255,130,0,0.3); color: #FF8200 !important; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 2px; }
-
-.signature-question { border-left: 3px solid #FF8200; padding: 1.5rem 2rem; margin: 2.5rem 0; background: #FAFAF9; }
-.sq-label { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #FF8200; margin-bottom: 0.5rem; }
-.sq-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: #000000; }
-
-.page-header { padding: 2.5rem 0 2rem 0; border-bottom: 1px solid #F0EDE8; margin-bottom: 2rem; }
-.page-header-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #FF8200; margin-bottom: 0.75rem; }
-.page-header-title { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: #000000; line-height: 1.15; margin-bottom: 0.6rem; }
-.page-header-sub { font-size: 0.88rem; font-weight: 300; color: #888888; line-height: 1.7; }
-
-.orange-callout { background: #FFF8F2; border-left: 3px solid #FF8200; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.88rem; color: #333333; line-height: 1.7; }
-.orange-callout strong { color: #FF8200; }
-
-.section-card { background: #FFFFFF; border: 1px solid #F0EDE8; border-radius: 4px; padding: 2rem 1.5rem; margin-bottom: 1rem; }
-.section-card:hover { border-color: #FF8200; box-shadow: 0 4px 20px rgba(255,130,0,0.08); }
-.sc-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
-.sc-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #000000; margin-bottom: 0.35rem; }
-.sc-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #FF8200; margin-bottom: 0.6rem; }
-.sc-desc { font-size: 0.8rem; color: #777777; line-height: 1.6; font-weight: 300; }
-
-.kpi-box { background: #000000; border-radius: 4px; padding: 1.75rem 1.25rem; text-align: center; }
-.kpi-value { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: #FF8200; line-height: 1; margin-bottom: 0.5rem; }
-.kpi-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-
-.info-card { background: #FAFAF9; border: 1px solid #F0EDE8; border-left: 3px solid #FF8200; border-radius: 0 4px 4px 0; padding: 1.25rem 1.5rem; margin-bottom: 0.85rem; }
-.info-card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: #000000; margin-bottom: 0.35rem; }
-.info-card-body { font-size: 0.82rem; color: #666666; line-height: 1.65; font-weight: 300; }
-
-.process-step { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px dotted #E8E4DF; }
-.step-num { background: #FF8200; color: #FFFFFF; font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 700; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.step-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: #000000; margin-bottom: 0.3rem; }
-.step-desc { font-size: 0.8rem; color: #777777; line-height: 1.6; font-weight: 300; }
-
-.body-text { font-size: 0.9rem; color: #444444; line-height: 1.8; font-weight: 300; }
-
-.stTabs [data-baseweb="tab-list"] { gap: 0; border-bottom: 2px solid #F0EDE8; }
-.stTabs [data-baseweb="tab"] { font-size: 0.75rem !important; font-weight: 600 !important; letter-spacing: 0.06em; text-transform: uppercase; color: #999999 !important; padding: 0.75rem 1.25rem !important; background: transparent !important; border: none !important; }
-.stTabs [aria-selected="true"] { color: #FF8200 !important; border-bottom: 2px solid #FF8200 !important; }
-
-.metric-card { background: #FFFFFF; border: 1px solid #F0EDE8; border-radius: 4px; padding: 1rem 1.25rem; }
-.metric-title { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: #000000; margin-bottom: 0.2rem; }
-.metric-desc { font-size: 0.75rem; color: #888888; font-weight: 300; }
-
-hr { border: none; border-top: 1px solid #F0EDE8; margin: 2.5rem 0; }
-
-.footer { text-align: center; padding: 3rem 0 2rem 0; border-top: 1px solid #F0EDE8; margin-top: 3rem; }
-.footer-created { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #AAAAAA; margin-bottom: 0.5rem; }
-.footer-signature { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #000000; line-height: 1.2; margin-bottom: 1rem; }
-.footer-icons { display: flex; justify-content: center; gap: 1rem; }
-.footer-icon-link { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #DDDDDD; color: #555555 !important; text-decoration: none; font-size: 0.8rem; font-weight: 700; }
-.footer-icon-link:hover { border-color: #FF8200; color: #FF8200 !important; }
-</style>
-""", unsafe_allow_html=True)q
+    css = (
+        "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&family=Great+Vibes&display=swap');"
+        "html,body,[class*='css']{font-family:'Inter',sans-serif;background:#FFFFFF;color:#1a1a1a;}"
+        ".stApp{background:#FFFFFF;}"
+        ".block-container{padding:2rem 2.5rem 4rem 2.5rem;max-width:1100px;}"
+        "#MainMenu,footer,header{visibility:hidden;}"
+        ".stDeployButton{display:none;}"
+        "section[data-testid='stSidebar']{background:#000000 !important;}"
+        "section[data-testid='stSidebar'] *{color:#FFFFFF !important;}"
+        "section[data-testid='stSidebar'] a{color:#FF8200 !important;font-size:0.82rem;font-weight:500;text-decoration:none;display:block;padding:0.4rem 0.75rem;border-radius:4px;}"
+        "h1,h2,h3{font-family:'Playfair Display',serif !important;color:#000000 !important;font-weight:700 !important;}"
+        ".page-header{padding:2.5rem 0 2rem 0;border-bottom:1px solid #F0EDE8;margin-bottom:2rem;}"
+        ".page-header-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF8200;margin-bottom:0.75rem;}"
+        ".page-header-title{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:#000000;line-height:1.15;margin-bottom:0.6rem;}"
+        ".page-header-sub{font-size:0.88rem;font-weight:300;color:#888888;line-height:1.7;}"
+        ".orange-callout{background:#FFF8F2;border-left:3px solid #FF8200;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:0.88rem;color:#333333;line-height:1.7;}"
+        ".orange-callout strong{color:#FF8200;}"
+        ".info-card{background:#FAFAF9;border:1px solid #F0EDE8;border-left:3px solid #FF8200;border-radius:0 4px 4px 0;padding:1.25rem 1.5rem;margin-bottom:0.85rem;}"
+        ".info-card-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;color:#000000;margin-bottom:0.35rem;}"
+        ".info-card-body{font-size:0.82rem;color:#666666;line-height:1.65;font-weight:300;}"
+        ".process-step{display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem 0;border-bottom:1px dotted #E8E4DF;}"
+        ".step-num{background:#FF8200;color:#FFFFFF;font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}"
+        ".step-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;color:#000000;margin-bottom:0.3rem;}"
+        ".step-desc{font-size:0.8rem;color:#777777;line-height:1.6;font-weight:300;}"
+        ".section-card{background:#FFFFFF;border:1px solid #F0EDE8;border-radius:4px;padding:2rem 1.5rem;margin-bottom:1rem;}"
+        ".sc-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#000000;margin-bottom:0.35rem;}"
+        ".sc-tag{font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#FF8200;margin-bottom:0.6rem;}"
+        ".sc-desc{font-size:0.8rem;color:#777777;line-height:1.6;font-weight:300;}"
+        ".kpi-box{background:#000000;border-radius:4px;padding:1.75rem 1.25rem;text-align:center;}"
+        ".kpi-value{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#FF8200;line-height:1;margin-bottom:0.5rem;}"
+        ".kpi-label{font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}"
+        ".metric-card{background:#FFFFFF;border:1px solid #F0EDE8;border-radius:4px;padding:1rem 1.25rem;}"
+        ".metric-title{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:#000000;margin-bottom:0.2rem;}"
+        ".metric-desc{font-size:0.75rem;color:#888888;font-weight:300;}"
+        ".body-text{font-size:0.9rem;color:#444444;line-height:1.8;font-weight:300;}"
+        ".stTabs [data-baseweb='tab-list']{gap:0;border-bottom:2px solid #F0EDE8;}"
+        ".stTabs [data-baseweb='tab']{font-size:0.75rem !important;font-weight:600 !important;letter-spacing:0.06em;text-transform:uppercase;color:#999999 !important;padding:0.75rem 1.25rem !important;background:transparent !important;border:none !important;}"
+        ".stTabs [aria-selected='true']{color:#FF8200 !important;border-bottom:2px solid #FF8200 !important;}"
+        "hr{border:none;border-top:1px solid #F0EDE8;margin:2.5rem 0;}"
+        ".footer{text-align:center;padding:3rem 0 2rem 0;border-top:1px solid #F0EDE8;margin-top:3rem;}"
+        ".footer-created{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#AAAAAA;margin-bottom:0.5rem;}"
+        ".footer-signature{font-family:'Great Vibes',cursive;font-size:2.8rem;color:#000000;line-height:1.2;margin-bottom:1rem;}"
+        ".footer-icons{display:flex;justify-content:center;gap:1rem;}"
+        ".footer-icon-link{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid #DDDDDD;color:#555555 !important;text-decoration:none;font-size:0.8rem;font-weight:700;}"
+        ".signature-question{border-left:3px solid #FF8200;padding:1.5rem 2rem;margin:2.5rem 0;background:#FAFAF9;}"
+        ".sq-label{display:block;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF8200;margin-bottom:0.5rem;}"
+        ".sq-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:#000000;}"
+    )
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
