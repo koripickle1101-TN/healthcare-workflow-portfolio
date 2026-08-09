@@ -1,108 +1,52 @@
-"""Patient Access & Eligibility Verification Analysis."""
-
 import streamlit as st
-import pandas as pd
-import plotly.express as px
-from components.styles import inject_global_css
-from components.header import render_sidebar_header
 
-st.set_page_config(page_title="Patient Access | Kori Pickle", page_icon="🏥", layout="wide")
-inject_global_css()
-render_sidebar_header()
-
-st.markdown("""
-<div class='page-header'>
-    <div class='page-header-eyebrow'>Section 02 · Access Operations</div>
-    <div class='page-header-title'>Patient Access & Eligibility</div>
-    <div class='page-header-sub'>
-        Insurance verification accuracy · Intake quality controls · Coverage validation gaps
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class='orange-callout'>
-    <strong>Core Problem:</strong> Incorrect or incomplete insurance data entered at registration
-    travels forward undetected — and becomes a denial weeks later. The fix happens at the front door,
-    not the billing office.
-</div>
-""", unsafe_allow_html=True)
-
-tab1, tab2, tab3 = st.tabs(["📊 Eligibility Data", "⚠️ Failure Points", "✅ Verification Checklist"])
-
-with tab1:
-    st.markdown("### Eligibility-Related Denial Breakdown")
-    data = {
-        "Root Cause": [
-            "Insurance inactive at DOS",
-            "Wrong payer on file",
-            "Coverage type mismatch",
-            "Subscriber ID error",
-            "Plan requires referral",
-            "Coordination of benefits",
-            "Other eligibility"
-        ],
-        "Denial Rate (%)": [28, 22, 18, 14, 9, 6, 3]
-    }
-    df = pd.DataFrame(data)
-    fig = px.pie(
-        df, names="Root Cause", values="Denial Rate (%)",
-        color_discrete_sequence=["#FF8200","#CC6800","#FFB366","#111111",
-                                  "#444444","#888888","#DDDDDD"],
-        title="Eligibility Denial Breakdown by Root Cause"
+def inject_global_css():
+    css = (
+        "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&family=Great+Vibes&display=swap');"
+        "html,body,[class*='css']{font-family:'Inter',sans-serif;background:#FFFFFF;color:#1a1a1a;}"
+        ".stApp{background:#FFFFFF;}"
+        ".block-container{padding:2rem 2.5rem 4rem 2.5rem;max-width:1100px;}"
+        "#MainMenu,footer,header{visibility:hidden;}"
+        ".stDeployButton{display:none;}"
+        "section[data-testid='stSidebar']{background:#000000 !important;}"
+        "section[data-testid='stSidebar'] *{color:#FFFFFF !important;}"
+        "section[data-testid='stSidebar'] a{color:#FF8200 !important;font-size:0.82rem;font-weight:500;text-decoration:none;display:block;padding:0.4rem 0.75rem;border-radius:4px;}"
+        "h1,h2,h3{font-family:'Playfair Display',serif !important;color:#000000 !important;font-weight:700 !important;}"
+        ".page-header{padding:2.5rem 0 2rem 0;border-bottom:1px solid #F0EDE8;margin-bottom:2rem;}"
+        ".page-header-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF8200;margin-bottom:0.75rem;}"
+        ".page-header-title{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:#000000;line-height:1.15;margin-bottom:0.6rem;}"
+        ".page-header-sub{font-size:0.88rem;font-weight:300;color:#888888;line-height:1.7;}"
+        ".orange-callout{background:#FFF8F2;border-left:3px solid #FF8200;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:0.88rem;color:#333333;line-height:1.7;}"
+        ".orange-callout strong{color:#FF8200;}"
+        ".info-card{background:#FAFAF9;border:1px solid #F0EDE8;border-left:3px solid #FF8200;border-radius:0 4px 4px 0;padding:1.25rem 1.5rem;margin-bottom:0.85rem;}"
+        ".info-card-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;color:#000000;margin-bottom:0.35rem;}"
+        ".info-card-body{font-size:0.82rem;color:#666666;line-height:1.65;font-weight:300;}"
+        ".process-step{display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem 0;border-bottom:1px dotted #E8E4DF;}"
+        ".step-num{background:#FF8200;color:#FFFFFF;font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}"
+        ".step-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;color:#000000;margin-bottom:0.3rem;}"
+        ".step-desc{font-size:0.8rem;color:#777777;line-height:1.6;font-weight:300;}"
+        ".section-card{background:#FFFFFF;border:1px solid #F0EDE8;border-radius:4px;padding:2rem 1.5rem;margin-bottom:1rem;}"
+        ".sc-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#000000;margin-bottom:0.35rem;}"
+        ".sc-tag{font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#FF8200;margin-bottom:0.6rem;}"
+        ".sc-desc{font-size:0.8rem;color:#777777;line-height:1.6;font-weight:300;}"
+        ".kpi-box{background:#000000;border-radius:4px;padding:1.75rem 1.25rem;text-align:center;}"
+        ".kpi-value{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#FF8200;line-height:1;margin-bottom:0.5rem;}"
+        ".kpi-label{font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}"
+        ".metric-card{background:#FFFFFF;border:1px solid #F0EDE8;border-radius:4px;padding:1rem 1.25rem;}"
+        ".metric-title{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:#000000;margin-bottom:0.2rem;}"
+        ".metric-desc{font-size:0.75rem;color:#888888;font-weight:300;}"
+        ".body-text{font-size:0.9rem;color:#444444;line-height:1.8;font-weight:300;}"
+        ".stTabs [data-baseweb='tab-list']{gap:0;border-bottom:2px solid #F0EDE8;}"
+        ".stTabs [data-baseweb='tab']{font-size:0.75rem !important;font-weight:600 !important;letter-spacing:0.06em;text-transform:uppercase;color:#999999 !important;padding:0.75rem 1.25rem !important;background:transparent !important;border:none !important;}"
+        ".stTabs [aria-selected='true']{color:#FF8200 !important;border-bottom:2px solid #FF8200 !important;}"
+        "hr{border:none;border-top:1px solid #F0EDE8;margin:2.5rem 0;}"
+        ".footer{text-align:center;padding:3rem 0 2rem 0;border-top:1px solid #F0EDE8;margin-top:3rem;}"
+        ".footer-created{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#AAAAAA;margin-bottom:0.5rem;}"
+        ".footer-signature{font-family:'Great Vibes',cursive;font-size:2.8rem;color:#000000;line-height:1.2;margin-bottom:1rem;}"
+        ".footer-icons{display:flex;justify-content:center;gap:1rem;}"
+        ".footer-icon-link{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid #DDDDDD;color:#555555 !important;text-decoration:none;font-size:0.8rem;font-weight:700;}"
+        ".signature-question{border-left:3px solid #FF8200;padding:1.5rem 2rem;margin:2.5rem 0;background:#FAFAF9;}"
+        ".sq-label{display:block;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF8200;margin-bottom:0.5rem;}"
+        ".sq-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:#000000;}"
     )
-    fig.update_layout(font_family="Inter", title_font_size=15)
-    st.plotly_chart(fig, use_container_width=True)
-
-    c1, c2, c3, c4 = st.columns(4)
-    for col, val, label in zip(
-        [c1, c2, c3, c4],
-        ["31%", "72hrs", "$42 avg", "68%"],
-        ["Of All Denials", "Avg Discovery Delay", "Cost to Rework", "Preventable at Intake"]
-    ):
-        col.metric(label, val)
-
-with tab2:
-    st.markdown("### Where Patient Access Breaks Down")
-    failures = [
-        ("Scheduling", "Insurance info collected verbally without real-time verification. Errors enter the system here."),
-        ("Pre-Registration", "Demographics and coverage not confirmed against payer database before appointment."),
-        ("Day-of-Service Check-In", "No second eligibility check. Changed coverage or lapsed policies go undetected."),
-        ("Authorization Alignment", "Services requiring PA not flagged at scheduling. Auth obtained too late or not at all."),
-        ("Referral Tracking", "Referral requirement missed because payer plan rules not embedded in workflow."),
-        ("Coordination of Benefits", "Primary vs. secondary payer order not confirmed. Claims submitted to wrong payer."),
-    ]
-    for i, (title, desc) in enumerate(failures, 1):
-        st.markdown(f"""
-        <div class='process-step'>
-            <div class='step-num'>{i}</div>
-            <div class='step-body'>
-                <div class='step-title'>{title}</div>
-                <div class='step-desc'>{desc}</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-with tab3:
-    st.markdown("### Eligibility Verification Checklist")
-    checks = [
-        ("Verify eligibility at scheduling AND day of service",
-         "One check is not enough. Coverage can lapse between scheduling and the appointment date."),
-        ("Confirm subscriber ID and group number against payer portal",
-         "Verbal collection creates transcription errors. Always confirm against source."),
-        ("Identify plan type and referral requirements",
-         "HMO, EPO, and managed Medicaid plans have referral rules that vary by payer."),
-        ("Flag coordination of benefits at registration",
-         "Ask about secondary insurance every visit. COB order changes and affects adjudication."),
-        ("Document real-time eligibility response in the account",
-         "If you verified it, document it. Undocumented verification creates dispute problems."),
-        ("Alert scheduling if authorization is required before service",
-         "PA requirements must trigger immediately at scheduling — not after the appointment."),
-    ]
-    for title, desc in checks:
-        st.markdown(f"""
-        <div class='info-card'>
-            <div class='info-card-title'>✅ {title}</div>
-            <div class='info-card-body'>{desc}</div>
-        </div>
-        ""
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
