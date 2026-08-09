@@ -1,5 +1,3 @@
-"""Revenue Cycle Management — upstream failure analysis."""
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -10,102 +8,52 @@ st.set_page_config(page_title="Revenue Cycle | Kori Pickle", page_icon="💰", l
 inject_global_css()
 render_sidebar_header()
 
-st.markdown("""
-<div class='page-header'>
-    <div class='page-header-eyebrow'>Section 01 · RCM Analysis</div>
-    <div class='page-header-title'>Revenue Cycle Management</div>
-    <div class='page-header-sub'>
-        Upstream failure mapping · Clean claim improvement · Front-end validation strategy
-    </div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<div class='page-header'><div class='page-header-eyebrow'>Section 01 · Revenue Cycle</div><div class='page-header-title'>Revenue Cycle Management</div><div class='page-header-sub'>Upstream failure mapping · Clean claim rate improvement · Front-end validation strategy</div></div>", unsafe_allow_html=True)
+st.markdown("<div class='orange-callout'><strong>Core Argument:</strong> Most revenue cycle failures do not start in billing. They start upstream — in intake, eligibility, authorization, and documentation. Fixing the front end is the highest-leverage move in the revenue cycle.</div>", unsafe_allow_html=True)
 
-st.markdown("""
-<div class='orange-callout'>
-    <strong>Core Argument:</strong> Most revenue cycle failures do not start in billing.
-    They start upstream — in intake, eligibility, authorization, and documentation.
-    Finding those upstream breaks before submission is the job.
-</div>
-""", unsafe_allow_html=True)
-
-tab1, tab2, tab3 = st.tabs(["📊 Denial Breakdown", "🗺️ Upstream Failures", "✅ Prevention Strategy"])
+tab1, tab2, tab3 = st.tabs(["Clean Claim Rate", "Denial Root Causes", "Front-End Checklist"])
 
 with tab1:
-    st.markdown("### Where Denials Come From")
-    data = {
-        "Denial Category": [
-            "Eligibility / Coverage", "Prior Authorization",
-            "Missing Documentation", "Coding Errors",
-            "Duplicate Claim", "Medical Necessity", "Other"
-        ],
-        "Percentage": [31, 24, 18, 13, 7, 5, 2],
-        "Upstream": ["Yes","Yes","Yes","Partial","No","Partial","No"]
-    }
-    df = pd.DataFrame(data)
-    fig = px.bar(
-        df, x="Denial Category", y="Percentage",
-        color="Upstream",
-        color_discrete_map={"Yes": "#FF8200", "Partial": "#FFB366", "No": "#CCCCCC"},
-        title="Denial Root Causes — Upstream vs. Downstream",
-        text="Percentage"
-    )
+    st.markdown("### Clean Claim Rate by Department (Synthetic Data)")
+    df = pd.DataFrame({
+        "Department": ["Emergency","Radiology","Surgery","Primary Care","Behavioral Health","Orthopedics"],
+        "Clean Claim Rate": [72, 81, 88, 91, 65, 85],
+        "Avg Days to Pay": [38, 29, 24, 21, 45, 27]
+    })
+    fig = px.bar(df, x="Department", y="Clean Claim Rate", text="Clean Claim Rate", color="Clean Claim Rate", color_continuous_scale=["#CC0000","#FF8200","#228B22"], title="Clean Claim Rate by Department")
     fig.update_traces(texttemplate="%{text}%", textposition="outside")
-    fig.update_layout(
-        plot_bgcolor="white", paper_bgcolor="white",
-        font_family="Inter", title_font_size=15,
-        xaxis_title="", yaxis_title="% of Denials",
-        legend_title="Upstream Origin"
-    )
+    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", yaxis_range=[0,110], coloraxis_showscale=False, font_family="Inter")
     st.plotly_chart(fig, use_container_width=True)
-
     c1, c2, c3, c4 = st.columns(4)
-    for col, val, label in zip(
-        [c1, c2, c3, c4],
-        ["73%", "31%", "$25–$118", "1–3 Days"],
-        ["Preventable Upstream", "Eligibility-Related", "Cost Per Denial", "Avg Rework Time"]
-    ):
-        col.metric(label, val)
+    c1.metric("Highest Clean Claim Rate", "91% — Primary Care")
+    c2.metric("Lowest Clean Claim Rate", "65% — Behavioral Health")
+    c3.metric("Avg Days to Pay (Best)", "21 days")
+    c4.metric("Avg Days to Pay (Worst)", "45 days")
 
 with tab2:
-    st.markdown("### Revenue Cycle Failure Points")
-    steps = [
-        ("Patient Scheduling", "Missing insurance info, incorrect demographics captured at first contact."),
-        ("Eligibility Verification", "Coverage not verified in real time. Inactive or wrong plan moves forward."),
-        ("Prior Authorization", "Auth not obtained or expired before service. Retroactive requests often denied."),
-        ("Clinical Documentation", "Incomplete notes create medical necessity gaps that payers flag."),
-        ("Charge Capture", "Services rendered but not captured. Revenue lost before billing starts."),
-        ("Claim Submission", "Coding errors, missing modifiers, wrong payer ID delay adjudication."),
-        ("Denial Management", "Reactive follow-up instead of root cause prevention. Cycle repeats."),
-    ]
-    for i, (title, desc) in enumerate(steps, 1):
-        st.markdown(f"""
-        <div class='process-step'>
-            <div class='step-num'>{i}</div>
-            <div class='step-body'>
-                <div class='step-title'>{title}</div>
-                <div class='step-desc'>{desc}</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("### Denial Root Cause Distribution (Synthetic Data)")
+    causes = ["Missing Authorization","Eligibility Error","Duplicate Claim","Coding Error","Missing Documentation","Timely Filing","Other"]
+    volumes = [28, 22, 8, 19, 14, 6, 3]
+    df2 = pd.DataFrame({"Root Cause": causes, "Denial Volume": volumes})
+    fig2 = px.bar(df2, x="Root Cause", y="Denial Volume", text="Denial Volume", title="Denial Volume by Root Cause", color_discrete_sequence=["#FF8200"])
+    fig2.update_traces(textposition="outside")
+    fig2.update_layout(plot_bgcolor="white", paper_bgcolor="white", yaxis_range=[0,35], font_family="Inter")
+    st.plotly_chart(fig2, use_container_width=True)
+    st.markdown("<div class='orange-callout'><strong>Key Finding:</strong> Missing authorization (28%) and eligibility errors (22%) account for 50% of all denials — both are preventable at the front end before the claim is ever submitted.</div>", unsafe_allow_html=True)
 
 with tab3:
-    st.markdown("### Denial Prevention Checkpoints")
-    strategies = [
-        ("Real-Time Eligibility Verification", "Verify coverage at scheduling AND day of service. Flag mismatches before the patient arrives."),
-        ("Authorization Tracking Board", "Track PA status, expiration dates, and payer timelines. Never let an auth age out unnoticed."),
-        ("Documentation Completeness Check", "Pre-bill review for medical necessity language, diagnosis specificity, and payer-required fields."),
-        ("Clean Claim Rate Monitoring", "Track first-pass acceptance rate by payer, provider, and service type. Identify patterns, not just incidents."),
-        ("Feedback Loop to Front End", "Denials should travel back upstream. If eligibility causes 31 percent of denials, registration needs to know."),
-    ]
-    for title, desc in strategies:
-        st.markdown(f"""
-        <div class='info-card'>
-            <div class='info-card-title'>✅ {title}</div>
-            <div class='info-card-body'>{desc}</div>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("### Front-End Revenue Cycle Checklist")
+    for i, (title, desc) in enumerate([
+        ("Real-time eligibility verified at scheduling AND check-in", "Two-touch verification prevents coverage change denials."),
+        ("Authorization obtained before service is rendered", "PA confirmed and documented in the chart before appointment."),
+        ("Referral collected for HMO and EPO plan types", "Missing referrals are a top denial cause for managed care plans."),
+        ("Patient demographics verified against insurance card", "Name, DOB, and member ID mismatches cause rejections."),
+        ("COB order confirmed for patients with multiple insurances", "Primary and secondary payer sequence documented at registration."),
+        ("Estimated patient responsibility calculated and communicated", "Upfront financial counseling reduces bad debt and surprises."),
+        ("Copay and deductible collected at point of service", "POS collection is the single best bad debt prevention strategy."),
+        ("Clinical documentation supports medical necessity", "Diagnosis codes must support the ordered service before submission."),
+    ], 1):
+        st.markdown(f"<div class='process-step'><div class='step-num'>{i}</div><div><div class='step-title'>{title}</div><div class='step-desc'>{desc}</div></div></div>", unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("""
-<div class='footer'>Kori Pickle · Healthcare Operations Portfolio · All data synthetic · No PHI</div>
-""", unsafe_allow_html=True)
+st.markdown("<div class='footer'><div class='footer-created'>Created by</div><div class='footer-signature'>Kori Pickle</div><div class='footer-icons'><a class='footer-icon-link' href='https://github.com/koripickle1101-TN' target='_blank'>GH</a><a class='footer-icon-link' href='https://linkedin.com' target='_blank'>in</a></div></div>", unsafe_allow_html=True)
