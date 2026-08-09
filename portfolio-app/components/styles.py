@@ -48,5 +48,12 @@ def inject_global_css():
         ".signature-question{border-left:3px solid #FF8200;padding:1.5rem 2rem;margin:2.5rem 0;background:#FAFAF9;}"
         ".sq-label{display:block;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF8200;margin-bottom:0.5rem;}"
         ".sq-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:#000000;}"
+        ".hero-banner{background:#000000;border-radius:4px;padding:3.5rem;margin-bottom:2.5rem;}"
+        ".hero-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF8200;margin-bottom:1rem;}"
+        ".hero-name{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:#FFFFFF;line-height:1.1;margin-bottom:1rem;}"
+        ".hero-name span{color:#FF8200;}"
+        ".hero-subtitle{font-size:0.88rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:1.75rem;}"
+        ".hero-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}"
+        ".hero-tag{background:rgba(255,130,0,0.12);border:1px solid rgba(255,130,0,0.3);color:#FF8200 !important;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2px;}"
     )
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
