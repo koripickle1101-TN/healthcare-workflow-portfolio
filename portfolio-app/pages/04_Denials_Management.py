@@ -23,14 +23,9 @@ with tab1:
         "Documentation": [9,6,4,5,8,2]
     })
     df_melt = df.melt(id_vars="Payer", var_name="Denial Type", value_name="Volume")
-    color_map = {
-        "Authorization": "#FF8200",
-        "Eligibility": "#E86B00",
-        "Coding": "#C45500",
-        "Documentation": "#FF9A33"
-    }
+    color_map = {"Authorization": "#FF8200", "Eligibility": "#E86B00", "Coding": "#C45500", "Documentation": "#FF9A33"}
     fig = px.bar(df_melt, x="Payer", y="Volume", color="Denial Type", barmode="stack", title="Denial Volume by Payer and Type", color_discrete_map=color_map)
-    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", font_family="Inter", legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1))
+    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", font_family="Inter")
     st.plotly_chart(fig, use_container_width=True)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Top Denial Payer", "United Healthcare")
@@ -44,7 +39,7 @@ with tab2:
         ("PT-1042","4 denials","Authorization not obtained before service","Escalate to PA team. Flag account for pre-service PA verification."),
         ("PT-2187","3 denials","Eligibility error — wrong payer billed","Audit registration. Re-verify insurance at every visit."),
         ("PT-3301","3 denials","Missing documentation — medical necessity","Clinical team to complete documentation template before billing."),
-        ("PT-4455","2 denials","Timely filing — claims submitted after deadline","Review submission workflow. Automate claim submission within 48 hours of service."),
+        ("PT-4455","2 denials","Timely filing — claims submitted after deadline","Review submission workflow. Automate claim submission within 48 hours."),
     ]:
         st.markdown(f"<div class='info-card'><div class='info-card-title'>{account} — {count} — {reason}</div><div class='info-card-body'>{action}</div></div>", unsafe_allow_html=True)
 
