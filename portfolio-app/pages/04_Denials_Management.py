@@ -23,35 +23,41 @@ with tab1:
         "Documentation": [9,6,4,5,8,2]
     })
     df_melt = df.melt(id_vars="Payer", var_name="Denial Type", value_name="Volume")
-    fig = px.bar(df_melt, x="Payer", y="Volume", color="Denial Type", barmode="stack", title="Denial Volume by Payer and Type", color_discrete_sequence=["#FF8200","#CC6600","#994C00","#663300"])
-    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", font_family="Inter")
+    color_map = {
+        "Authorization": "#FF8200",
+        "Eligibility": "#E86B00",
+        "Coding": "#C45500",
+        "Documentation": "#FF9A33"
+    }
+    fig = px.bar(df_melt, x="Payer", y="Volume", color="Denial Type", barmode="stack", title="Denial Volume by Payer and Type", color_discrete_map=color_map)
+    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white", font_family="Inter", legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1))
     st.plotly_chart(fig, use_container_width=True)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Top Denial Payer", "United Healthcare")
-    c2.metric("Top Denial Type", "Authorization — 60 cases")
+    c2.metric("Top Denial Type", "Authorization — 60")
     c3.metric("Eligibility Denials", "54 cases")
     c4.metric("Preventable Denials", "73%")
 
 with tab2:
     st.markdown("### Repeat Denial Patterns — High Risk Accounts")
     for account, count, reason, action in [
-        ("PT-1042", "4 denials", "Authorization not obtained before service", "Escalate to PA team. Flag account for pre-service PA verification."),
-        ("PT-2187", "3 denials", "Eligibility error — wrong payer billed", "Audit registration. Re-verify insurance at every visit."),
-        ("PT-3301", "3 denials", "Missing documentation — medical necessity", "Clinical team to complete documentation template before billing."),
-        ("PT-4455", "2 denials", "Timely filing — claims submitted after deadline", "Review submission workflow. Automate claim submission within 48 hours of service."),
+        ("PT-1042","4 denials","Authorization not obtained before service","Escalate to PA team. Flag account for pre-service PA verification."),
+        ("PT-2187","3 denials","Eligibility error — wrong payer billed","Audit registration. Re-verify insurance at every visit."),
+        ("PT-3301","3 denials","Missing documentation — medical necessity","Clinical team to complete documentation template before billing."),
+        ("PT-4455","2 denials","Timely filing — claims submitted after deadline","Review submission workflow. Automate claim submission within 48 hours of service."),
     ]:
         st.markdown(f"<div class='info-card'><div class='info-card-title'>{account} — {count} — {reason}</div><div class='info-card-body'>{action}</div></div>", unsafe_allow_html=True)
 
 with tab3:
     st.markdown("### Denial Prevention Checkpoint Plan")
     for i, (title, desc) in enumerate([
-        ("Eligibility verified at scheduling and check-in", "Two-touch verification catches coverage changes before service."),
-        ("Authorization confirmed before procedure or service", "No auth, no service. PA must be in hand before the appointment."),
-        ("Coding reviewed against diagnosis and documentation", "CPT and ICD-10 codes must match the clinical note exactly."),
-        ("Documentation supports medical necessity", "If the chart does not justify the service, the claim will be denied."),
-        ("Claims submitted within 5 business days of service", "Timely filing windows vary by payer — 90 days is the common minimum."),
-        ("Denial root causes tracked and reported weekly", "Pattern data drives process improvement. Track every denial by root cause."),
-        ("Appeals filed within payer deadline with supporting documentation", "First-level appeals with strong documentation reverse 60-70% of denials."),
+        ("Eligibility verified at scheduling and check-in","Two-touch verification catches coverage changes before service."),
+        ("Authorization confirmed before procedure or service","No auth, no service. PA must be in hand before the appointment."),
+        ("Coding reviewed against diagnosis and documentation","CPT and ICD-10 codes must match the clinical note exactly."),
+        ("Documentation supports medical necessity","If the chart does not justify the service, the claim will be denied."),
+        ("Claims submitted within 5 business days of service","Timely filing windows vary by payer — 90 days is the common minimum."),
+        ("Denial root causes tracked and reported weekly","Pattern data drives process improvement. Track every denial by root cause."),
+        ("Appeals filed within payer deadline with supporting documentation","First-level appeals with strong documentation reverse 60-70% of denials."),
     ], 1):
         st.markdown(f"<div class='process-step'><div class='step-num'>{i}</div><div><div class='step-title'>{title}</div><div class='step-desc'>{desc}</div></div></div>", unsafe_allow_html=True)
 
