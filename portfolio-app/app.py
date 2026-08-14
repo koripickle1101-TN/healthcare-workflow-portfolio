@@ -16,7 +16,7 @@ st.markdown("<div class='hero-banner'><div class='hero-eyebrow'>Healthcare Opera
 st.markdown("<div class='signature-question'><span class='sq-label'>Portfolio Signature Question</span><div class='sq-text'>Where does the workflow break — and how do we stop it before it becomes a denial?</div></div>", unsafe_allow_html=True)
 
 st.markdown("## About This Portfolio")
-st.markdown("<div class='body-text'>This portfolio demonstrates practical healthcare operations expertise across revenue cycle management, prior authorization, patient access, denial prevention, and workflow integrity. Every section contains real analysis, synthetic data tools, and documented thinking — not placeholder content.<br/><br/><b>The core argument:</b> Most revenue cycle failures do not start in billing. They start upstream — in intake, eligibility, authorization, and documentation. This portfolio is built around finding those upstream breaks before they cost the organization money.</div>", unsafe_allow_html=True)
+st.markdown("<div class='body-text'>This portfolio demonstrates applied healthcare operations knowledge through student-developed analysis of revenue cycle management, prior authorization, patient access, denial prevention, workflow integrity, and responsible AI.<br/><br/>All projects use synthetic or fictional no-PHI data and do not represent professional healthcare employment experience.<br/><br/><b>The core argument:</b> Most revenue cycle failures do not start in billing. They start upstream — in intake, eligibility, authorization, and documentation. This portfolio is built around finding those upstream breaks before they cost the organization money.</div>", unsafe_allow_html=True)
 
 st.markdown("<br/>", unsafe_allow_html=True)
 k1, k2, k3, k4 = st.columns(4)
