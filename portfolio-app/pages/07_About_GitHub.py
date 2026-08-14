@@ -38,12 +38,12 @@ with col1:
     st.markdown("---")
     st.markdown("## What This Portfolio Demonstrates")
     items = [
-        ("Revenue Cycle Thinking", "Understanding of end-to-end RCM — from scheduling to payment — and where upstream failures create downstream costs."),
-        ("Prior Authorization Operations", "Tracking, aging, payer friction analysis, and workflow design for PA management."),
-        ("Patient Access & Eligibility", "Real-time verification requirements, intake quality controls, and COB handling."),
-        ("Denial Prevention Strategy", "Root cause analysis, repeat denial pattern identification, and feedback loop design."),
-        ("Workflow Mapping", "Process visualization, failure point identification, and risk scoring across the revenue cycle."),
-        ("Responsible AI Application", "Practical AI use cases in healthcare ops with clear human oversight boundaries and governance documentation."),
+        ("Revenue Cycle Thinking", "Applied understanding of end-to-end revenue cycle workflows, including how upstream intake, eligibility, authorization, and documentation issues can create downstream administrative risk."),
+        ("Prior Authorization Operations", "Student-developed analysis of prior authorization tracking, aging, payer-friction scenarios, escalation logic, and workflow failure points."),
+        ("Patient Access & Eligibility", "Simulated analysis of eligibility verification requirements, intake quality controls, registration accuracy, and coordination-of-benefits concepts."),
+        ("Denial Prevention Strategy", "Student-developed root-cause analysis of repeat denial patterns, upstream failure points, and preventive workflow controls."),
+        ("Workflow Mapping", "End-to-end mapping of simulated revenue cycle workflows to identify failure points, handoff gaps, and administrative risk."),
+        ("Responsible AI Application", "Educational analysis of healthcare AI use cases with human-review boundaries, privacy considerations, and governance documentation."),
         ("Data Tools Without PHI", "All analysis uses synthetic data. No real patient information. Full HIPAA compliance awareness."),
     ]
     for title, desc in items:
