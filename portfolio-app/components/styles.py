@@ -6,7 +6,7 @@ def inject_global_css():
         "html,body,[class*='css']{font-family:'Inter',sans-serif;background:#FFFFFF;color:#1a1a1a;}"
         ".stApp{background:#FFFFFF;}"
         ".block-container{padding:2rem 2.5rem 4rem 2.5rem;max-width:1100px;}"
-        "#MainMenu,footer,header{visibility:hidden;}"
+        "#MainMenu,footer{visibility:hidden;}"
         ".stDeployButton{display:none;}"
         "section[data-testid='stSidebar']{background:#000000 !important;}"
         "section[data-testid='stSidebar'] *{color:#FFFFFF !important;}"
@@ -55,5 +55,6 @@ def inject_global_css():
         ".hero-subtitle{font-size:0.88rem;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:1.75rem;}"
         ".hero-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}"
         ".hero-tag{background:rgba(255,130,0,0.12);border:1px solid rgba(255,130,0,0.3);color:#FF8200 !important;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2px;}"
+        "@media (max-width: 768px){.hero-banner{padding:1.4rem;}.hero-name{font-size:2rem;}.block-container{padding:1rem 1rem 3rem 1rem;}.kpi-value{font-size:1.6rem;}}"
     )
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
