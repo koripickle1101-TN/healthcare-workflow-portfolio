@@ -38,6 +38,30 @@ This portfolio is built around analyzing where workflows break, why errors move 
 
 The focus is shifting from reactive denial management to proactive denial prevention.
 
+### Upstream Requirement Intelligence
+
+When a workflow is driven by an external requirement, I trace that requirement to the first operational consequence: the workflow, role, system, queue, documentation step, control, or metric that had to change.
+
+External Requirement
+↓
+Operational Requirement
+↓
+Workflow
+↓
+Control Point
+↓
+Exception / Failure
+↓
+Patient • Staff • Revenue Impact
+↓
+Measure
+↓
+Analyze
+↓
+Adjust
+
+This framework is used only when evidence supports the connection. A project does not label an issue as regulatory, payer-driven, contractual, or policy-driven unless the relevant source establishes that requirement.
+
 ## LinkedIn Brand System and Portfolio Proof Machine
 
 This repository also supports a repeatable LinkedIn authority system for healthcare operations, RCM, risk management, patient safety, and workflow integrity analysis.
