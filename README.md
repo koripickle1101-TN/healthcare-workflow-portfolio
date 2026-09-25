@@ -411,3 +411,12 @@ Brand system documentation
 This portfolio is designed to support entry-level and early-career opportunities in remote healthcare operations, revenue cycle management, prior authorization, patient access, denial prevention, health informatics, and healthcare workflow analysis.
 
 Created by Kori Pickle
+
+
+## Connected Revenue-Cycle Operating Architecture
+
+The Healthcare Operations Intelligence Engine™ now treats EVIS, PARCS, DPIS, and SBI as connected student training controls rather than isolated portfolio pages.
+
+**Patient / service intake → EVIS eligibility + benefit readiness → READY / HOLD / ROUTE / ESCALATE → PARCS authorization requirement + execution → READY / HOLD / ROUTE / ESCALATE → claim-readiness boundary → DPIS claim readiness + denial prevention → claim submission → payer processing / adjudication → remittance / payment / denial / adjustment signal → DPIS signal classification + root-cause routing → SBI backward breakpoint investigation → first supported loss of control → correct / route / escalate → verify closure → measure → analyze → adjust.**
+
+Operational boundary: the portfolio practices evidence review, workflow routing, ownership, escalation, closure verification, and recurrence analysis. It does not select CPT/HCPCS/ICD-10 codes or modifiers, determine medical necessity or coverage, interpret contracts authoritatively, calculate real patient liability, or make payer adjudication or reimbursement decisions.
