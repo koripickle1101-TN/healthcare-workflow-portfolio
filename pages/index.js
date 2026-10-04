@@ -18,7 +18,7 @@ const caseStudies = [
     focus: 'Insurance verification, payer validation, eligibility risk',
     problem: 'Incorrect or incomplete coverage information can create avoidable denials, rework, delays, and patient billing confusion.',
     outcome: 'Defines verification controls and eligibility status logic for cleaner claim readiness.',
-    href: '#',
+    href: '/case-studies/eligibility-insurance-verification-analysis',
   },
   {
     title: 'Denial Root Cause Analysis Framework',
