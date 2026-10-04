@@ -50,7 +50,7 @@ return <main style={{fontFamily:'Arial, Helvetica, sans-serif',background:brand.
       <h1 style={{fontFamily:'Georgia, Times New Roman, serif',fontSize:'clamp(46px,8vw,86px)',lineHeight:.96,margin:'14px 0 22px',maxWidth:1000}}>Payment Posting Control Gate + Exception-Origin Matrix</h1>
       <p style={{fontSize:'clamp(20px,3vw,28px)',fontWeight:800,lineHeight:1.35,maxWidth:850}}>A downstream revenue-cycle control case study built around one question: where did the workflow first lose control?</p>
       <div style={{display:'flex',flexWrap:'wrap',gap:10,marginTop:26}}>
-        {['Student-developed','Simulated','No PHI','Bachelor's Degree in Healthcare Administration Candidate'].map(x=><span key={x} style={{border:`1px solid ${brand.black}`,padding:'9px 12px',fontSize:12,fontWeight:900,textTransform:'uppercase',letterSpacing:'.06em'}}>{x}</span>)}
+        {['Student-developed','Simulated','No PHI','Healthcare Administration Candidate'].map(x=><span key={x} style={{border:`1px solid ${brand.black}`,padding:'9px 12px',fontSize:12,fontWeight:900,textTransform:'uppercase',letterSpacing:'.06em'}}>{x}</span>)}
       </div>
     </div>
   </header>
@@ -100,22 +100,31 @@ return <main style={{fontFamily:'Arial, Helvetica, sans-serif',background:brand.
 
   <section style={{padding:'64px 22px'}}>
     <div style={{maxWidth:1120,margin:'0 auto'}}><p style={kicker}>Failure-Point Reasoning</p><h2 style={sectionTitle}>Exception-Origin Matrix</h2>
-      <div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse',minWidth:700}}>
+      <style>{`
+        .origin-mobile{display:none}
+        @media(max-width:700px){.origin-desktop{display:none}.origin-mobile{display:grid;gap:14px}}
+      `}</style>
+      <div className="origin-desktop"><table style={{width:'100%',borderCollapse:'collapse'}}>
         <thead><tr>{['Downstream signal','Possible origin','Operational question'].map(h=><th key={h} style={{background:brand.black,color:brand.white,padding:13,textAlign:'left',border:`1px solid ${brand.black}`}}>{h}</th>)}</tr></thead>
         <tbody>{origins.map(r=><tr key={r[0]}>{r.map(x=><td key={x} style={{padding:13,border:`1px solid ${brand.black}`,verticalAlign:'top',lineHeight:1.45}}>{x}</td>)}</tr>)}</tbody>
       </table></div>
+      <div className="origin-mobile">{origins.map(r=><article key={r[0]} style={{border:`1px solid ${brand.black}`,padding:18}}>
+        <p style={{...kicker,margin:'0 0 5px'}}>Downstream Signal</p><p style={{fontWeight:900,lineHeight:1.45,margin:'0 0 15px'}}>{r[0]}</p>
+        <p style={{...kicker,margin:'0 0 5px'}}>Possible Origin</p><p style={{lineHeight:1.45,margin:'0 0 15px'}}>{r[1]}</p>
+        <p style={{...kicker,margin:'0 0 5px'}}>Operational Question</p><p style={{lineHeight:1.55,margin:0}}>{r[2]}</p>
+      </article>)}</div>
     </div>
   </section>
 
   <section style={{padding:'58px 22px',borderTop:`1px solid ${brand.black}`}}>
     <div style={{maxWidth:1120,margin:'0 auto'}}><p style={kicker}>Measurement Layer</p><h2 style={sectionTitle}>Simulated Educational KPIs</h2>
-      <p style={body}>These measures demonstrate how a workflow analyst might think about visibility and control. They are simulated educational measures—not employer performance results.</p>
+      <p style={body}>These simulated educational measures demonstrate how workflow performance, exceptions, reconciliation, and resolution could be evaluated within this student-developed control model. They are learning measures, not employer performance results.</p>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:12,marginTop:24}}>{kpis.map(k=><div key={k[0]} style={{border:`1px solid ${brand.black}`,padding:18}}><strong>{k[0]}</strong><p style={{lineHeight:1.5}}>{k[1]}</p></div>)}</div>
     </div>
   </section>
 
   <section style={{background:brand.black,color:brand.white,padding:'62px 22px'}}>
-    <div style={{maxWidth:1120,margin:'0 auto'}}><p style={kicker}>Skills Demonstrated</p><h2 style={{...sectionTitle,color:brand.white}}>What This Project Proves</h2>
+    <div style={{maxWidth:1120,margin:'0 auto'}}><p style={kicker}>Skills Demonstrated</p><h2 style={{...sectionTitle,color:brand.white}}>What This Project Demonstrates</h2>
       <div style={{display:'flex',flexWrap:'wrap',gap:10}}>{['Workflow Mapping','RCM Literacy','Exception Management','Root-Cause Reasoning','Control Design','Reconciliation Awareness','Handoff Awareness','Patient-Impact Awareness'].map(x=><span key={x} style={{border:`1px solid ${brand.orange}`,color:brand.orange,padding:'11px 14px',fontWeight:900}}>{x}</span>)}</div>
     </div>
   </section>
@@ -124,7 +133,7 @@ return <main style={{fontFamily:'Arial, Helvetica, sans-serif',background:brand.
     <div style={{maxWidth:1120,margin:'0 auto'}}><p style={kicker}>Key Takeaway</p><h2 style={sectionTitle}>The Visible Problem May Be Downstream of the Actual Breakdown.</h2>
       <p style={body}>This case study demonstrates how a student can use payment-posting outcomes to practice connected-process thinking: identify the signal, avoid assuming the detection point is the root cause, classify the exception, trace possible upstream origins, assign the next action, and verify closure.</p>
       <div style={{borderLeft:`5px solid ${brand.orange}`,padding:'6px 0 6px 20px',marginTop:30,maxWidth:850}}>
-        <strong>Integrity boundary</strong><p style={{lineHeight:1.65}}>Created by Kori Pickle, Bachelor's Degree in Healthcare Administration Candidate, University of Phoenix. This project is educational, simulated, and does not use PHI, employer data, payer data, claims data, or real patient information. It does not claim professional payment-posting experience, coding authority, reimbursement authority, payer-contract interpretation, live EHR access, or real patient-account work.</p>
+        <strong>Integrity boundary</strong><p style={{lineHeight:1.65}}>Created by Kori Pickle, Bachelor's Degree in Healthcare Administration Candidate, University of Phoenix. This student-developed project is educational, simulated, and uses no PHI, employer data, payer data, claims data, or real patient information. It demonstrates applied healthcare operations learning and does not represent professional payment-posting experience, coding authority, reimbursement authority, payer-contract interpretation, live EHR access, or work with real patient accounts.</p>
       </div>
       <a href="/" style={{display:'inline-block',marginTop:28,background:brand.orange,color:brand.white,textDecoration:'none',padding:'14px 20px',fontWeight:900}}>← Return to Portfolio</a>
     </div>
