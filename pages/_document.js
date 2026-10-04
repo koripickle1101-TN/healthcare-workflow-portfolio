@@ -5,7 +5,7 @@ export default function Document() {
     <Html>
       <Head>
         <title>Healthcare Operations Intelligence Engine™ | Kori Pickle</title>
-        <meta name="description" content="Student-developed, simulated, no-PHI healthcare operations portfolio by Kori Pickle, BSHA Candidate, focused on patient access, workflow intelligence, denial prevention, documentation quality, revenue-cycle readiness, and responsible AI." />
+        <meta name="description" content="Student-developed, simulated, no-PHI healthcare operations portfolio by Kori Pickle, Bachelor's Degree in Healthcare Administration Candidate, focused on patient access, workflow intelligence, denial prevention, documentation quality, revenue-cycle readiness, and responsible AI." />
         <meta name="author" content="Kori Pickle" />
         <meta property="article:author" content="Kori Pickle" />
         <meta property="article:published_time" content="2026-05-01T00:00:00-04:00" />
