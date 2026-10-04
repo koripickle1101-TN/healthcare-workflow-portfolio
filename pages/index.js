@@ -57,7 +57,7 @@ export default function Home() {
             Where healthcare workflows break before patients, staff, and revenue feel the impact.
           </p>
           <p style={{ marginTop: 22, maxWidth: 780, fontSize: 18, lineHeight: 1.75, color: brand.black }}>
-            I am a BSHA Candidate building an honest patient-to-professional healthcare operations foundation through student-developed, simulated, no-PHI portfolio projects. I study where workflow control is lost across patient access, eligibility, authorization, documentation, revenue-cycle readiness, denial prevention, and downstream exception handling.
+            I am a Bachelor's Degree in Healthcare Administration Candidate building an honest patient-to-professional healthcare operations foundation through student-developed, simulated, no-PHI portfolio projects. I study where workflow control is lost across patient access, eligibility, authorization, documentation, revenue-cycle readiness, denial prevention, and downstream exception handling.
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 34 }}>
@@ -129,7 +129,7 @@ export default function Home() {
             Building toward entry-level opportunities in patient access, revenue-cycle support, healthcare operations, documentation workflow, health informatics, quality improvement, and implementation support.
           </h2>
           <p style={{ color: brand.black, fontSize: 18, lineHeight: 1.7 }}>
-            Created by Kori Pickle, BSHA Candidate, University of Phoenix. Student-developed, simulated, no-PHI healthcare operations portfolio work.
+            Created by Kori Pickle, Bachelor's Degree in Healthcare Administration Candidate, University of Phoenix. Student-developed, simulated, no-PHI healthcare operations portfolio work.
           </p>
         </div>
       </section>
