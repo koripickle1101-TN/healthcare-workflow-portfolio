@@ -50,7 +50,7 @@ return <main style={{fontFamily:'Arial, Helvetica, sans-serif',background:brand.
       <h1 style={{fontFamily:'Georgia, Times New Roman, serif',fontSize:'clamp(46px,8vw,86px)',lineHeight:.96,margin:'14px 0 22px',maxWidth:1000}}>Payment Posting Control Gate + Exception-Origin Matrix</h1>
       <p style={{fontSize:'clamp(20px,3vw,28px)',fontWeight:800,lineHeight:1.35,maxWidth:850}}>A downstream revenue-cycle control case study built around one question: where did the workflow first lose control?</p>
       <div style={{display:'flex',flexWrap:'wrap',gap:10,marginTop:26}}>
-        {['Student-developed','Simulated','No PHI','BSHA Candidate'].map(x=><span key={x} style={{border:`1px solid ${brand.black}`,padding:'9px 12px',fontSize:12,fontWeight:900,textTransform:'uppercase',letterSpacing:'.06em'}}>{x}</span>)}
+        {['Student-developed','Simulated','No PHI','Bachelor's Degree in Healthcare Administration Candidate'].map(x=><span key={x} style={{border:`1px solid ${brand.black}`,padding:'9px 12px',fontSize:12,fontWeight:900,textTransform:'uppercase',letterSpacing:'.06em'}}>{x}</span>)}
       </div>
     </div>
   </header>
@@ -124,7 +124,7 @@ return <main style={{fontFamily:'Arial, Helvetica, sans-serif',background:brand.
     <div style={{maxWidth:1120,margin:'0 auto'}}><p style={kicker}>Key Takeaway</p><h2 style={sectionTitle}>The Visible Problem May Be Downstream of the Actual Breakdown.</h2>
       <p style={body}>This case study demonstrates how a student can use payment-posting outcomes to practice connected-process thinking: identify the signal, avoid assuming the detection point is the root cause, classify the exception, trace possible upstream origins, assign the next action, and verify closure.</p>
       <div style={{borderLeft:`5px solid ${brand.orange}`,padding:'6px 0 6px 20px',marginTop:30,maxWidth:850}}>
-        <strong>Integrity boundary</strong><p style={{lineHeight:1.65}}>Created by Kori Pickle, BSHA Candidate, University of Phoenix. This project is educational, simulated, and does not use PHI, employer data, payer data, claims data, or real patient information. It does not claim professional payment-posting experience, coding authority, reimbursement authority, payer-contract interpretation, live EHR access, or real patient-account work.</p>
+        <strong>Integrity boundary</strong><p style={{lineHeight:1.65}}>Created by Kori Pickle, Bachelor's Degree in Healthcare Administration Candidate, University of Phoenix. This project is educational, simulated, and does not use PHI, employer data, payer data, claims data, or real patient information. It does not claim professional payment-posting experience, coding authority, reimbursement authority, payer-contract interpretation, live EHR access, or real patient-account work.</p>
       </div>
       <a href="/" style={{display:'inline-block',marginTop:28,background:brand.orange,color:brand.white,textDecoration:'none',padding:'14px 20px',fontWeight:900}}>← Return to Portfolio</a>
     </div>
