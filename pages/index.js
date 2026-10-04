@@ -25,7 +25,7 @@ const caseStudies = [
     focus: 'Denial categories, pattern recognition, workflow feedback loops',
     problem: 'Denials are often treated as one-off billing issues instead of repeatable system signals.',
     outcome: 'Connects denial categories to workflow stages and prevention opportunities.',
-    href: '#',
+    href: '/case-studies/denial-root-cause-analysis-framework',
   },
   {
     title: 'Payment Posting Control Gate + Exception-Origin Matrix',
