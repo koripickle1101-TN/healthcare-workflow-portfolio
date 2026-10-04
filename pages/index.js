@@ -11,7 +11,7 @@ const caseStudies = [
     focus: 'Patient access, claim readiness, workflow validation',
     problem: 'Revenue cycle failures often appear at denial, but many root causes begin upstream in intake, eligibility, authorization, and documentation.',
     outcome: 'Maps risk points and proposes validation checkpoints before claim submission.',
-    href: '#',
+    href: '/case-studies/revenue-cycle-workflow-breakdown',
   },
   {
     title: 'Eligibility & Insurance Verification Analysis',
