@@ -258,7 +258,34 @@ Goal
 
 Identify root causes and prevent repeat denial conditions.
 
-### 5. AI Assisted Revenue Cycle Workflow System
+### 5. Payment Posting Control Gate + Exception-Origin Matrix
+
+Problem
+
+A payment-posting exception may be the point where a problem becomes visible, not the point where it began.
+
+Focus
+
+ERA/EOB review  
+Downstream exception detection  
+Upstream root-cause tracing  
+Exception ownership and routing  
+Unapplied cash and credit-balance review  
+Reconciliation and quality controls
+
+Goal
+
+Show how downstream payment signals can be traced back to earlier workflow breakdowns and routed through a simulated control gate for ownership, resolution, validation, and closure.
+
+GitHub file
+
+case-studies/payment-posting-control-gate.md
+
+Career value
+
+Demonstrates workflow mapping, RCM literacy, exception management, root-cause reasoning, control design, reconciliation awareness, and patient-impact thinking.
+
+### 6. AI Assisted Revenue Cycle Workflow System
 
 Problem
 
@@ -285,7 +312,7 @@ GitHub file
 
 https://github.com/koripickle1101-TN/healthcare-workflow-portfolio/blob/main/docs/ai-assisted-rcm-workflow-system.html
 
-### 6. Risk Management Near-Miss Reporting Workflow
+### 7. Risk Management Near-Miss Reporting Workflow
 
 Problem
 
