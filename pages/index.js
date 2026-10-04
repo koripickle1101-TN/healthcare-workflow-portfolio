@@ -11,28 +11,32 @@ const caseStudies = [
     focus: 'Patient access, claim readiness, workflow validation',
     problem: 'Revenue cycle failures often appear at denial, but many root causes begin upstream in intake, eligibility, authorization, and documentation.',
     outcome: 'Maps risk points and proposes validation checkpoints before claim submission.',
+    href: '#',
   },
   {
     title: 'Eligibility & Insurance Verification Analysis',
     focus: 'Insurance verification, payer validation, eligibility risk',
     problem: 'Incorrect or incomplete coverage information can create avoidable denials, rework, delays, and patient billing confusion.',
     outcome: 'Defines verification controls and eligibility status logic for cleaner claim readiness.',
+    href: '#',
   },
   {
     title: 'Denial Root Cause Analysis Framework',
     focus: 'Denial categories, pattern recognition, workflow feedback loops',
     problem: 'Denials are often treated as one-off billing issues instead of repeatable system signals.',
     outcome: 'Connects denial categories to workflow stages and prevention opportunities.',
+    href: '#',
   },
   {
     title: 'Payment Posting Control Gate + Exception-Origin Matrix',
     focus: 'ERA/EOB review, exception routing, reconciliation, downstream control',
     problem: 'A payment-posting exception may be where a problem becomes visible even when the workflow first lost control upstream in eligibility, authorization, documentation, claim submission, or payer processing.',
     outcome: 'Uses a simulated control gate to classify downstream signals, trace possible failure origins, assign ownership, document action, validate resolution, and close the workflow.',
+    href: '/case-studies/payment-posting-control-gate',
   },
 ];
 
-const skills = ['Revenue Cycle Management', 'Insurance Verification', 'Claims Analysis', 'Denial Prevention', 'Workflow Analysis', 'Healthcare Operations', 'Health Informatics', 'Data Validation'];
+const skills = ['Revenue Cycle Management', 'Insurance Verification', 'Claims Workflow Analysis', 'Denial Prevention', 'Workflow Mapping', 'Exception Management', 'Revenue-Cycle Readiness', 'Healthcare Operations', 'Health Informatics', 'Data Validation'];
 
 export default function Home() {
   return (
@@ -41,7 +45,7 @@ export default function Home() {
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 18, marginBottom: 54 }}>
             <div style={{ height: 2, width: 180, background: brand.orange }} />
-            <div style={{ color: brand.orange, fontWeight: 900, letterSpacing: '0.18em', fontSize: 18 }}>RCM PORTFOLIO</div>
+            <div style={{ color: brand.orange, fontWeight: 900, letterSpacing: '0.18em', fontSize: 18 }}>HEALTHCARE OPERATIONS PORTFOLIO</div>
             <div style={{ height: 2, width: 180, background: brand.orange }} />
           </div>
 
@@ -70,7 +74,9 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18 }}>
             {['Patient Intake', 'Eligibility Verification', 'Authorization Gaps', 'Claim Readiness', 'Denial Root Cause', 'Workflow Feedback'].map((item) => (
               <div key={item} style={{ background: brand.white, border: `1px solid ${brand.line}`, borderRadius: 0, padding: 24 }}>
-                <div style={{ width: 46, height: 46, borderRadius: '50%', border: `2px solid ${brand.orange}`, boxShadow: '0 0 18px rgba(255,130,0,0.16)', marginBottom: 16 }} />
+                <div style={{ width: 52, height: 52, borderRadius: '50%', border: `1px solid ${brand.black}`, display: 'grid', placeItems: 'center', marginBottom: 16 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: '50%', border: `2px solid ${brand.orange}` }} />
+                </div>
                 <h3 style={{ margin: 0, fontSize: 19 }}>{item}</h3>
               </div>
             ))}
@@ -93,6 +99,11 @@ export default function Home() {
                 <p style={{ fontWeight: 900, color: brand.black }}>{study.focus}</p>
                 <p><strong>Problem:</strong> {study.problem}</p>
                 <p><strong>Approach:</strong> {study.outcome}</p>
+                {study.href !== '#' ? (
+                  <a href={study.href} style={{ display: 'inline-block', marginTop: 12, background: brand.black, color: brand.white, borderBottom: `3px solid ${brand.orange}`, textDecoration: 'none', padding: '12px 16px', fontWeight: 900, letterSpacing: '0.04em' }}>Open Case Study →</a>
+                ) : (
+                  <span style={{ display: 'inline-block', marginTop: 12, border: `1px solid ${brand.black}`, padding: '10px 14px', fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Evidence page in development</span>
+                )}
               </article>
             ))}
           </div>
@@ -115,9 +126,9 @@ export default function Home() {
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <p style={{ color: brand.orange, fontWeight: 900, letterSpacing: '0.22em', textTransform: 'uppercase', fontSize: 13 }}>Professional Direction</p>
           <h2 style={{ fontFamily: 'Georgia, Times New Roman, serif', fontSize: 'clamp(34px, 5vw, 56px)', margin: '10px 0 18px' }}>
-            Open to remote RCM, claims, patient access, and health informatics pathways.
+            Building toward entry-level opportunities in patient access, revenue-cycle support, healthcare operations, documentation workflow, health informatics, quality improvement, and implementation support.
           </h2>
-          <p style={{ color: '#333', fontSize: 18, lineHeight: 1.7 }}>
+          <p style={{ color: brand.black, fontSize: 18, lineHeight: 1.7 }}>
             Created by Kori Pickle, BSHA Candidate, University of Phoenix. Student-developed, simulated, no-PHI healthcare operations portfolio work.
           </p>
         </div>
