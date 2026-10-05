@@ -164,6 +164,49 @@ These targets are educational only and are not based on employer, payer, claim, 
 | Aging A/R | Problems discovered late | Trace root cause earlier and escalate unresolved accounts sooner |
 | Repeat denial patterns | Same failure recurs | Feed downstream findings back to upstream controls |
 
+
+---
+
+## Measurement Layer: KPIs as Workflow Signals
+
+Revenue-cycle metrics are most useful here as **signals that tell the analyst where to investigate**, not as proof of a root cause by themselves.
+
+| KPI / Signal | What It Can Reveal | Root-Cause Question |
+|---|---|---|
+| Clean-claim performance | Whether claims are moving forward without avoidable correction | Which upstream control is allowing incomplete or inaccurate information to reach submission? |
+| Denial rate / denial pattern | Where payment problems are recurring | Are repeated denials tracing back to eligibility, authorization, documentation, submission, or payer processing? |
+| Days in A/R / aging distribution | How long balances remain unresolved | At what earlier handoff did ownership, status, evidence, or escalation break down? |
+| Reimbursement trend | Whether payment outcomes are changing over time | Is the change tied to workflow quality, payer processing, unresolved denials, or another factor that requires investigation? |
+| Prior-authorization outcomes | Whether authorization requests are being approved, denied, delayed, or returned for more information | Was the requirement identified early, was documentation complete, and was the request escalated when necessary? |
+
+**Control principle:** A KPI identifies a signal. Root-cause analysis determines where the workflow first lost control.
+
+### EOB and Denial Information as Downstream Evidence
+
+An Explanation of Benefits (EOB) can help a patient understand how a health plan processed a claim, including charges, plan payment, and potential patient responsibility. It is not itself a bill.
+
+For workflow analysis, payment, adjustment, denial, and reason information should be treated as **downstream evidence** that can trigger investigation. A denial should not automatically be treated as the originating failure point. The analysis traces the issue backward through the relevant handoffs until the first failed control is identified.
+
+This preserves the distinction between:
+
+- **Signal:** what became visible downstream
+- **Root cause:** where the workflow first lost control
+- **Corrective action:** what resolves the current issue
+- **Preventive control:** what reduces recurrence upstream
+
+### 2026–2027 Operational Relevance
+
+Prior authorization is becoming more measurable and more digital. CMS requirements for impacted payers include specific denial reasons and public reporting of prior-authorization metrics beginning in 2026, while certain standards-based Prior Authorization API requirements begin in 2027. For this simulated project, that makes **status, reason, documentation, ownership, turnaround, and escalation** especially relevant workflow-control concepts.
+
+This project does not claim hands-on payer, billing, coding, EHR, API, or prior-authorization experience. It demonstrates student-level analysis of how those operational signals can be organized into a workflow-control framework.
+
+### Authoritative Reference Points
+
+- Centers for Medicare & Medicaid Services. *How to read a health insurance explanation of benefits.* https://www.cms.gov/initiatives/your-patient-rights/medical-bill-rights/get-help/medical-bill-guides-resources/how-read-health-insurance-explanation-benefits
+- Centers for Medicare & Medicaid Services. *CMS Interoperability and Prior Authorization Final Rule (CMS-0057-F).* https://www.cms.gov/initiatives/burden-reduction/overview/interoperability/policies-regulations/cms-interoperability-prior-authorization-final-rule-cms-0057-f
+- Centers for Medicare & Medicaid Services. *Improving Prior Authorization Processes.* https://www.cms.gov/initiatives/burden-reduction/overview/interoperability/frequently-asked-questions/prior-authorization-api/improving-prior-authorization-processes
+- Centers for Medicare & Medicaid Services. *Electronic Prior Authorization.* https://www.cms.gov/priorities/electronic-prior-authorization/overview
+
 ---
 
 ## Analyst Takeaway
