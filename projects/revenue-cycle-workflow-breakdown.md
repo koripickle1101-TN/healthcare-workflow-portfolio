@@ -134,6 +134,51 @@ from
 
 That difference is critical for root-cause analysis, ownership, corrective action, and prevention.
 
+
+---
+
+## Denial Signal → Upstream Control Matrix
+
+Denial information is treated here as a **diagnostic signal**, not as proof that the failure began in billing. The purpose of this matrix is to connect a downstream outcome to the earliest workflow control that should be investigated.
+
+| Downstream Signal | First Control Area to Investigate | Control Question | Appropriate Operational Response |
+|---|---|---|---|
+| Coverage / eligibility issue | Insurance capture + eligibility verification | Was coverage valid for the date of service, and was the correct plan verified? | Recheck source data and coverage evidence; correct routing/data when appropriate |
+| Prior-authorization issue | Scheduling + authorization review | Was authorization required, obtained, documented, and still valid for the service? | Verify requirement/status and route unresolved issues to the appropriate owner |
+| Patient / insurance data mismatch | Registration + insurance capture | Were demographics, subscriber/member identifiers, payer, and plan information validated? | Correct source data before allowing the error to continue downstream |
+| Duplicate-claim signal | Claim status + submission control | Was an earlier claim already accepted, pending, or adjudicated? | Check claim status before any resubmission |
+| Timely-filing signal | Claim submission + work-queue monitoring | When was the claim ready, submitted, rejected, corrected, and resubmitted relative to the applicable payer deadline? | Track payer-specific filing limits and unresolved submission exceptions; do not assume one universal filing window |
+| Missing / incomplete information | Documentation + claim-readiness control | What required information was absent, and where should completeness have been verified? | Route to the correct owner, complete the missing information, and strengthen the pre-submission checkpoint |
+| Coordination-of-benefits issue | Insurance capture + payer-order validation | Was other coverage identified and was payer order established correctly? | Validate primary/secondary coverage and update payer routing as appropriate |
+| Coding / modifier / bundling signal | Coding / claim-edit workflow | Does the issue require coding review rather than an administrative correction? | Route to qualified coding/billing personnel; this portfolio does not simulate coding authority |
+| Medical-necessity signal | Documentation / coverage-policy workflow | What payer or coverage requirement generated the outcome, and what documentation or review is required? | Route for qualified clinical/coding/payer-policy review rather than making a student-level determination |
+
+### Remittance-Code Guardrail
+
+A remittance adjustment should not be interpreted from a number alone. The workflow should consider the **Claim Adjustment Group Code (CAGC), Claim Adjustment Reason Code (CARC), any applicable Remittance Advice Remark Code (RARC), payer context, and the underlying claim/account history** before assigning root cause.
+
+Examples used only for educational recognition:
+
+- **CARC 18** — duplicate claim/service signal.
+- **CARC 27** — expenses incurred after coverage terminated; this is more precise than labeling every eligibility problem simply “CO-27.”
+- **CARC 29** — filing time limit expired.
+- **CARC 197** — precertification/authorization/notification/pre-treatment absent.
+- **CARC 97** — payment included in the allowance for another service/procedure.
+
+The **CO** prefix is a Claim Adjustment Group Code meaning Contractual Obligation; it is not part of the CARC number itself. Group-code use depends on the adjudication context.
+
+### Control-Gate Lesson
+
+The useful question is not:
+
+> “Which denial code do I memorize?”
+
+It is:
+
+> **“What downstream signal appeared, what evidence explains it, which upstream control should have caught the issue, who owns the next action, and where did the workflow first lose control?”**
+
+This keeps denial analysis connected to patient access, authorization, documentation quality, claim readiness, payer processing, A/R, and prevention without implying coding, billing, clinical, or payer authority.
+
 ---
 
 ## Proposed Workflow Controls
