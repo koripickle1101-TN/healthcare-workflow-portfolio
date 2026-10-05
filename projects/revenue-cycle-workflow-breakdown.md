@@ -355,6 +355,58 @@ This section is educational and simulated. It does not claim MIPS submission, CP
 - Centers for Medicare & Medicaid Services, Quality Payment Program. *Collect & Submit Data.* https://qpp.cms.gov/get-started/what-is-mips/data-collection-and-submission
 - Centers for Medicare & Medicaid Services, Quality Payment Program. *Explore Measures & Activities — 2026.* https://qpp.cms.gov/reporting-requirements/measures-activities/explore?py=2026
 
+
+---
+
+## Code-Set Versioning as a Data-Governance Control
+
+ICD knowledge adds the most value to this portfolio when treated as a **version-control and data-governance problem**, not as a claim of coding expertise.
+
+In current U.S. workflows, **ICD-10-CM** is used to classify diagnoses across healthcare settings, while **ICD-10-PCS** is used for inpatient hospital procedure coding. CMS and NCHS publish effective-date-specific releases; therefore, a healthcare system should not treat a stored code value as complete context by itself.
+
+A stronger information model preserves:
+
+```text
+Clinical documentation
+   ↓
+Applicable coding system identified
+   ↓
+Correct code-set version / effective date identified
+   ↓
+Authorized coding workflow assigns or validates code
+   ↓
+Code + system + version context stored
+   ↓
+Data transmitted / reused downstream
+   ↓
+Analytics, reporting, claims, or interoperability use validated
+```
+
+### Version-Control Questions
+
+| Control Point | Failure Risk | Operational Question |
+|---|---|---|
+| Code-system identity | Same-looking data is interpreted under the wrong classification | Which coding system does this value belong to? |
+| Version / effective date | A code is validated against the wrong release | Which code-set release was effective for the relevant encounter or discharge date? |
+| Documentation-to-code handoff | Source documentation does not support reliable downstream classification | Is the documentation complete enough for the qualified coding workflow to act? |
+| Data storage | Code is retained without sufficient provenance | Are system, version/effective-date context, and source history preserved? |
+| Mapping / conversion | Legacy-to-current mapping is treated as automatically equivalent | Has the mapping been validated for its intended operational or analytic use? |
+| Downstream reuse | Claims, analytics, reporting, or interfaces consume stale/misclassified data | Does the receiving workflow know which code system/version it received? |
+
+### 2026–2027 U.S. Relevance
+
+CMS lists FY 2027 ICD-10-CM and ICD-10-PCS updates effective October 1, 2026. ICD-10-CM remains the U.S. diagnosis classification used for healthcare encounters, and ICD-10-PCS remains the U.S. inpatient procedure coding system. ICD-11 is the WHO's latest global revision and has been in effect internationally since 2022, but countries transition on their own timelines. **ICD-11 should therefore not be treated as the current U.S. replacement for ICD-10-CM/PCS in this portfolio.**
+
+**Portfolio insight:** A healthcare code is not merely a value. For reliable downstream use, the workflow also needs to know the **coding system, applicable version/effective date, provenance, and intended use**. That is a data-integrity and interoperability control.
+
+This section is educational and simulated. It demonstrates healthcare data-governance and workflow reasoning; it does **not** claim diagnosis/procedure code assignment, coding certification, reimbursement determination, EHR configuration, or clinical authority.
+
+### Reference Points
+
+- Centers for Medicare & Medicaid Services. *ICD-10.* https://www.cms.gov/medicare/coding-billing/icd-10-codes
+- Centers for Disease Control and Prevention, National Center for Health Statistics. *ICD-10-CM.* https://www.cdc.gov/nchs/icd/icd-10-cm/
+- World Health Organization. *ICD-11 Implementation.* https://www.who.int/standards/classifications/frequently-asked-questions/icd-11-implementation
+
 ---
 
 ## Analyst Takeaway
