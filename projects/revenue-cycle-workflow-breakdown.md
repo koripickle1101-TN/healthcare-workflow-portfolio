@@ -179,6 +179,57 @@ It is:
 
 This keeps denial analysis connected to patient access, authorization, documentation quality, claim readiness, payer processing, A/R, and prevention without implying coding, billing, clinical, or payer authority.
 
+
+---
+
+## Payment Posting as a Reconciliation Control Gate
+
+Payment posting is not treated here as simple data entry. It is a downstream **reconciliation and exception-detection control** connecting payer adjudication, payment, account balances, patient responsibility, denials, and A/R follow-up.
+
+For an electronic workflow, the operational chain can be viewed as:
+
+```text
+Claim adjudicated
+   ↓
+ERA / remittance information received
+   ↓
+EFT or other payment received
+   ↓
+Payment and adjustment details associated with the correct claim/account
+   ↓
+ERA-to-payment reconciliation
+   ↓
+Exceptions identified
+   ↓
+Correct balance / responsibility established
+   ↓
+Denial, underpayment, credit, or unresolved balance routed for follow-up
+```
+
+CMS explains that an Electronic Remittance Advice (ERA) reports final claim adjudication and payment information, including adjustment reasons and values. Medicare ERAs use the X12 835 format. The associated EFT carries the funds; matching the EFT to the correct ERA is called **reassociation**.
+
+### Payment-Posting Control Questions
+
+| Control Point | Failure Signal | Operational Question |
+|---|---|---|
+| Remittance receipt | ERA/remittance cannot be matched or interpreted | Do we have the adjudication detail needed to explain the payment? |
+| Payment association | EFT/check does not align with expected remittance | Has the payment been associated with the correct ERA and account activity? |
+| Adjustment review | Posted balance changes without a clear reason | Do the applicable Group Code, CARC, RARC, and remittance details explain the adjustment? |
+| Responsibility assignment | Patient/provider responsibility appears inconsistent | Does the remittance support how the remaining balance was classified? |
+| Exception detection | Denial, reduced payment, credit, or unapplied amount remains unresolved | Who owns the exception and what evidence is needed next? |
+| Reconciliation | Posted totals do not align with payment/remittance evidence | Where did the workflow first lose control: adjudication interpretation, payment association, posting, or follow-up? |
+
+### Portfolio Insight
+
+**Payment posting is both a financial-recording step and a control point.** A posting workflow can expose downstream signals—such as an adjustment, denial, unmatched payment, or unresolved balance—that require investigation before the account can move cleanly into the next stage.
+
+This student-developed analysis focuses on workflow logic, reconciliation, information quality, and exception routing. It does **not** claim professional payment-posting experience, payer-contract interpretation, coding authority, EHR/practice-management-system access, or responsibility for determining patient balances.
+
+### Reference Points
+
+- Centers for Medicare & Medicaid Services. *Health Care Payment and Remittance Advice.* https://www.cms.gov/medicare/coding-billing/electronic-billing/health-care-payment-remittance-advice
+- Centers for Medicare & Medicaid Services. *Health Care Payment and Remittance Advice and Electronic Funds Transfer.* https://www.cms.gov/priorities/key-initiatives/burden-reduction/administrative-simplification/transactions/health-care-payment-remittance-advice-electronic-funds-transfer
+
 ---
 
 ## Proposed Workflow Controls
