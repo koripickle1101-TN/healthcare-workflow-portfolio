@@ -252,6 +252,58 @@ This project does not claim hands-on payer, billing, coding, EHR, API, or prior-
 - Centers for Medicare & Medicaid Services. *Improving Prior Authorization Processes.* https://www.cms.gov/initiatives/burden-reduction/overview/interoperability/frequently-asked-questions/prior-authorization-api/improving-prior-authorization-processes
 - Centers for Medicare & Medicaid Services. *Electronic Prior Authorization.* https://www.cms.gov/priorities/electronic-prior-authorization/overview
 
+
+---
+
+## Quality Reporting as a Data-Integrity Workflow
+
+Quality reporting adds a different operational lens to the revenue cycle: **some claim-associated data may support performance measurement even when the data element itself is not a separately reimbursed service.**
+
+CPT Category II codes are supplemental tracking codes used for performance measurement. Their use is optional and they are not a substitute for Category I codes. Depending on the applicable MIPS measure and collection type, quality data may be collected and submitted through several mechanisms; Medicare Part B claims are only one possible collection type.
+
+For workflow analysis, the important issue is not memorizing individual quality codes. It is protecting the integrity of the reporting chain:
+
+```text
+Measure requirement identified
+   ↓
+Eligible encounter / population recognized
+   ↓
+Required clinical or process data documented
+   ↓
+Correct measure-specific data captured
+   ↓
+Data transmitted through the applicable reporting method
+   ↓
+Submission / completeness validated
+   ↓
+Performance result reviewed
+   ↓
+Workflow gap investigated and corrected
+```
+
+### Quality-Reporting Control Gates
+
+| Control Gate | Failure Signal | Operational Question |
+|---|---|---|
+| Measure identification | Wrong or outdated requirement used | Which performance year, measure specification, and collection type apply? |
+| Documentation | Required measure element is absent or incomplete | Was the underlying activity/result documented at the appropriate point in the workflow? |
+| Data capture | Documentation exists but structured reporting data is missing | Did the workflow reliably convert documentation into the required reportable data? |
+| Transmission | Captured data does not reach the reporting destination | Did the selected claims, registry, EHR, or other reporting pathway transmit the data correctly? |
+| Validation | Submission appears complete but required cases/data are missing | Was data completeness and submission status checked before the reporting deadline? |
+| Feedback | Performance result is reviewed without workflow follow-through | Where did the reporting workflow first lose control, and what upstream control needs improvement? |
+
+**Portfolio insight:** A `$0.00` or non-payable tracking element can still carry operational value when it supports an applicable quality-measure workflow. Financial value and information value are not the same thing.
+
+This section is educational and simulated. It does not claim MIPS submission, CPT/HCPCS coding, EHR configuration, clinical quality reporting, Medicare billing, or compliance authority.
+
+### Reference Points
+
+- American Medical Association. *Criteria for CPT Category II codes.* https://www.ama-assn.org/practice-management/cpt/criteria-cpt-category-ii-codes
+- American Medical Association. *Category II codes.* https://www.ama-assn.org/practice-management/cpt/category-ii-codes
+- Centers for Medicare & Medicaid Services, Quality Payment Program. *Traditional MIPS.* https://qpp.cms.gov/reporting-requirements/ways-to-report/traditional-mips
+- Centers for Medicare & Medicaid Services, Quality Payment Program. *Collect & Submit Data.* https://qpp.cms.gov/get-started/what-is-mips/data-collection-and-submission
+- Centers for Medicare & Medicaid Services, Quality Payment Program. *Explore Measures & Activities — 2026.* https://qpp.cms.gov/reporting-requirements/measures-activities/explore?py=2026
+
 ---
 
 ## Analyst Takeaway
