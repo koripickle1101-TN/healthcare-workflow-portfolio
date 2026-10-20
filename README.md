@@ -1,5 +1,12 @@
 # Healthcare Revenue Cycle Workflow Portfolio
 
+## Consistent Visual Identity
+
+All current flagship project websites (EVIS, PARCS, DPIS, SBI, Habit Audit, and the Portfolio Hub) use the canonical Healthcare Operations Intelligence Engine™ visual standards: **#FFFFFF white**, **#000000 black**, and **#FF8200 Tennessee Orange** for restrained accents. Editorial serif headings, modern sans-serif content, airy structured layouts, orange dotted workflow connections, and double-ring node styling are the design direction. The creator footer uses **Created by Kori Pickle**, a cursive display signature, and minimal LinkedIn/GitHub links.
+
+See [the canonical brand specification](design-system/brand-rules.md). Individual legacy supporting pages may need separate template-level updates; changes to one project's landing page do not automatically restyle every nested HTML or Streamlit page. GitHub README rendering itself uses GitHub's typography.
+
+
 RCM Workflow Analysis
 Denial Prevention
 Claims Accuracy
