@@ -6,14 +6,14 @@ Created by Kori Pickle
 
 This brand system is designed for healthcare operations, revenue cycle management, workflow integrity, risk management, patient safety analysis, and portfolio-backed LinkedIn authority building.
 
-The visual identity should feel premium, executive, editorial, feminine, clean, strategic, and credible.
+The visual identity should feel premium, professional, editorial, feminine, clean, structured, and credible, without implying executive employment experience.
 
 ## Primary Brand Colors
 
 Background: Pure White #FFFFFF
 Accent Color: Tennessee Orange #FF8200
-Font Color: Black #111111
-Secondary Text: Deep Gray #333333
+Font Color: True Black #000000
+Secondary Text: True Black #000000; use warm gray only for subtle structural surfaces when needed
 Structure Color: Warm Gray #E8E2DC
 Soft Neutral: Champagne Gray #F6EDE7
 
@@ -123,3 +123,16 @@ It should not look like a class assignment.
 It should not look like generic Canva healthcare content.
 
 It should look like a polished executive strategy asset.
+## Canonical Brand Tokens — October 2026
+
+- Primary canvas: #FFFFFF (white)
+- Primary text and outlines: #000000 (true black)
+- Signature accent: #FF8200 (Tennessee Orange; thin dividers, dotted paths, rings, restrained highlights)
+- Optional warm gray structural neutral: #F7F5F2 (background surfaces only; never replace the three brand colors)
+- Headlines: editorial serif (Newsreader, Georgia, or equivalent)
+- Supporting text: clean sans serif (Inter or equivalent)
+- Signature: elegant cursive display (Great Vibes or equivalent), slightly right-slanted; textual signature, not a claim of a literal handwritten autograph
+
+**Footer hierarchy:** "Created by Kori Pickle" → flowing cursive "Kori Pickle" → small LinkedIn/GitHub icon links. On every HTML presentation, keep all links keyboard accessible, clearly labeled, and visibly legible. Avoid proprietary font file redistribution.
+
+**Scope:** This applies to every newly authored or revised portfolio website, interactive project, chart, spreadsheet visual, downloadable case-study document, and social graphic; Markdown README files use GitHub's default typography and cannot be forced to use custom fonts through repository stylesheets. Archived repositories may retain legacy visual systems unless reopened.
