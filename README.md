@@ -312,6 +312,16 @@ GitHub file
 
 https://github.com/koripickle1101-TN/healthcare-workflow-portfolio/blob/main/docs/ai-assisted-rcm-workflow-system.html
 
+### 8. Implementation Safety Stop/Go Decision Framework
+
+**Distinct contribution:** Extends near-miss signal detection into an implementation decision workflow: when worsening safety indicators warrant review, escalation, temporary pause, corrective action, and documented authorization to resume.
+
+**Student deliverable:** A simulated, no-PHI decision matrix, responsibility map, issue-tracking field specification, and illustrative KPI definitions. Includes a companion patient-harm accountability scenario without presenting legal or clinical recommendations as authoritative.
+
+**GitHub case study:** [Implementation Safety Stop/Go Decision Framework](case-studies/implementation-safety-stop-go-framework.md)
+
+**Career value:** Entry-level implementation coordination, quality improvement support, escalation documentation, control design, and corrective-action tracking.
+
 ### 7. Risk Management Near-Miss Reporting Workflow
 
 Problem
