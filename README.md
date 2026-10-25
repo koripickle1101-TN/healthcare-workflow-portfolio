@@ -16,7 +16,7 @@ Healthcare Operations
 
 This portfolio showcases practical work and learning in healthcare revenue cycle management with a focus on identifying and improving workflow breakdowns that lead to claim denials, rework, delays, and revenue loss.
 
-The goal is to demonstrate real world understanding of how administrative workflows impact financial performance and patient access outcomes.
+The goal is to demonstrate educational understanding of how administrative workflows impact financial performance and patient access outcomes.
 
 ## Core Focus Areas
 
@@ -152,7 +152,7 @@ A no-PHI interactive healthcare operations command center that uses synthetic da
 
 Why This Project Belongs in the Portfolio
 
-This is one of the strongest interactive healthcare operations artifacts in the portfolio because it demonstrates more than interest in healthcare operations. It shows practical workflow thinking, command center logic, executive communication, and responsible data governance.
+This is a student-developed interactive prototype; its public deployment and all controls require separate live verification. It shows practical workflow thinking, command center logic, executive communication, and responsible data governance.
 
 It demonstrates:
 
@@ -174,7 +174,7 @@ The Leadership Brief Generator, Daily Huddle Script, and Portfolio Report Builde
 
 Remote-ready proof of work
 
-The tool gives recruiters and healthcare professionals something interactive to click, test, and understand quickly.
+The source demonstrates an interactive prototype; public deployment and runtime behavior must be verified independently.
 
 Core Features
 
@@ -313,7 +313,7 @@ Show how AI can support pattern recognition, workflow summaries, denial categori
 
 Project link
 
-https://koripickle1101-tn.github.io/healthcare-workflow-portfolio/ai-assisted-rcm-workflow-system.html
+https://github.com/koripickle1101-TN/healthcare-workflow-portfolio/blob/main/docs/ai-assisted-rcm-workflow-system.html
 
 GitHub file
 
@@ -353,6 +353,8 @@ GitHub file
 case-studies/risk-management-near-miss-reporting.md
 
 ## Repository Structure
+
+The paths below are an illustrative planning outline, not a verified file manifest. For actual files use the repository's GitHub file browser.
 
 content/
 linkedin-posts/
