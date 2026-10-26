@@ -1,0 +1,55 @@
+name: Portfolio prototype runtime validation
+on:
+  push:
+    paths:
+      - 'pages/**'
+      - 'portfolio-app/**'
+      - 'responsible-ai-healthcare-study-tool/**'
+      - 'synthetic-healthcare-operations-command-center/**'
+      - '.github/workflows/portfolio-prototype-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  nextjs-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+  streamlit-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install 'streamlit>=1.35,<2' 'pandas>=2,<3' 'numpy>=1.26,<3' 'plotly>=5.18,<7'
+      - name: Execute Streamlit applications
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+          import os
+          paths=[
+            'responsible-ai-healthcare-study-tool/app.py',
+            'synthetic-healthcare-operations-command-center/app.py',
+            'portfolio-app/app.py'
+          ]
+          for path in paths:
+            cwd=os.getcwd()
+            try:
+              if path.startswith('portfolio-app/'):
+                os.chdir('portfolio-app')
+                path='app.py'
+              at=AppTest.from_file(path, default_timeout=30).run()
+              errors=[str(e.message) for e in at.exception]
+              assert not errors, f'{path}: {errors}'
+              print('PASS Streamlit AppTest',path,'widgets',len(at.get('button')))
+            finally:
+              os.chdir(cwd)
+          PY
