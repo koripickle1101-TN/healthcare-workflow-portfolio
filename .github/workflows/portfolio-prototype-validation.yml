@@ -49,7 +49,17 @@ jobs:
               at=AppTest.from_file(path, default_timeout=30).run()
               errors=[str(e.message) for e in at.exception]
               assert not errors, f'{path}: {errors}'
-              print('PASS Streamlit AppTest',path,'widgets',len(at.get('button')))
+              assert len(at.markdown)+len(at.title)+len(at.subheader)>0, f'{path}: no rendered content'
+              if at.radio:
+                w=at.radio[0]
+                if len(w.options)>1:
+                  at=w.set_value(w.options[-1]).run()
+                  assert not list(at.exception), f'{path}: radio interaction failed'
+              if at.slider:
+                w=at.slider[0]
+                at=w.set_value(w.value).run()
+                assert not list(at.exception), f'{path}: slider interaction failed'
+              print('PASS Streamlit rendered content and controls',path,'markdown',len(at.markdown),'radio',len(at.radio),'slider',len(at.slider))
             finally:
               os.chdir(cwd)
           PY
