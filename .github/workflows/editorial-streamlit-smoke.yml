@@ -98,5 +98,15 @@ jobs:
               raise AssertionError(f'Streamlit UI exceptions: {errors}')
           assert len(app.tabs) == 6, f'Expected 6 tabs, got {len(app.tabs)}'
           assert len(app.selectbox) >= 3
+          for mode in [
+              'Cohort comparison', 'Case investigations', 'Quality and definitions',
+              'Linked exploration'
+          ]:
+              option = next(radio for radio in app.radio if radio.label == 'Investigate')
+              app = option.set_value(mode).run()
+              errors = [str(e.message) for e in app.exception]
+              if errors:
+                  raise AssertionError(f'{mode} UI exceptions: {errors}')
+          assert len(app.tabs) == 6
           print('Streamlit UI smoke test passed.')
           PY
