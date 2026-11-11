@@ -21,7 +21,7 @@ jobs:
       - name: Install only dashboard dependencies
         run: python -m pip install -r projects/editorial-streamlit-analytics/requirements.txt
       - name: Check Python syntax
-        run: python -m compileall -q projects/editorial-streamlit-analytics/app.py
+        run: python -m compileall -q projects/editorial-streamlit-analytics/app.py projects/editorial-streamlit-analytics/advanced_workbench.py
       - name: Verify generated data and calculations
         run: |
           python - <<'PY'
@@ -45,6 +45,46 @@ jobs:
           assert m['denied'] == rows['Denial'].sum()
           print('Data/model checks passed.')
           PY
+      - name: Test advanced analytics, filtering, session decisions and QA
+        run: |
+          python - <<'PY'
+          import sys
+          import importlib.util
+          from pathlib import Path
+          path = Path('projects/editorial-streamlit-analytics')
+          sys.path.insert(0, str(path.resolve()))
+          import advanced_workbench as w
+          spec = importlib.util.spec_from_file_location('rcm_demo', path/'app.py')
+          demo = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(demo)
+          claims = demo.generate_claims('2026-11-10')
+          assert len(claims) == 3000
+          assert w.percent(0, 0) == 0
+          full = w.summary(claims)
+          assert full['claims'] == 3000
+          assert 0 <= full['denial_rate'] <= 100
+          grid = w.payer_breakdown(claims)
+          assert grid['Claims'].sum() == 3000
+          assert abs(grid['Denial rate (%)'].max()) <= 100
+          pareto = w.pareto(claims)
+          assert pareto['Count'].sum() == full['denied']
+          assert abs(pareto['Cumulative (%)'].iloc[-1] - 100.0) < 1e-9
+          current, previous = w.period_compare(claims, 90)
+          assert len(current) > 0 and len(previous) > 0
+          assert set(current['Claim ID']).isdisjoint(set(previous['Claim ID']))
+          assert len(w.filter_claims(claims, payer='Payer A')) > 0
+          assert w.filter_claims(claims, reason='Authorization')['Denial'].all()
+          qa = w.quality_checks(claims)
+          assert len(qa) == 10
+          assert qa['Flagged rows'].sum() == 0
+          notes = w.save_case({}, 'DEMO-00001', 'Billing',
+                              'Investigating', 'Demo follow-up')
+          assert len(notes) == 1
+          assert notes['DEMO-00001']['owner'] == 'Billing'
+          assert w.selection({'selection': {'points': []}}, 'x') is None
+          assert w.selection({'selection': {'points': [{'x': 'Coding'}]}}, 'x') == 'Coding'
+          print('Advanced workbench analytical tests passed')
+          PY
       - name: Smoke test UI with Streamlit AppTest
         run: |
           python - <<'PY'
@@ -56,7 +96,7 @@ jobs:
           errors = [str(e.message) for e in app.exception]
           if errors:
               raise AssertionError(f'Streamlit UI exceptions: {errors}')
-          assert len(app.tabs) == 5, f'Expected 5 tabs, got {len(app.tabs)}'
+          assert len(app.tabs) == 6, f'Expected 6 tabs, got {len(app.tabs)}'
           assert len(app.selectbox) >= 3
           print('Streamlit UI smoke test passed.')
           PY
