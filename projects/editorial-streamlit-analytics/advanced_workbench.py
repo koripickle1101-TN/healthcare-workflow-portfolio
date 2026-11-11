@@ -177,8 +177,8 @@ def explore(data):
         reason_choice = st.selectbox("Root cause drilldown", ["All reasons", *REASONS],
                                      key="advanced_cause_choice")
     # Selected chart marks override dropdowns, so a touch selection changes rows immediately.
-    payer_filter = selected_payer if selected_payer in set(data["Payer"]) else payer_choice
-    cause_filter = selected_cause if selected_cause in REASONS else reason_choice
+    payer_filter = payer_choice if payer_choice != "All payers" else (selected_payer if selected_payer in set(data["Payer"]) else "All payers")
+    cause_filter = reason_choice if reason_choice != "All reasons" else (selected_cause if selected_cause in REASONS else "All reasons")
     drilled = filter_claims(data, payer_filter, cause_filter)
     s = summary(drilled)
     st.caption(f"Active drilldown: {payer_filter} / {cause_filter}")
@@ -303,7 +303,7 @@ def case_lab(data):
             {"Control": "Claim status", "Value": case["Status"]},
         ]), hide_index=True, use_container_width=True)
     previous = decisions.get(cid, {})
-    with st.form("advanced_case_form"):
+    with st.form("advanced_case_form_" + cid):
         a, b = st.columns(2)
         with a:
             owner = st.selectbox("Assign synthetic owner", OWNERS,
