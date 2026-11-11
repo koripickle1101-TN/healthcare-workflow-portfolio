@@ -1,0 +1,108 @@
+name: Editorial RCM dashboard smoke test
+
+on:
+  push:
+    branches:
+      - feat/editorial-streamlit-analytics-demo-2026-11
+  pull_request:
+    paths:
+      - 'projects/editorial-streamlit-analytics/**'
+      - '.github/workflows/editorial-streamlit-smoke.yml'
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install only dashboard dependencies
+        run: python -m pip install -r projects/editorial-streamlit-analytics/requirements.txt
+      - name: Check Python syntax
+        run: python -m compileall -q projects/editorial-streamlit-analytics/app.py projects/editorial-streamlit-analytics/advanced_workbench.py projects/editorial-streamlit-analytics/visual_portal.py
+      - name: Verify generated data and calculations
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          path = Path('projects/editorial-streamlit-analytics/app.py')
+          spec = importlib.util.spec_from_file_location('volunteer_rcm_demo', path)
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          rows = module.generate_claims('2026-11-10')
+          assert len(rows) == 3000
+          assert rows['Claim ID'].nunique() == 3000
+          assert (rows['Charge'] > 0).all()
+          assert (rows['Open A/R'] >= 0).all()
+          assert not (rows.loc[rows['Status']=='Paid', 'Open A/R'] > 0).any()
+          assert rows.loc[rows['Denial'], 'Denial Reason'].ne('').all()
+          m = module.metrics(rows)
+          assert 0 <= m['denial_rate'] <= 100
+          assert 0 <= m['clean_rate'] <= 100
+          assert abs(m['open_ar'] - rows['Open A/R'].sum()) < 0.01
+          assert m['denied'] == rows['Denial'].sum()
+          print('Data/model checks passed.')
+          PY
+      - name: Test advanced analytics, filtering, session decisions and QA
+        run: |
+          python - <<'PY'
+          import sys
+          import importlib.util
+          from pathlib import Path
+          path = Path('projects/editorial-streamlit-analytics')
+          sys.path.insert(0, str(path.resolve()))
+          import advanced_workbench as w
+          spec = importlib.util.spec_from_file_location('rcm_demo', path/'app.py')
+          demo = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(demo)
+          claims = demo.generate_claims('2026-11-10')
+          assert len(claims) == 3000
+          assert w.percent(0, 0) == 0
+          full = w.summary(claims)
+          assert full['claims'] == 3000
+          assert 0 <= full['denial_rate'] <= 100
+          grid = w.payer_breakdown(claims)
+          assert grid['Claims'].sum() == 3000
+          assert abs(grid['Denial rate (%)'].max()) <= 100
+          pareto = w.pareto(claims)
+          assert pareto['Count'].sum() == full['denied']
+          assert abs(pareto['Cumulative (%)'].iloc[-1] - 100.0) < 1e-9
+          current, previous = w.period_compare(claims, 90)
+          assert len(current) > 0 and len(previous) > 0
+          assert set(current['Claim ID']).isdisjoint(set(previous['Claim ID']))
+          assert len(w.filter_claims(claims, payer='Payer A')) > 0
+          assert w.filter_claims(claims, reason='Authorization')['Denial'].all()
+          qa = w.quality_checks(claims)
+          assert len(qa) == 10
+          assert qa['Flagged rows'].sum() == 0
+          notes = w.save_case({}, 'DEMO-00001', 'Billing',
+                              'Investigating', 'Demo follow-up')
+          assert len(notes) == 1
+          assert notes['DEMO-00001']['owner'] == 'Billing'
+          assert w.selection({'selection': {'points': []}}, 'x') is None
+          assert w.selection({'selection': {'points': [{'x': 'Coding'}]}}, 'x') == 'Coding'
+          print('Advanced workbench analytical tests passed')
+          PY
+      - name: Test advanced mobile-first frontend interaction
+        run: |
+          npm install --no-save --no-package-lock --prefix /tmp/careflow-dom-test jsdom@25
+          NODE_PATH=/tmp/careflow-dom-test/node_modules node projects/careflow-intelligence-web/frontend.test.cjs
+      - name: Verify embedded interface and Streamlit runtime
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from streamlit.testing.v1 import AppTest
+          html = Path('projects/careflow-intelligence-web/index.html').read_text()
+          assert html.startswith('<!doctype html>')
+          assert 'viewport-fit=cover' in html
+          assert html.count('data-nav') >= 6
+          app = AppTest.from_file(
+              'projects/editorial-streamlit-analytics/app.py',
+              default_timeout=90
+          ).run()
+          errors = [str(e.message) for e in app.exception]
+          assert not errors, f'Embedded portal runtime exceptions: {errors}'
+          print('Premium portal launch smoke test passed.')
+          PY

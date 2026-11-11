@@ -1,0 +1,5 @@
+# CareFlow OS embedded dashboard dependencies; no paid APIs.
+streamlit>=1.44,<2
+pandas>=2.2,<3
+numpy>=1.26,<3
+plotly>=5.24,<7
