@@ -607,4 +607,6 @@ def app():
 
 
 if __name__ == "__main__":
-    app()
+    # Premium mobile-first portal replaces the legacy Streamlit layout.
+    from visual_portal import launch
+    launch()
