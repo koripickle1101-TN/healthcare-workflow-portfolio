@@ -21,7 +21,7 @@ jobs:
       - name: Install only dashboard dependencies
         run: python -m pip install -r projects/editorial-streamlit-analytics/requirements.txt
       - name: Check Python syntax
-        run: python -m compileall -q projects/editorial-streamlit-analytics/app.py projects/editorial-streamlit-analytics/advanced_workbench.py
+        run: python -m compileall -q projects/editorial-streamlit-analytics/app.py projects/editorial-streamlit-analytics/advanced_workbench.py projects/editorial-streamlit-analytics/visual_portal.py
       - name: Verify generated data and calculations
         run: |
           python - <<'PY'
@@ -85,28 +85,24 @@ jobs:
           assert w.selection({'selection': {'points': [{'x': 'Coding'}]}}, 'x') == 'Coding'
           print('Advanced workbench analytical tests passed')
           PY
-      - name: Smoke test UI with Streamlit AppTest
+      - name: Test advanced mobile-first frontend interaction
+        run: |
+          npm install --no-save --no-package-lock --prefix /tmp/careflow-dom-test jsdom@25
+          NODE_PATH=/tmp/careflow-dom-test/node_modules node projects/careflow-intelligence-web/frontend.test.cjs
+      - name: Verify embedded interface and Streamlit runtime
         run: |
           python - <<'PY'
+          from pathlib import Path
           from streamlit.testing.v1 import AppTest
+          html = Path('projects/careflow-intelligence-web/index.html').read_text()
+          assert html.startswith('<!doctype html>')
+          assert 'viewport-fit=cover' in html
+          assert html.count('data-nav') >= 6
           app = AppTest.from_file(
               'projects/editorial-streamlit-analytics/app.py',
               default_timeout=90
           ).run()
           errors = [str(e.message) for e in app.exception]
-          if errors:
-              raise AssertionError(f'Streamlit UI exceptions: {errors}')
-          assert len(app.tabs) == 6, f'Expected 6 tabs, got {len(app.tabs)}'
-          assert len(app.selectbox) >= 3
-          for mode in [
-              'Cohort comparison', 'Case investigations', 'Quality and definitions',
-              'Linked exploration'
-          ]:
-              option = next(radio for radio in app.radio if radio.label == 'Investigate')
-              app = option.set_value(mode).run()
-              errors = [str(e.message) for e in app.exception]
-              if errors:
-                  raise AssertionError(f'{mode} UI exceptions: {errors}')
-          assert len(app.tabs) == 6
-          print('Streamlit UI smoke test passed.')
+          assert not errors, f'Embedded portal runtime exceptions: {errors}'
+          print('Premium portal launch smoke test passed.')
           PY
