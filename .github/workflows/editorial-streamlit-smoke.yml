@@ -1,0 +1,62 @@
+name: Editorial RCM dashboard smoke test
+
+on:
+  push:
+    branches:
+      - feat/editorial-streamlit-analytics-demo-2026-11
+  pull_request:
+    paths:
+      - 'projects/editorial-streamlit-analytics/**'
+      - '.github/workflows/editorial-streamlit-smoke.yml'
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install only dashboard dependencies
+        run: python -m pip install -r projects/editorial-streamlit-analytics/requirements.txt
+      - name: Check Python syntax
+        run: python -m compileall -q projects/editorial-streamlit-analytics/app.py
+      - name: Verify generated data and calculations
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          path = Path('projects/editorial-streamlit-analytics/app.py')
+          spec = importlib.util.spec_from_file_location('volunteer_rcm_demo', path)
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          rows = module.generate_claims('2026-11-10')
+          assert len(rows) == 3000
+          assert rows['Claim ID'].nunique() == 3000
+          assert (rows['Charge'] > 0).all()
+          assert (rows['Open A/R'] >= 0).all()
+          assert not (rows.loc[rows['Status']=='Paid', 'Open A/R'] > 0).any()
+          assert rows.loc[rows['Denial'], 'Denial Reason'].ne('').all()
+          m = module.metrics(rows)
+          assert 0 <= m['denial_rate'] <= 100
+          assert 0 <= m['clean_rate'] <= 100
+          assert abs(m['open_ar'] - rows['Open A/R'].sum()) < 0.01
+          assert m['denied'] == rows['Denial'].sum()
+          print('Data/model checks passed.')
+          PY
+      - name: Smoke test UI with Streamlit AppTest
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+          app = AppTest.from_file(
+              'projects/editorial-streamlit-analytics/app.py',
+              default_timeout=90
+          ).run()
+          errors = [str(e.message) for e in app.exception]
+          if errors:
+              raise AssertionError(f'Streamlit UI exceptions: {errors}')
+          assert len(app.tabs) == 5, f'Expected 5 tabs, got {len(app.tabs)}'
+          assert len(app.selectbox) >= 3
+          print('Streamlit UI smoke test passed.')
+          PY
