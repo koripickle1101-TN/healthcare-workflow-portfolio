@@ -357,6 +357,7 @@ def app():
         ("Average open aging", f"{m['avg_days']:.0f} days", "Unweighted mean on open claims"),
     ])
     tabs = st.tabs([
+        "Advanced Intelligence",
         "Command Center",
         "Denial Intelligence",
         "A/R Workbench",
@@ -365,6 +366,10 @@ def app():
     ])
 
     with tabs[0]:
+        from advanced_workbench import render_advanced
+        render_advanced(frame)
+
+    with tabs[1]:
         section("Claim quality across time")
         st.caption("Weekly submission and denial trends. Each point is derived from the selected fictional claims.")
         if frame.empty:
@@ -409,7 +414,7 @@ def app():
                     "The clean rate measures demonstration intake/coding criteria and does not "
                     "represent a measured payer acceptance rate.")
 
-    with tabs[1]:
+    with tabs[2]:
         section("Denial intelligence")
         st.caption("Root causes, prioritization, and a real filtered worklist for this simulation.")
         denied = frame.loc[frame["Denial"]].copy()
@@ -465,7 +470,7 @@ def app():
             st.caption("Priority tiers use illustrative charge/age rules, not actual payer timely-filing limits. "
                        "Gross charges are not recoverable cash projections.")
 
-    with tabs[2]:
+    with tabs[3]:
         section("A/R aging workbench")
         st.caption("Unpaid sample claim charges by age. Amounts are gross, not adjusted net receivables.")
         open_items = frame.loc[frame["Open A/R"] > 0].copy()
@@ -504,7 +509,7 @@ def app():
         st.caption("Open A/R is modeled as the original gross charge on unpaid claims. "
                    "It excludes allowances, partial payments, bad-debt estimates, and actual collectible value.")
 
-    with tabs[3]:
+    with tabs[4]:
         section("Scenario studio")
         st.caption("Move the sliders to model hypothetical workload effects. Nothing is written to a database.")
         eligible_causes = frame.loc[
@@ -552,7 +557,7 @@ def app():
                    "as preventable and applies a user-selected rework-cost assumption. "
                    "No causal effect, recovered cash, ROI, or financial outcome is verified.")
 
-    with tabs[4]:
+    with tabs[5]:
         section("Claim explorer")
         st.caption("Search across identifiers and choose which data to export.")
         a, b = st.columns(2)
